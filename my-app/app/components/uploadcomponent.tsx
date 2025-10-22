@@ -8,7 +8,8 @@ const UplaodComponent=()=>{
       const [fileUrl, setFileUrl] = useState(null)
       const [progress,setProgress]=useState(0)
     
-      const handleSubmit=(e)=>{
+      const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
+        
         e.preventDefault()
         try {
           if(!file){
