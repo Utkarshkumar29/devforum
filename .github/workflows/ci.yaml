@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [main,ci-setup]
   pull:
-    branches: [main]
+    branches: [main,ci-setup]
 
 jobs:
   build:
@@ -30,4 +30,4 @@ jobs:
         run: npm test
       
       - name: Build next.js app
-        run: npm run build
+        run: npm run build  
