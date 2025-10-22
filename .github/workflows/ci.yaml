@@ -3,13 +3,13 @@ name: CI Pipeline
 on:
   push:
     branches: [main,ci-setup]
-  pull:
+  pull_request:
     branches: [main,ci-setup]
 
 jobs:
   build:
     name: lint, Test, build
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
   
     steps:
       - name: checkout code
