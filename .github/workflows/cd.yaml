@@ -20,7 +20,7 @@ on:
     deploy-baclend:
       name: Deploy backend on render
       runs-on: ubuntu-latest
-      if: ${{github.event.workflow_run.conclusion='success'}}
+      if: ${{github.event.workflow_run.conclusion='success'}}   
 
       steps:
         - name: Trigger render deployment
