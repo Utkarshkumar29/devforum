@@ -6,10 +6,10 @@ import { storage } from "../firebase/fireabase";
 const UploadComponent = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       if (!file) {
         console.log("Please select a file");
