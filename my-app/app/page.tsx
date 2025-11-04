@@ -6,6 +6,8 @@ import HeroSection from "./components/heroSection";
 import AboutSection from "./components/aboutSection";
 import DiverseSection from "./components/diverseSection";
 import ServicesSection from "./components/servicesSection";
+import ExploreSection from "./components/exploreSection";
+import GridSections from "./components/girdSection";
 
 export default function Home() {
 
@@ -16,6 +18,9 @@ export default function Home() {
       <AboutSection/>
       <DiverseSection/>
       <ServicesSection/>
+      <ExploreSection/>
+      <GridSections/>
+      <ExploreSection/>
     </div>
   );
 }

@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "axios": "^1.12.2",
     "firebase": "^12.4.0",
     "framer-motion": "^12.23.24",
