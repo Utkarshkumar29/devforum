@@ -8,6 +8,8 @@ import DiverseSection from "./components/diverseSection";
 import ServicesSection from "./components/servicesSection";
 import ExploreSection from "./components/exploreSection";
 import GridSections from "./components/girdSection";
+import CollaborationSection from "./components/collaborationSection";
+import FrequentlySection from "./components/FrequentlySection";
 
 export default function Home() {
 
@@ -21,6 +23,8 @@ export default function Home() {
       <ExploreSection/>
       <GridSections/>
       <ExploreSection/>
+      <CollaborationSection/>
+      <FrequentlySection/>
     </div>
   );
 }
