@@ -10,6 +10,7 @@ import ExploreSection from "./components/exploreSection";
 import GridSections from "./components/girdSection";
 import CollaborationSection from "./components/collaborationSection";
 import FrequentlySection from "./components/FrequentlySection";
+import FooterSection from "./components/FooterSection";
 
 export default function Home() {
 
@@ -22,9 +23,9 @@ export default function Home() {
       <ServicesSection/>
       <ExploreSection/>
       <GridSections/>
-      <ExploreSection/>
       <CollaborationSection/>
       <FrequentlySection/>
+      <FooterSection/>
     </div>
   );
 }

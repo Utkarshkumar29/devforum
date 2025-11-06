@@ -16,6 +16,7 @@ app.use(express.json())
 app.use("/api", uploadRoutes)
 app.use("/api",testRoutes)
 
+
 app.get("/", (req, res) => {
   res.send("Server is running with nodemon!")
 })

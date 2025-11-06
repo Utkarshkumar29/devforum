@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Navbar=()=>{
     return(
         <div className=" text-white max-w-[1980px] flex justify-center h-[100px] ">
@@ -10,7 +12,7 @@ const Navbar=()=>{
                     <div>Service</div>
                     <div>Contact</div>
                 </div>
-                <div className=" w-[165px] min-h-[60px] h-full bg-white rounded-4xl flex justify-center items-center text-black px-[42px] font-semibold ">Join Now</div>
+                <Link href={'/pages/login'} className=" cursor-pointer w-[165px] min-h-[60px] h-full bg-white rounded-4xl flex justify-center items-center text-black px-[42px] font-semibold ">Join Now</Link>
             </div>
             </div>
         </div>
