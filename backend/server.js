@@ -5,6 +5,7 @@ const cors = require("cors")
 const mongoose = require("mongoose")
 const uploadRoutes = require("./routes/uploadRoutes")
 const testRoutes = require("./routes/testRoutes")
+const userRoutes = require("./routes/userRoutes")
 
 dotenv.config()
 
@@ -15,6 +16,7 @@ app.use(express.json())
 // Routes
 app.use("/api", uploadRoutes)
 app.use("/api",testRoutes)
+app.use("/api",userRoutes)
 
 
 app.get("/", (req, res) => {

@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Poppins, sans-serif;
 }
+
+.ring {
+  animation: animate 6s linear infinite;
+}
+
+.ring-reverse{
+  animation: animate 6s linear infinite reverse;
+}
+
+@keyframes animate {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
