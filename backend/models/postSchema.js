@@ -1,75 +1,85 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema(
+  {
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-    imageArray: [{
-        type: String
-    }],
-    likes: [{
-        user: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-        }],
-        reactionType: {
-            type: String,
-            default: 'like',
+    imageArray: [
+      {
+        type: String,
+      },
+    ],
+    likes: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
         },
-    }],
-    comments: [{
+        reactionType: {
+          type: String,
+          default: 'like',
+        },
+      },
+    ],
+    comments: [
+      {
         text: {
-            type: String,
-            required: true
+          type: String,
+          required: true,
         },
         user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
         },
         createdAt: {
-            type: Date,
-            default: Date.now
-        }
-    }],
-    repost: [{
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    repost: [
+      {
         user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
         },
         repost_description: {
-            type: String
-        }
-    }],
+          type: String,
+        },
+      },
+    ],
     document: {
-        type: String
+      type: String,
     },
     poll: {
-        poll_description: {
+      poll_description: {
+        type: String,
+      },
+      options: [
+        {
+          optionText: {
             type: String,
-            required: true
+          },
+          votes: {
+            type: Number,
+            default: 0,
+          },
         },
-        options: [{
-            optionText: {
-                type: String,
-            },
-            votes: {
-                type: Number,
-                default: 0,
-            },
-        }]
-    }
-},
-    { timestamps: true }
-)
+      ],
+    },
+  },
+  { timestamps: true }
+);
 
-const Post = mongoose.model('post', postSchema)
+const Post = mongoose.model('Post', postSchema);
 
-module.exports = { Post }
+module.exports = { Post };

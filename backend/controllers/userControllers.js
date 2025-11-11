@@ -18,7 +18,7 @@ const createUser=async(req,res)=>{
         }
         const hashedPassword=await bcrypt.hash(password, 10)
         const newUser=new User({
-            id:`slug-${uuidv4}`,
+            id:`slug-${uuidv4()}`,
             email,
             email,
             firebase_uid,
@@ -30,7 +30,7 @@ const createUser=async(req,res)=>{
 
         const token=jwt.sign(
             {id:newUser._id,email:newUser.email},
-            "scerete",
+            process.env.JWT_SECRET,
             {expiresIn:'7d'}
         )
         res.status(200).send({
@@ -63,7 +63,7 @@ const userlogin=async(req,res)=>{
         }
         const token=jwt.sign(
             {id:existingUser._id,email:existingUser.email},
-            'sceret',
+            process.env.JWT_SECRET,
             {expiresIn:'7d'}
         )
         res.status(200).send({

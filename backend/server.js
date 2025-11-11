@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const uploadRoutes = require("./routes/uploadRoutes")
 const testRoutes = require("./routes/testRoutes")
 const userRoutes = require("./routes/userRoutes")
+const postRoutes = require("./routes/postRoutes")
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use("/api", uploadRoutes)
 app.use("/api",testRoutes)
 app.use("/api",userRoutes)
+app.use("/api",postRoutes)
 
 
 app.get("/", (req, res) => {
