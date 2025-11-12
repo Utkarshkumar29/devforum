@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
-import smile from "../../public/template-asset-cd2af550.png"
+import smile from "../../../public/template-asset-cd2af550.png"
 import Image from "next/image";
 
 const HeroSection=()=>{

@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import UploadComponent from "@/app/components/landingPage/uploadcomponent";
+import UploadFeed from "@/app/components/feed/UploadFeed";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -15,8 +17,10 @@ const Feed = () => {
   };
 
   return (
-    <div className="max-w-[800px] mx-auto mt-10 space-y-6">
-      Feed
+    <div className=" max-w-[1920px] flex justify-center items-center ">
+        <div className=" flex justify-center items-center max-w-[1350px] w-full h-full ">
+          <UploadFeed/>
+        </div>  
     </div>
   );
 };

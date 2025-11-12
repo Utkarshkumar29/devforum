@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase/fireabase";
+import { storage } from "../../firebase/fireabase";
 
 const UploadComponent = ({fileUrl,setFileUrl}) => {
   const [file, setFile] = useState<File | null>(null);

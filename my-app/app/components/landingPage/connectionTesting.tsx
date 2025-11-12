@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from "react"
-import instance from "../utils/axiosInstance"
+import instance from "../../utils/axiosInstance"
 
 const ConnectionTesting=()=>{
 

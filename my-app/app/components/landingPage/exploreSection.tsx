@@ -1,9 +1,9 @@
 "use client";
-import dream from "../../public/dream.jpeg";
-import expertise from "../../public/expertise.jpeg";
-import connect from "../../public/connect.jpeg";
-import collaboration from "../../public/collaboration.jpeg";
-import developer from "../../public/developers.jpeg";
+import dream from "../../../public/dream.jpeg";
+import expertise from "../../../public/expertise.jpeg";
+import connect from "../../../public/connect.jpeg";
+import collaboration from "../../../public/collaboration.jpeg";
+import developer from "../../../public/developers.jpeg";
 import Image from "next/image";
 import { motion } from "framer-motion";
 

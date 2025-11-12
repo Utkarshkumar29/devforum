@@ -3,24 +3,41 @@ import { useState } from "react"
 import {auth, googleProvider, githubProvider, signInWithPopup} from "../../firebase/fireabase"
 import { useRouter } from "next/navigation"
 import axios from "axios"
-
+import { useDispatch } from "react-redux"
+import { addUser } from "@/app/redux/userSlice"
 
 const Login=()=>{
     const router=useRouter()
+    const dispatch=useDispatch()
     const [user,setUser]=useState<any>("")
     
-    const handleGoogleSignIn=async()=>{
-        try {
-            const response=await signInWithPopup(auth,googleProvider)
-            const user=response.user
-            console.log("Google Login Success:", user)
-            setUser(user)
-            const result=await axios.post('/api/user')
-            router.push('/pages/feed')
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const handleGoogleSignIn = async () => {
+  try {
+    const response = await signInWithPopup(auth, googleProvider);
+    const user = response.user;
+    console.log("Google Login Success:", user);
+
+    // extract only serializable data
+    const userData = {
+      email: user.email,
+      email_verified: user.emailVerified,
+      display_name: user.displayName,
+      photo_url: user.photoURL,
+    };
+
+    // update local and redux state
+    setUser(userData);
+    dispatch(addUser(userData));
+
+    // send to backend
+//    const result = await axios.post("/api/user", userData);
+
+    router.push("/pages/feed");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
     const handleGithubLogin=async()=>{
         try {

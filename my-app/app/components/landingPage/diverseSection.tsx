@@ -1,11 +1,11 @@
 'use client'
 import Image from "next/image"
-import orangeBg from "../../public/template-asset-b2537329.png"
-import review from "../../public/template-asset-1f3b3c3b.png"
-import post from "../../public/template-asset-297c0098.png"
-import girl from "../../public/template-asset-23027c53.jpeg"
-import Tick from "../../public/template-asset-cd0bda93.png"
-import Msg from "../../public/template-asset-7800b6b5.png"
+import orangeBg from "../../../public/template-asset-b2537329.png"
+import review from "../../../public/template-asset-1f3b3c3b.png"
+import post from "../../../public/template-asset-297c0098.png"
+import girl from "../../../public/template-asset-23027c53.jpeg"
+import Tick from "../../../public/template-asset-cd0bda93.png"
+import Msg from "../../../public/template-asset-7800b6b5.png"
 import { motion } from "framer-motion"
 
 const DiverseSection = () => {

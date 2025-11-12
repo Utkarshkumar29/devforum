@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import aboutSectionImg from "../../public/aboutSection.svg";
+import aboutSectionImg from "../../../public/aboutSection.svg";
 import { motion } from "framer-motion";
 
 const AboutSection = () => {

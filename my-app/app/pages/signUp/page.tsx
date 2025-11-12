@@ -2,7 +2,7 @@
 import { useState } from "react"
 import {auth, googleProvider, githubProvider, signInWithPopup} from "../../firebase/fireabase"
 import { useRouter } from "next/navigation"
-import UploadComponent from "@/app/components/uploadcomponent"
+import UploadComponent from "@/app/components/landingPage/uploadcomponent"
 import axios from "axios"
 
 
