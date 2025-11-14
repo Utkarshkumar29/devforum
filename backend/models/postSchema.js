@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema(
   {
+    slug:{
+      type:String,
+      unique:true
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

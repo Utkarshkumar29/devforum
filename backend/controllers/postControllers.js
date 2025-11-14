@@ -1,4 +1,6 @@
+const { send } = require("process")
 const { Post } = require("../models/postSchema")
+const { v4: uuidv4 } = require('uuid')
 
 const createPost = async (req, res) => {
     const {
@@ -11,7 +13,6 @@ const createPost = async (req, res) => {
         repostUserId,
         repostDescription
     } = req.body
-    console.log(description)
     try {
         if (!req.user || !req.user._id) {
             return res.status(401).send({
@@ -47,15 +48,13 @@ const createPost = async (req, res) => {
             ]
         }
 
-        if (
-            !newPostData.description
-        ) {
+        if (!newPostData.description) {
             return res.status(400).json({
                 success: false,
                 message: 'Cannot create an empty post',
             });
         }
-
+        newPostData.slug=`slug-${uuidv4()}`
         const post = new Post(newPostData)
         await post.save()
 
@@ -74,6 +73,18 @@ const createPost = async (req, res) => {
         res.status(500).send({
             message: "Internal Server error",
             error: error.message
+        })
+    }
+}
+
+const allpost=async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500),send({
+            message:"Internal Server Error",
+            error:error
         })
     }
 }
