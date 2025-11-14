@@ -5,6 +5,7 @@ import { Fragment, useState } from "react"
 import { useSelector } from "react-redux"
 import { Description, Dialog, DialogDescription, DialogTitle, Textarea, Transition, TransitionChild } from "@headlessui/react"
 import axios from "axios"
+import { axiosPrivate } from "@/app/axios/axiosInstance"
 
 const UploadFeed = () => {
     const userDetails = useSelector((state) => state.userDetails)
@@ -40,13 +41,15 @@ const UploadFeed = () => {
         }
     }
 
-    const handleCreatePost=async()=>{
-        try {
-            const response=await axios.post('/api/posts/createPost',description)
-            console.log(response)
-        } catch (error) {
-            console.log(error)
-        }
+    const handleCreatePost = async () => {
+    try {
+        const response = await axiosPrivate.post("/posts/createPost", {
+        description: description, // ✅ send as JSON
+        });
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
     }
     
     return (

@@ -6,25 +6,51 @@ const { v4: uuidv4 } = require('uuid')
 const createUser=async(req,res)=>{
     const {
         email,
-        firebase_uid,
+        password,
         display_name,
         photo_url,
-        password
+        authProvider
     }=req.body
     try {
         const existingUser=await User.findOne({email})
         if(existingUser){
-            return res.status(400).send({message:"Email already exists"})
+            if(authProvider=="google"){
+                const token=jwt.sign(
+                    {id:existingUser._id,email:existingUser.email},
+                    process.env.JWT_SECRET,
+                    {expiresIn:"7d"}
+                )
+
+                return res.status(200).send({
+                    message:"Logged in successfully",
+                    token,
+                    user:{
+                        email: existingUser.email,
+                        display_name: existingUser.display_name,
+                        photo_url: existingUser.photo_url,
+                        id: existingUser.id
+                    }
+                })
+            }
+            if(existingUser.authProvider=="google"){
+                return res.status(400).send({
+                    message:"This email is registered via Google. Please set your password first."
+                })
+            }
+            return res.status(400).send({ message: "Email already exists" })
         }
-        const hashedPassword=await bcrypt.hash(password, 10)
+        
+        let hashedPassword=null
+        if (authProvider === "local") {
+            hashedPassword = await bcrypt.hash(password, 10);
+        }
         const newUser=new User({
-            id:`slug-${uuidv4()}`,
+            id: `slug-${uuidv4()}`,
             email,
-            email,
-            firebase_uid,
             display_name,
             photo_url,
             password: hashedPassword,
+            authProvider
         })
         await newUser.save()
 
@@ -37,11 +63,10 @@ const createUser=async(req,res)=>{
             message:"User created successfully",
             token,
             user: {
-                id: newUser._id,
                 email: newUser.email,
                 display_name: newUser.display_name,
                 photo_url: newUser.photo_url,
-                slug:newUser.id
+                id:newUser.id
             }
         })
     } catch (error) {
@@ -51,31 +76,66 @@ const createUser=async(req,res)=>{
 }
 
 const userlogin=async(req,res)=>{
-    const {email,password}=req.body
+    const {email,password,authProvider}=req.body
     try {
         const existingUser=await User.findOne({email})
         if(!existingUser){
-            return res.status(404).send({message:"User not found"})
+            return res.status(404).send({message:"User not found! Invalid email"})
         }
-        const comparePassword=bcrypt.compareSync(password,existingUser.password)
-        if(!comparePassword){
-            return res.status(404).send({message:"User not found"})
+        if(authProvider=="google"){
+            if(existingUser.authProvider=="local"){
+                return res.status(400).send({
+                    message:"This email is registered as a local account. Please login with password."
+                })
+            }
+            const token = jwt.sign(
+                { id: existingUser._id, email: existingUser.email },
+                process.env.JWT_SECRET,
+                { expiresIn: '7d' }
+            )
+
+            return res.status(200).send({
+                message: "Logged in successfully",
+                token,
+                user: {
+                    id: existingUser.id,
+                    email: existingUser.email,
+                    display_name: existingUser.display_name,
+                    photo_url: existingUser.photo_url
+                }
+            });
         }
-        const token=jwt.sign(
-            {id:existingUser._id,email:existingUser.email},
-            process.env.JWT_SECRET,
-            {expiresIn:'7d'}
-        )
-        res.status(200).send({
-            message:"Logged in successfully",
-            token,
-            user: {
-                id: existingUser._id,
-                email: existingUser.email,
-                display_name: existingUser.display_name,
-                photo_url: existingUser.photo_url
-            },
-        })
+
+        if(authProvider=="local"){
+            if (existingUser.authProvider === "google") {
+                return res.status(400).send({
+                    message: "This email was registered using Google. Please login with Google."
+                });
+            }
+            const checkPasword=bcrypt.compareSync(password,existingUser.password)
+            if(!checkPasword){
+                return res.status(401).send({
+                    message:"Incorrect Passsword"
+                })
+            }
+            const token=jwt.sign(
+                {id:existingUser._id,email:existingUser.email},
+                process.env.JWT_SECRET,
+                {expiresIn:'7d'}
+            )
+            res.status(200).send({
+                message:"Logged in successfully",
+                token,
+                user: {
+                    id: existingUser.id,
+                    email: existingUser.email,
+                    display_name: existingUser.display_name,
+                    photo_url: existingUser.photo_url
+                },
+            })
+            }
+        
+        return res.status(400).send({ message: "Invalid auth provider" })
     } catch (error) {
         console.log(error)
         res.status(500).send({

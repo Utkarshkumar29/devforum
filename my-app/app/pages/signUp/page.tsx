@@ -4,6 +4,7 @@ import {auth, googleProvider, githubProvider, signInWithPopup} from "../../fireb
 import { useRouter } from "next/navigation"
 import UploadComponent from "@/app/components/landingPage/uploadcomponent"
 import axios from "axios"
+import { axiosPublic } from "@/app/axios/axiosInstance"
 
 
 const SignUp=()=>{
@@ -14,17 +15,28 @@ const SignUp=()=>{
     const [email,setEmail]=useState("")
     const [password,setPasswrod]=useState("")
     
-    const handleGoogleSignIn=async()=>{
-        try {
-            const response=await signInWithPopup(auth,googleProvider)
-            const user=response.user
-            console.log("Google Login Success:", user)
-            setUser(user)
-            router.push('/pages/feed')
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const handleGoogleSignIn = async () => {
+  try {
+    const response = await signInWithPopup(auth, googleProvider)
+    const user = response.user
+    console.log("Google Login Success:", response)
+
+    const result = await axiosPublic.post('/user/signUp', {
+      email: response.user.email,
+      display_name: response.user.displayName,
+      photo_url: response.user.photoURL,
+      password: null,
+      authProvider:"google"
+    })
+
+    console.log(result, "tokentoken")
+    localStorage.setItem("accessToken", result.data.token)
+    router.push('/pages/feed')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
     const handleGithubLogin=async()=>{
         try {

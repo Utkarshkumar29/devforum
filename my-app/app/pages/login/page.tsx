@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { addUser } from "@/app/redux/userSlice"
+import { axiosPublic } from "@/app/axios/axiosInstance"
 
 const Login=()=>{
     const router=useRouter()
@@ -24,7 +25,13 @@ const Login=()=>{
       display_name: user.displayName,
       photo_url: user.photoURL,
     };
-
+    const result = await axiosPublic.post('/user/login', {
+          email: response.user.email,
+          password:null,
+          authProvider:"google"
+        })
+    localStorage.setItem("accessToken",result.data.token)
+    console.log(response.data.token)
     // update local and redux state
     setUser(userData);
     dispatch(addUser(userData));

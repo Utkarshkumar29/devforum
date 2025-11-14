@@ -11,6 +11,7 @@ const createPost = async (req, res) => {
         repostUserId,
         repostDescription
     } = req.body
+    console.log(description)
     try {
         if (!req.user || !req.user._id) {
             return res.status(401).send({
@@ -57,6 +58,11 @@ const createPost = async (req, res) => {
 
         const post = new Post(newPostData)
         await post.save()
+
+        await post.populate([
+            { path: 'user', select: 'id email display_name photo_url' },
+            { path: 'repost.user', select: 'id email display_name photo_url' }
+        ])
         res.status(201).json({
             success: true,
             message: 'Post created successfully',
