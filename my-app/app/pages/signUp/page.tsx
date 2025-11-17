@@ -21,7 +21,7 @@ const SignUp=()=>{
     const user = response.user
     console.log("Google Login Success:", response)
 
-    const result = await axiosPublic.post('/user/signUp', {
+    const result = await axiosPublic.post('/users/signUp', {
       email: response.user.email,
       display_name: response.user.displayName,
       photo_url: response.user.photoURL,

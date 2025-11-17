@@ -3,6 +3,7 @@ const app=express()
 const cors=require('cors')
 const dotenv=require('dotenv')
 const { createProxyMiddleware }=require('http-proxy-middleware')
+const bycrt=require("bycrpt")
 
 dotenv.config()
 app.use(cors({
