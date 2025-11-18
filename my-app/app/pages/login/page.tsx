@@ -25,7 +25,7 @@ const Login=()=>{
       display_name: user.displayName,
       photo_url: user.photoURL,
     };
-    const result = await axiosPublic.post('/user/login', {
+    const result = await axiosPublic.post('/users/login', {
           email: response.user.email,
           password:null,
           authProvider:"google"

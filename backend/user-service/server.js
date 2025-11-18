@@ -8,20 +8,25 @@ const userRoutes = require("./routes/userRoutes")
 dotenv.config()
 
 app.use(cors({
-    methods:["POST","GET","PATCH","PUT","DELTET"],
+    methods:["POST","GET","PATCH","PUT","DELETE"],
     origin:process.env.CLIENT_URL,
     credentials:true
 }))
 
 app.use(express.json())
-app.use("/api/users", userRoutes);
+app.use("/", userRoutes);
 
-app.get('/',(req,res)=>{
-    res.send("User Services are running")
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
+.then(() => console.log("User DB connected"))
+.catch((err) => console.error("User DB connection error:", err));
 
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("Post DB connected"))
-    .catch((err) => console.error("Post DB connection error:", err))
 
-app.listen(process.env.PORT || 5001, () => console.log(`User Service running on port ${process.env.PORT}`));
+{/*app.listen(process.env.PORT || 5001, () => console.log(`User Service running on port ${process.env.PORT}`));
+const PORT = process.env.PORT || 5001;*/}
+
+app.listen(process.env.PORT, '0.0.0.0', () => {
+  console.log(`User Service running on port ${process.env.PORT}`);
+});

@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./api-gateway/.env
+    depends_on:
+      - user-service
+      - post-service
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./user-service/.env
+    depends_on:
+      - mongo
+
+  post-service:
+    build: ./post-service
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./post-service/.env
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
