@@ -1,42 +1,68 @@
-const express=require('express')
-const app=express()
-const cors=require('cors')
-const dotenv=require('dotenv')
-const { createProxyMiddleware }=require('http-proxy-middleware')
+// server.js
+const express = require("express");
+const cors = require("cors");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+const dotenv = require("dotenv");
 
-dotenv.config()
-app.use(express.json());
-app.use(cors({
-    origin:process.env.CLIENT_URL,
-    credentials:true
-}))
+dotenv.config();
+const app = express();
 
-app.use('/api/users', (req, res, next) => {
-  console.log(`API Gateway - Incoming request: ${req.method} ${req.originalUrl}`);
+// ---------------- CORS ----------------
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    allowedHeaders: "*",
+    methods: "*",
+  })
+);
+
+// ---------------- LOG REQUESTS ----------------
+app.use((req, res, next) => {
+  console.log("GW RECEIVED →", req.method, req.url);
   next();
 });
 
-app.use('/api/users', createProxyMiddleware({
-  target: process.env.USER_SERVICE_URL,
-  changeOrigin: true,
-  pathRewrite: { '^/api/users': '' },
-  onProxyRes: (proxyRes, req, res) => {
-    console.log(`API Gateway - Response status: ${proxyRes.statusCode} for ${req.method} ${req.originalUrl}`);
-  },
-  onError: (err, req, res) => {
-    console.error('API Gateway proxy error:', err);
-    res.status(500).json({ error: 'Proxy error', details: err.message });
-  }
-}));
+// ---------------- USER SERVICE PROXY (NO REWRITE) ----------------
+app.use(
+  "/api/users",
+  createProxyMiddleware({
+    target: process.env.USER_SERVICE_URL, // http://localhost:5001
+    changeOrigin: true,
 
-app.use('/api/posts',createProxyMiddleware({
-    target:process.env.POST_SERVICE_URL,
-    changeOrigin:true
-}))
+    onProxyReq(proxyReq, req) {
+      console.log(
+        `GW → Forwarding ${req.method} ${req.originalUrl} → ${process.env.USER_SERVICE_URL}${req.originalUrl}`
+      );
+    },
 
-app.get('/',(req,res)=>{
-    res.send("API Gateway Running")
-})
+    onProxyRes(proxyRes, req) {
+      console.log(
+        `GW ← Response ${proxyRes.statusCode} for ${req.method} ${req.originalUrl}`
+      );
+    },
+  })
+);
 
+// ---------------- POST SERVICE PROXY (NO REWRITE) ----------------
+app.use(
+  "/api/posts",
+  createProxyMiddleware({
+    target: process.env.POST_SERVICE_URL, // http://localhost:5002
+    changeOrigin: true,
+  })
+);
+
+// ---------------- BODY PARSER AFTER PROXY ----------------
+app.use(express.json());
+
+// ---------------- ROOT CHECK ----------------
+app.get("/", (req, res) => {
+  res.send("API Gateway running.");
+});
+
+// ---------------- START SERVER ----------------
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Gateway running on port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`API Gateway running on port ${PORT}`)
+);

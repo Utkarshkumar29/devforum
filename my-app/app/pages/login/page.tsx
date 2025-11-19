@@ -2,10 +2,10 @@
 import { useState } from "react"
 import {auth, googleProvider, githubProvider, signInWithPopup} from "../../firebase/fireabase"
 import { useRouter } from "next/navigation"
-import axios from "axios"
 import { useDispatch } from "react-redux"
 import { addUser } from "@/app/redux/userSlice"
 import { axiosPublic } from "@/app/axios/axiosInstance"
+import axios from "axios"
 
 const Login=()=>{
     const router=useRouter()
@@ -25,11 +25,18 @@ const Login=()=>{
       display_name: user.displayName,
       photo_url: user.photoURL,
     };
-    const result = await axiosPublic.post('/users/login', {
+    const result = await axios.post('http://localhost:8000/api/users/login', {
           email: response.user.email,
           password:null,
           authProvider:"google"
-        })
+        },
+        {
+            withCredentials: true,
+            headers: {
+            "Content-Type": "application/json"
+            }
+        }
+    )
     localStorage.setItem("accessToken",result.data.token)
     console.log(response.data.token)
     // update local and redux state
