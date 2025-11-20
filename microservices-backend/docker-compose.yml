@@ -12,6 +12,7 @@ services:
       - ./gateway/.env
     depends_on:
       - user_service
+      - post_service
 
   user_service:
     build: ./user-service
@@ -24,7 +25,16 @@ services:
     depends_on:
       - mongo
 
-
+  post_service:
+    build: ./post-service
+    container_name: post_service
+    restart: always
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./post-service/src/.env
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo:6
