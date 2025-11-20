@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  gateway:
+    build: ./gateway
+    container_name: api_gateway
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./gateway/.env
+    depends_on:
+      - user_service
+
+  user_service:
+    build: ./user-service
+    container_name: user_service
+    restart: always
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./user-service/src/.env
+    depends_on:
+      - mongo
+
+
+
+  mongo:
+    image: mongo:6
+    container_name: mongo_db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
