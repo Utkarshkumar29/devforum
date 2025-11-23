@@ -43,8 +43,8 @@ const UploadFeed = () => {
 
     const handleCreatePost = async () => {
     try {
-        const response = await axiosPrivate.post("/posts/createPost", {
-        description: description, // ✅ send as JSON
+        const response = await axiosPrivate.post("/posts/posts/createPost", {
+        description: description,
         });
         console.log(response);
     } catch (error) {

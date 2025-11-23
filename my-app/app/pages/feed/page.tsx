@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import UploadComponent from "@/app/components/landingPage/uploadcomponent";
 import UploadFeed from "@/app/components/feed/UploadFeed";
+import FeedPosts from "@/app/components/feed/FeedPosts";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -18,8 +19,9 @@ const Feed = () => {
 
   return (
     <div className=" max-w-[1920px] flex justify-center items-center ">
-        <div className=" flex justify-center items-center max-w-[1350px] w-full h-full ">
+        <div className=" flex flex-col gap-10 justify-center items-center max-w-[1350px] w-full h-full ">
           <UploadFeed/>
+          <FeedPosts/>
         </div>  
     </div>
   );

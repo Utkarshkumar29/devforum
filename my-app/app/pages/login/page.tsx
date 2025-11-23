@@ -24,16 +24,7 @@ const Login = () => {
             };
 
             // Login through API Gateway -> User Service
-            const result = await axios.post(
-                "http://localhost:8000/api/users/login",
-                loginPayload,
-                {
-                    withCredentials: true,
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+            const result = await axiosPublic.post("/users/login",loginPayload);
 
             // Save token
             localStorage.setItem("accessToken", result.data.token);

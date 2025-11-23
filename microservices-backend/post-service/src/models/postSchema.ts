@@ -1,0 +1,128 @@
+import mongoose, { Document,Schema } from "mongoose"
+
+export interface ILike{
+  user:mongoose.Types.ObjectId
+  reactionType:string
+}
+
+export interface IComment{
+  text:string,
+  user:mongoose.Types.ObjectId
+  createdAt:Date
+}
+
+export interface IRepost{
+  user:mongoose.Types.ObjectId
+  repost_description?:string
+}
+
+export interface IPollOption{
+  optionText:string
+  votes:number
+}
+
+export interface IPoll{
+  poll_description?:string
+  options: IPollOption[]
+}
+
+export interface IPost extends Document{
+  slug:string
+  user:mongoose.Types.ObjectId
+  description:string
+  imageArray?:string[]
+  likes:ILike[]
+  comments:IComment[]
+  repost?:IRepost[]
+  document?:string
+  poll?:IPoll
+  createdAt:Date
+  updatedAt:Date
+}
+
+
+const postSchema = new mongoose.Schema<IPost>(
+  {
+    slug:{
+      type:String,
+      unique:true
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    imageArray: [
+      {
+        type: String,
+      },
+    ],
+    likes: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+        reactionType: {
+          type: String,
+          default: 'like',
+        },
+      },
+    ],
+    comments: [
+      {
+        text: {
+          type: String,
+          required: true,
+        },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    repost: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
+        },
+        repost_description: {
+          type: String,
+        },
+      },
+    ],
+    document: {
+      type: String,
+    },
+    poll: {
+      poll_description: {
+        type: String,
+      },
+      options: [
+        {
+          optionText: {
+            type: String,
+          },
+          votes: {
+            type: Number,
+            default: 0,
+          },
+        },
+      ],
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model<IPost>("Post", postSchema)
