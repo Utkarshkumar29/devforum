@@ -10,7 +10,7 @@ export const fetchPost=createAsyncThunk(
         const data=res.data
         
         return {
-            post:data.results,
+            posts:data.results,
             page: data.current_page_number ?? data.page_number,
             totalPages: data.total_pages,
             limit: data.per_page,
@@ -36,7 +36,58 @@ const postSlice=createSlice({
         loading: false,
         hasMore: true,
     },
-  reducers:{
+    reducers:{
+        nextPage:(state)=>{
+            state.page+=1
+        },
+        resetPosts:(state)=>{
+            state.posts=[]
+            state.page=1
+            state.hasMore=true
+        }
+    },
+    extraReducers:(builder)=>{
+        builder
+        .addCase(fetchPost.pending,(state)=>{
+            state.loading=true
+        })
+        .addCase(fetchPost.fulfilled,(state,action)=>{
+            const { posts,page,totalPages,limit }=action.payload
 
-  }
+            state.page=page
+            state.totalPages=totalPages
+            state.limit=limit
+            state.hasMore=page<totalPages
+            
+            if(page==1){
+                state.posts=posts
+            }else{
+                state.posts = [...state.posts, ...posts]
+            }
+        })
+        .addCase(fetchPost.rejected, (state) => {
+            state.loading = false;
+        })
+        .addCase(updatePost.pending,(state)=>{
+            state.loading=true
+        })
+        .addCase(updatePost.fulfilled,(state,action)=>{
+            const updatedPost=action.payload
+
+            const index=state.posts.findIndex(
+                (post)=> post.slug==updatedPost.slug
+            )
+
+             if (index !== -1) {
+                state.posts[index] = {
+                    ...state.posts[index],
+                    ...updatedPost,
+                    id: updatedPost._id?.toString() || state.posts[index].id,
+                }
+            }
+        })
+    }
 })
+
+export const { nextPage,resetPosts } = postSlice.actions
+export default postSlice.reducer
