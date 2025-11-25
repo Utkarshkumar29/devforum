@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosPrivate } from "../axios/axiosInstance";
 
-export const fetchPost=createAsyncThunk(
+export const fetchPostSlugs=createAsyncThunk(
     "posts/fetchPosts",
     async({page,limit})=>{
-        const res=await axiosPrivate.get('/api/posts/getPosts',{
+        const res=await axiosPrivate.get('/posts/getPosts',{
             params:{ page,limit }
         })
         const data=res.data
-        
+        console.log("Fetched Posts Data:", data);
         return {
             posts:data.results,
             page: data.current_page_number ?? data.page_number,
@@ -18,10 +18,19 @@ export const fetchPost=createAsyncThunk(
     }
 )
 
+export const fetchPostDetails=createAsyncThunk(
+    "posts/fetchPostDetails",
+    async({slug})=>{
+        const response=await axiosPrivate.get(`/posts/singlePost/${slug}`)
+        console.log(response,"fetched details")
+        return response.data.result.post
+    }
+)
+
 export const updatePost = createAsyncThunk(
   "posts/updatePost",
   async ({ slug, updatedData }) => {
-    const res = await axiosPrivate.put(`/api/posts/editPost/${slug}`, updatedData)
+    const res = await axiosPrivate.put(`/posts/editPost/${slug}`, updatedData)
     return res.data.result.post
   }
 )
@@ -30,6 +39,7 @@ const postSlice=createSlice({
     name:"posts",
     initialState: {
         posts: [],
+        postDetails:{},
         page: 1,
         limit: 5,
         totalPages: 1,
@@ -48,10 +58,10 @@ const postSlice=createSlice({
     },
     extraReducers:(builder)=>{
         builder
-        .addCase(fetchPost.pending,(state)=>{
+        .addCase(fetchPostSlugs.pending,(state)=>{
             state.loading=true
         })
-        .addCase(fetchPost.fulfilled,(state,action)=>{
+        .addCase(fetchPostSlugs.fulfilled,(state,action)=>{
             const { posts,page,totalPages,limit }=action.payload
 
             state.page=page
@@ -65,25 +75,31 @@ const postSlice=createSlice({
                 state.posts = [...state.posts, ...posts]
             }
         })
-        .addCase(fetchPost.rejected, (state) => {
+        .addCase(fetchPostSlugs.rejected, (state) => {
             state.loading = false;
+        })
+        .addCase(fetchPostDetails.pending,(state)=>{
+            state.loading=true
+        })
+        .addCase(fetchPostDetails.fulfilled,(state,action)=>{
+            const fullPost = action.payload;
+            state.postDetails[fullPost.slug] = fullPost;
         })
         .addCase(updatePost.pending,(state)=>{
             state.loading=true
         })
-        .addCase(updatePost.fulfilled,(state,action)=>{
-            const updatedPost=action.payload
+        .addCase(updatePost.fulfilled, (state, action) => {
+            const updatedPost = action.payload;
 
-            const index=state.posts.findIndex(
-                (post)=> post.slug==updatedPost.slug
-            )
+            const index = state.posts.findIndex(
+            (post) => post.slug === updatedPost.slug
+            );
 
-             if (index !== -1) {
-                state.posts[index] = {
-                    ...state.posts[index],
-                    ...updatedPost,
-                    id: updatedPost._id?.toString() || state.posts[index].id,
-                }
+            if (index !== -1) {
+            state.posts[index] = {
+                ...state.posts[index],
+                ...updatedPost,
+            };
             }
         })
     }

@@ -178,12 +178,12 @@ const getSinglePost = async (req: AuthRequest, res: Response) => {
 
     if (redisPost) {
         const cachedString = typeof redisPost === "string" ? redisPost: redisPost.toString();
-      console.log("Cache Hit for single post");
-      return res.status(200).json({
-        success: true,
-        result: { post: JSON.parse(cachedString) },
-        cache: true,
-      });
+        console.log("Cache Hit for single post");
+        return res.status(200).json({
+            success: true,
+            result: { post: JSON.parse(cachedString) },
+            cache: true,
+        });
     }
 
     console.log("Single Post Cache Miss");

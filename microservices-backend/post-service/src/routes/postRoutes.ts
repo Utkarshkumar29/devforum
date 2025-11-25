@@ -4,9 +4,9 @@ import { createPost, editPost, getPaginatedPosts, getSinglePost } from "../contr
 
 const Router = express.Router()
 
-Router.post('/posts/createPost',protect,createPost)
-Router.get('/posts/getPosts',protect,getPaginatedPosts)
-Router.get('/posts/singlePost',protect,getSinglePost)
-Router.put('/posts/editPost/:slug',protect,editPost)
+Router.post('/createPost',protect,createPost)
+Router.get('/getPosts',protect,getPaginatedPosts)
+Router.get('/singlePost/:slug',protect,getSinglePost)
+Router.put('/editPost/:slug',protect,editPost)
 
 export default Router
