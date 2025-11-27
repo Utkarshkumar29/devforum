@@ -315,8 +315,8 @@ const getCommentsPaginated = async (req, res) => {
     const nextPage = page < totalPages ? page + 1 : null
     const prevPage = page > 1 ? page - 1 : null
 
-    const nextUrl = nextPage ? `/posts/comments/${slug}?page=${nextPage}` : null
-    const prevUrl = prevPage ? `/posts/comments/${slug}?page=${prevPage}` : null
+    const nextUrl = nextPage ? `/posts/getComments/${slug}?page=${nextPage}` : null
+    const prevUrl = prevPage ? `/posts/getComments/${slug}?page=${prevPage}` : null
 
     const sorted = [...post.comments].sort(
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
