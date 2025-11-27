@@ -1,22 +1,37 @@
 'use client'
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
 const FeedComments=({post})=>{
     const userDetails=useSelector((state:any)=>state.user)
     const [commentText,setCommentText]=useState("")
+    const [commentPage,setCommentPage]=useState(1)
     
     const handleAddComment=async()=>{
         try {
             const response=await axiosPrivate.post(`/posts/addComment/${post?.slug}`,{commentText})
+            
             console.log(response)
         } catch (error) {
             console.log(error)
         }
     }
 
+
+    const fetchComments=async()=>{
+        try {
+            const reponse=await axiosPrivate.get(`/posts/getComments/${post?.slug}?page=${commentPage}`)
+            console.log(reponse)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        fetchComments()
+    },[commentPage])
 
     return(
         <div className=" flex border border-[#2c2b47] p-4 rounded-[8px] mt-4 h-auto gap-2 ">
