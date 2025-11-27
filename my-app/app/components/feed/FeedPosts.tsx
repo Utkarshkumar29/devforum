@@ -11,6 +11,7 @@ import {
   nextPage,
 } from "../../redux/feedPostslice";
 import FeedLoader from "../../components/loaders/FeedLoader";
+import FeedPost from "./FeedPost";
 
 const FeedPosts = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,9 @@ const FeedPosts = () => {
     useSelector((state) => state.posts)
 
   useEffect(() => {
+    console.log("runnug1")
     dispatch(fetchPostSlugs({ page: 1, limit }))
+    console.log("runnug2")
   }, [])
 
   useEffect(() => {
@@ -44,81 +47,29 @@ const FeedPosts = () => {
   }
 
   return (
-    <InfiniteScroll
+    <div
+      id="scrollableDiv"
+      className="flex flex-col w-full max-w-[700px] mx-auto" 
+    >
+      <InfiniteScroll
       dataLength={posts.length}
       next={loadMorePosts}
       hasMore={hasMore}
-      loader={<p className="text-center py-2"><FeedLoader/></p>}
+      loader={<div className="text-center py-2">Loading//...</div>}
       endMessage={<p className="text-center py-2">No more posts</p>}
     >
-      {posts.map((post) => {
+      <div className=" flex gap-4 flex-col ">
+      {posts.map((post,index) => {
         const fullPost = postDetails?.[post.slug];
 
         return (
-          <div
-            key={post.id}
-            className="p-4 border-b border-gray-300 flex justify-between"
-          > 
-            <div className="flex-1">
-              <h3 className="font-bold">{fullPost?.user?.display_name ?? post.slug}</h3>
+          <FeedPost post={fullPost} key={index} />
 
-              {/* Description */}
-              <p className="opacity-80">
-                {fullPost ? fullPost.description : "Loading post..."}
-              </p>
-
-              {/* Images */}
-              {fullPost?.imageArray?.length > 0 && (
-                <div className="flex gap-2 mt-2">
-                  {fullPost.imageArray.map((img) => (
-                    <img
-                      key={img}
-                      src={img}
-                      alt="post media"
-                      className="w-24 h-24 object-cover rounded"
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Poll */}
-              {fullPost?.poll && (
-                <div className="mt-2">
-                  <p className="font-semibold">{fullPost.poll.poll_description}</p>
-                  {fullPost.poll.options.map((opt, idx) => (
-                    <p key={idx}>• {opt.optionText} ({opt.votes})</p>
-                  ))}
-                </div>
-              )}
-
-              {/* Repost (example) */}
-              {fullPost?.repost?.length > 0 && (
-                <div className="mt-2 text-sm text-gray-600">
-                  Repost by {fullPost.repost[0]?.user?.display_name ?? "someone"}
-                </div>
-              )}
-            </div>
-
-            {/* EDIT button (only show when fullPost exists) */}
-            <div className="ml-4 flex items-start">
-              <button
-                className="text-blue-600 underline"
-                onClick={() =>
-                  dispatch(
-                    updatePost({
-                      slug: post.slug,
-                      updatedData: { description: "Updated description!" },
-                    })
-                  )
-                }
-              >
-                Edit
-              </button>
-            </div>
-          </div>
         );
       })}
+      </div>
     </InfiniteScroll>
+    </div>
   );
 };
 

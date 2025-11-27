@@ -1,3 +1,4 @@
+import { fetchPostSlugs } from './../../../../my-app/app/redux/feedPostslice';
 import Post, { IPost } from "../models/postSchema"
 import { v4 as uuidv4 } from "uuid"
 import { Request, Response } from "express" 
@@ -248,4 +249,147 @@ const editPost=async(req:AuthRequest,res:Response)=>{
     }
 }
 
-export { createPost, getPaginatedPosts, getSinglePost, editPost }
+const addComment=async(req:AuthRequest,res:Response)=>{
+    try {
+        const { commentText}=req.body
+        const slug=req.params.slug
+        const updatedPost=await Post.findByIdAndUpdate(
+            {slug},
+            {
+                $push:{
+                    comments:{
+                        text:commentText,
+                        user:req.user._id,
+                        createdAt:new Date()
+                    }
+                }
+            },
+            {
+                new: true,
+                lean: true,
+                projection: {
+                comments: { $slice: -1 }
+                }
+            }
+        ).populate("comments.user"," photo_url display_name ")
+
+        if (!updatedPost) {
+        return res.status(404).send({
+            success: false,
+            message: "Post not found"
+        })
+        }
+
+        res.status(200).send({
+            success: true,
+            message: "Comment Added",
+            comment: updatedPost.comments[0]
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message:"Internal Server Error",
+            error:error
+        })
+    }
+}
+
+const getCommentsPaginated=async(req:AuthRequest,res:Response)=>{
+    try {
+        const slug=req.params.slug
+        const page=Number(req.params.page) || 1
+        const limit=5
+        const skip=(page-1)*limit
+        const post=await Post.findOne({slug})
+        
+        if(!post){
+            return res.status(404).send({
+                message:"Post not found",
+                success:false
+            })
+        }
+
+        const totalComments=post.comments.length
+        const totalPages=Math.ceil(totalComments/limit)
+
+        const paginatedComments = post.comments
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .slice(skip, skip + limit);
+
+        return res.status(200).send({
+            message: "Comments fetched successfully",
+            page,
+            totalPages,
+            totalComments,
+            comments: paginatedComments,
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message:"Internal Server Error",
+            error:error
+        })
+    }
+}
+
+const likePost=async(req:AuthRequest,res:Response)=>{
+    try {
+        const {
+            slug,
+            reactionType
+        }=req.body
+        const post=await Post.findOne({slug})
+        const userId=req.user._id
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
+        const existingLike=post.likes.find((like)=>
+            like.user.toString()===userId.toString()
+        )
+
+        if(existingLike && existingLike.reactionType===reactionType){
+            post.likes=post.likes.filter((like)=>
+                like.user.toString() !== userId.toString()
+            )
+
+            await post.save()
+
+            return res.status(200).send({
+                message:"Reaction removed",
+                likes:post.likes
+            })
+        }
+
+        if(existingLike){
+            existingLike.reactionType=reactionType  
+            await post.save()
+
+            return res.status(200).send({
+                message: "Reaction updated",
+                likes: post.likes,
+            })
+        }
+
+        post.likes.push({
+            user: userId,
+            reactionType: reactionType,
+        })
+
+        await post.save()
+        return res.status(200).send({
+            message:"Reaction added",
+            likes: post.likes,
+        })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message:"Internal Server Error",
+            error:error
+        })
+    }
+}
+
+export { createPost, getPaginatedPosts, getSinglePost, editPost, addComment, likePost, getCommentsPaginated }

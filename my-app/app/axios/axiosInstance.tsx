@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL= "http://localhost:8000/api"
+const baseURL= "https://devforum-gateway.onrender.com/api"
 
 export const axiosPublic=axios.create({
     baseURL:baseURL,

@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader";
 const FeedLoader = ({ }) => {
   
   return (
-    <div className={`  rounded-2xl border border-gray-400 mb-3 overflow-hidden max-w-[700px] max-h-[679px] w-[700px] h-[679px]`}>
+    <div className={` bg-[#23253c]  rounded-2xl border border-gray-400 mb-3 overflow-hidden max-w-[700px] max-h-[679px] w-[700px] h-[679px]`}>
       <ContentLoader
         viewBox="0 0 400 490"
         backgroundColor={"#8F8F8F"}
