@@ -10,6 +10,9 @@ Router.get('/singlePost/:slug',protect,getSinglePost)
 Router.put('/editPost/:slug',protect,editPost)
 Router.post('/addComment/:slug',protect,addComment)
 Router.get('/getComments/:slug',protect,getCommentsPaginated)
-Router.get('/like/:slug',protect,likePost)
+Router.post('/like/:slug',protect,likePost)
 
 export default Router
+
+https://devforum-gateway.onrender.com/api/posts/like/slug-63061ddb-dc82-4a26-81e8-7c8340811638
+https://devforum-gateway.onrender.com/api/posts/getComments/slug-63061ddb-dc82-4a26-81e8-7c8340811638?page=1

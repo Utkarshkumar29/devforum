@@ -18,7 +18,7 @@ const Feed = () => {
   };
 
   return (
-    <div className=" max-w-[1920px] flex justify-center items-center ">
+    <div className=" max-w-[1920px] flex justify-center items-center bg-[#1d1a2d] min-h-screen ">
         <div className=" flex flex-col gap-10 justify-center items-center max-w-[1350px] w-full h-full ">
           <UploadFeed/>
           <FeedPosts/>

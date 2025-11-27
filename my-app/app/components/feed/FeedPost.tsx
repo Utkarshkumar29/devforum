@@ -36,7 +36,7 @@ const FeedPost=({post})=>{
             </div>
             <div className=" my-2 border border-[#2c2b47] "></div>
             <div className=" flex justify-between px-[12px] ">
-                <i class={`fa-regular fa-heart cursor-pointer ${isPostLiked && "text-red-500"} `} onClick={()=>handleLikePost()}></i>
+                {isPostLiked ? <i className="fa-solid fa-heart text-red-500 cursor-pointer"></i>:<i class={`fa-regular fa-heart cursor-pointer ${isPostLiked && "text-red-500"} `} onClick={()=>handleLikePost()}></i>}
                 <p onClick={()=>setShowComments(prev=>!prev)} ><i className={`fa-regular fa-comment cursor-pointer ${showComments ? "text-white" : ""}`}></i></p>
                 <i class="fa-solid fa-arrow-rotate-left cursor-pointer"></i>
                 <i class="fa-solid fa-share cursor-pointer"></i>
