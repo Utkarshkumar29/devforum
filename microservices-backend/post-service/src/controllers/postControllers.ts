@@ -1,4 +1,3 @@
-import { fetchPostSlugs } from './../../../../my-app/app/redux/feedPostslice';
 import Post, { IPost } from "../models/postSchema"
 import { v4 as uuidv4 } from "uuid"
 import { Request, Response } from "express" 
