@@ -298,7 +298,8 @@ const addComment=async(req:AuthRequest,res:Response)=>{
 const getCommentsPaginated = async (req, res) => {
   try {
     const slug = req.params.slug
-    const page = Number(req.query.page) || 1
+
+    const page = parseInt(req.query.page as string, 10) || 1
     const limit = 5
 
     const post = await Post.findOne({ slug }).lean()
@@ -318,23 +319,26 @@ const getCommentsPaginated = async (req, res) => {
     const prevUrl = prevPage ? `/posts/comments/${slug}?page=${prevPage}` : null
 
     const sorted = [...post.comments].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
 
     const sliced = sorted.slice(skip, skip + limit)
 
-    const userIds = sliced.map(c => c.user)
+    const userIds = sliced.map((c) => c.user)
+
     const users = await User.find(
       { _id: { $in: userIds } },
       "display_name photo_url"
     ).lean()
 
-    const userMap = {}
-    users.forEach(u => (userMap[u._id] = u))
+    const userMap: Record<string, any> = {}
+    users.forEach((u) => {
+      userMap[u._id.toString()] = u
+    })
 
-    const comments = sliced.map(c => ({
+    const comments = sliced.map((c) => ({
       ...c,
-      user: userMap[c.user] || null,
+      user: userMap[c.user.toString()] || null,
     }))
 
     return res.status(200).json({
@@ -351,15 +355,17 @@ const getCommentsPaginated = async (req, res) => {
       prevUrl,
       comments,
     })
+
   } catch (error) {
     console.log(error)
-    return res.status(500).send({
+    return res.status(500).json({
       success: false,
       message: "Internal Server Error",
       error,
     })
   }
 }
+
 
 const likePost=async(req:AuthRequest,res:Response)=>{
     try {
