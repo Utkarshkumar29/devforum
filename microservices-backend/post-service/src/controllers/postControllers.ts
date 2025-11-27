@@ -1,16 +1,17 @@
 import Post, { IPost } from "../models/postSchema"
 import { v4 as uuidv4 } from "uuid"
 import { Request, Response } from "express" 
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 import { redisClient } from "../redis/redisClient"
+import { User } from "../models/userSchema"
 
 interface AuthRequest extends Request{
     user?: {_id:string}
 }
 
 interface PostMinimal {
-  slug: string;
-  _id: any;
+  slug: string
+  _id: any
 }
 
 const createPost = async (req:AuthRequest, res:Response) => {
@@ -65,16 +66,16 @@ const createPost = async (req:AuthRequest, res:Response) => {
             return res.status(400).json({
                 success: false,
                 message: 'Cannot create an empty post',
-            });
+            })
         }
         newPostData.slug=`slug-${uuidv4()}`
         const post = new Post(newPostData)
         await post.save()
 
-        const keys = await redisClient.keys("posts:*");
+        const keys = await redisClient.keys("posts:*")
         if (keys.length > 0) {
-            await redisClient.del(keys);
-            console.log("Redis cache cleared after new post.");
+            await redisClient.del(keys)
+            console.log("Redis cache cleared after new post.")
         }
 
         await post.populate([
@@ -96,8 +97,8 @@ const createPost = async (req:AuthRequest, res:Response) => {
     }
 }
 
-const MAX_LIMIT = 20;
-const DEFAULT_LIMIT = 5;
+const MAX_LIMIT = 20
+const DEFAULT_LIMIT = 5
 
 const getPaginatedPosts=async(req:AuthRequest,res:Response)=>{
     try {        
@@ -167,54 +168,54 @@ const getPaginatedPosts=async(req:AuthRequest,res:Response)=>{
 
 const getSinglePost = async (req: AuthRequest, res: Response) => {
   try {
-    const { slug } = req.params;
+    const { slug } = req.params
 
     if (!slug) {
-      return res.status(400).json({ message: "Slug is missing" });
+      return res.status(400).json({ message: "Slug is missing" })
     }
 
-    const cacheKey = `post:${slug}`;
-    const redisPost = await redisClient.get(cacheKey);
+    const cacheKey = `post:${slug}`
+    const redisPost = await redisClient.get(cacheKey)
 
     if (redisPost) {
-        const cachedString = typeof redisPost === "string" ? redisPost: redisPost.toString();
-        console.log("Cache Hit for single post");
+        const cachedString = typeof redisPost === "string" ? redisPost: redisPost.toString()
+        console.log("Cache Hit for single post")
         return res.status(200).json({
             success: true,
             result: { post: JSON.parse(cachedString) },
             cache: true,
-        });
+        })
     }
 
-    console.log("Single Post Cache Miss");
+    console.log("Single Post Cache Miss")
 
     const post = await Post.findOne({ slug }).populate([
       { path: "user", select: "id email display_name photo_url" },
       { path: "repost.user", select: "id email display_name photo_url" },
-    ]);
+    ])
 
     if (!post) {
       return res.status(404).json({
         success: false,
         message: "Post not found",
-      });
+      })
     }
 
-    await redisClient.setEx(cacheKey, 60, JSON.stringify(post));
+    await redisClient.setEx(cacheKey, 60, JSON.stringify(post))
 
     return res.status(200).json({
       success: true,
       result: { post },
       cache: false,
-    });
+    })
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return res.status(500).json({
       message: "Internal Server Error",
       error: error.message,
-    });
+    })
   }
-};
+}
 
 const editPost=async(req:AuthRequest,res:Response)=>{
     try {
@@ -270,7 +271,7 @@ const addComment=async(req:AuthRequest,res:Response)=>{
                     comments: { $slice: -1 },
                 },
             }
-        ).populate("comments.user", "photo_url display_name");
+        ).populate("comments.user", "photo_url display_name")
 
 
         if (!updatedPost) {
@@ -294,43 +295,70 @@ const addComment=async(req:AuthRequest,res:Response)=>{
     }
 }
 
-const getCommentsPaginated=async(req:AuthRequest,res:Response)=>{
-    try {
-        const slug=req.params.slug
-        const page=Number(req.params.page) || 1
-        const limit=5
-        const skip=(page-1)*limit
-        const post=await Post.findOne({slug})
-        
-        if(!post){
-            return res.status(404).send({
-                message:"Post not found",
-                success:false
-            })
-        }
+const getCommentsPaginated = async (req, res) => {
+  try {
+    const slug = req.params.slug
+    const page = Number(req.query.page) || 1
+    const limit = 5
 
-        const totalComments=post.comments.length
-        const totalPages=Math.ceil(totalComments/limit)
+    const post = await Post.findOne({ slug }).lean()
 
-        const paginatedComments = post.comments
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .slice(skip, skip + limit);
-
-        return res.status(200).send({
-            message: "Comments fetched successfully",
-            page,
-            totalPages,
-            totalComments,
-            comments: paginatedComments,
-        })
-
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({
-            message:"Internal Server Error",
-            error:error
-        })
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" })
     }
+
+    const totalComments = post.comments.length
+    const skip = (page - 1) * limit
+    const totalPages = Math.ceil(totalComments / limit)
+
+    const nextPage = page < totalPages ? page + 1 : null
+    const prevPage = page > 1 ? page - 1 : null
+
+    const nextUrl = nextPage ? `/posts/comments/${slug}?page=${nextPage}` : null
+    const prevUrl = prevPage ? `/posts/comments/${slug}?page=${prevPage}` : null
+
+    const sorted = [...post.comments].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    )
+
+    const sliced = sorted.slice(skip, skip + limit)
+
+    const userIds = sliced.map(c => c.user)
+    const users = await User.find(
+      { _id: { $in: userIds } },
+      "display_name photo_url"
+    ).lean()
+
+    const userMap = {}
+    users.forEach(u => (userMap[u._id] = u))
+
+    const comments = sliced.map(c => ({
+      ...c,
+      user: userMap[c.user] || null,
+    }))
+
+    return res.status(200).json({
+      success: true,
+      message: "Comments fetched",
+      slug,
+      page,
+      limit,
+      totalComments,
+      totalPages,
+      nextPage,
+      prevPage,
+      nextUrl,
+      prevUrl,
+      comments,
+    })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send({
+      success: false,
+      message: "Internal Server Error",
+      error,
+    })
+  }
 }
 
 const likePost=async(req:AuthRequest,res:Response)=>{
@@ -342,7 +370,7 @@ const likePost=async(req:AuthRequest,res:Response)=>{
         const post=await Post.findOne({slug})
         const userId=req.user._id
         if (!post) {
-            return res.status(404).json({ message: "Post not found" });
+            return res.status(404).json({ message: "Post not found" })
         }
 
         const existingLike=post.likes.find((like)=>
