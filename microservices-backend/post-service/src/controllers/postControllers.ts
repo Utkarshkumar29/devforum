@@ -252,25 +252,26 @@ const addComment=async(req:AuthRequest,res:Response)=>{
     try {
         const { commentText}=req.body
         const slug=req.params.slug
-        const updatedPost=await Post.findByIdAndUpdate(
-            {slug},
+        const updatedPost = await Post.findOneAndUpdate(
+            { slug },
             {
-                $push:{
-                    comments:{
-                        text:commentText,
-                        user:req.user._id,
-                        createdAt:new Date()
-                    }
-                }
+                $push: {
+                comments: {
+                    text: commentText,
+                    user: new mongoose.Types.ObjectId(req.user._id),
+                    createdAt: new Date(),
+                },
+                },
             },
             {
                 new: true,
                 lean: true,
                 projection: {
-                comments: { $slice: -1 }
-                }
+                    comments: { $slice: -1 },
+                },
             }
-        ).populate("comments.user"," photo_url display_name ")
+        ).populate("comments.user", "photo_url display_name");
+
 
         if (!updatedPost) {
         return res.status(404).send({
@@ -312,7 +313,7 @@ const getCommentsPaginated=async(req:AuthRequest,res:Response)=>{
         const totalPages=Math.ceil(totalComments/limit)
 
         const paginatedComments = post.comments
-        .sort((a, b) => b.createdAt - a.createdAt)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(skip, skip + limit);
 
         return res.status(200).send({
@@ -372,7 +373,7 @@ const likePost=async(req:AuthRequest,res:Response)=>{
         }
 
         post.likes.push({
-            user: userId,
+            user: new mongoose.Types.ObjectId(req.user._id),
             reactionType: reactionType,
         })
 
