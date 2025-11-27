@@ -4,29 +4,41 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
+interface Comment {
+  _id: string;
+  text: string;
+  user: any;
+  createdAt: string;
+}
+
 const FeedComments=({post})=>{
     const userDetails=useSelector((state:any)=>state.user)
     const [commentText,setCommentText]=useState("")
     const [commentPage,setCommentPage]=useState(1)
-    const [userComments,setUserComments]=useState([])
+    const [userComments,setUserComments]=useState<Comment[]>([])
     const [totalPages,setTotalPages]=useState(1)
     const [nextCommentUrl,setNextcommentUrl]=useState(null)
     
     const handleAddComment=async()=>{
         try {
             const response=await axiosPrivate.post(`/posts/addComment/${post?.slug}`,{commentText})
-            
+            setCommentText("")
+            setUserComments((prev)=>[response.data.comment,...prev])
         } catch (error) {
             console.log(error)
         }
     }
 
-
     const fetchComments=async()=>{
         try {
             const response=await axiosPrivate.get(nextCommentUrl ?? `/posts/getComments/${post?.slug}?page=${commentPage}`)
             console.log(response,"plawse")
-            setUserComments(response.data.comments)
+            if(userComments.length>0){
+                setUserComments((prev)=>[...prev,...response.data.comments])
+            }else{
+                setUserComments(response.data.comments)
+            }
+            setCommentPage(response.data.page)
             setTotalPages(response.data.totalPages)
             if(response.data.nextUrl){
                 setNextcommentUrl(response.data.nextUrl)
@@ -52,7 +64,7 @@ const FeedComments=({post})=>{
             </div>
             </div>
 
-            <div>
+            <div className=" flex flex-col gap-2 ">
                 {userComments && userComments.length>0 && userComments.map((comment,index)=>{
                     return(
                         <div className=" flex gap-2 ">

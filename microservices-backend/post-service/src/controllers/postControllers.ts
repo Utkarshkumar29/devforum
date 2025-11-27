@@ -369,10 +369,8 @@ const getCommentsPaginated = async (req, res) => {
 
 const likePost=async(req:AuthRequest,res:Response)=>{
     try {
-        const {
-            slug,
-            reactionType
-        }=req.body
+        const {reactionType}=req.body
+        const slug=req.params.slug
         const post=await Post.findOne({slug})
         const userId=req.user._id
         if (!post) {
