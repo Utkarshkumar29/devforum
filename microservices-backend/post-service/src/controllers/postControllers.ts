@@ -18,6 +18,7 @@ const createPost = async (req:AuthRequest, res:Response) => {
     const {
         description,
         imageArray,
+        video,
         document,
         poll_description,
         pollOptions,

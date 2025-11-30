@@ -20,6 +20,8 @@ const FeedPost=({post})=>{
             console.log(error)
         }
     }
+
+    console.log(post,"isha")
     
     return(
         <div className=" w-full h-auto max-w-[700px] bg-[#23253c] rounded-[8px] border border-[#2c2b47] px-[24px] py-[16px] gap-4 flex flex-col ">
@@ -38,6 +40,42 @@ const FeedPost=({post})=>{
             <div>
                 <span>{post?.description}</span>    
             </div>
+
+            <div>
+                {post?.imageArray && post?.imageArray.map((img,index)=>{
+                    console.log(img,"thene")
+                    return(
+                        <Image src={img} alt="Error" key={index} width={200} height={200}/>
+                    )
+                })}
+
+                {post?.document && (
+                     <iframe
+                        src={`https://docs.google.com/gview?url=${encodeURIComponent(post?.document)}&embedded=true`}
+                        className="w-full h-[600px] rounded-xl"
+                    />
+                )}
+
+                {post?.poll?.poll_description && (
+                    <div className=" border border-[#2c2b47] p-[24px] rounded-2xl ">
+                        <span>Poll: {post?.poll?.poll_description}</span>
+                        {post?.poll?.options && post?.poll?.options.map((option,index)=>{
+                            return(
+                                <div key={index} className=" min-w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none cursor-pointer ">{option.optionText}</div>
+                            )
+                        })}
+                    </div>
+                )}
+
+                {post?.video && (
+                     <video
+                        src={post?.video}
+                        controls 
+                        className="w-full rounded-xl max-h-[400px]" 
+                     />
+                )}
+            </div>
+            
             <div className=" my-2 border border-[#2c2b47] "></div>
             <div className=" flex justify-between px-[12px] ">
                 {isPostLiked ? <i className="fa-solid fa-heart text-red-500 cursor-pointer" onClick={()=>handleLikePost()}></i>:<i className={`fa-regular fa-heart cursor-pointer ${isPostLiked && "text-red-500"} `} onClick={()=>handleLikePost()}></i>}
