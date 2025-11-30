@@ -19,6 +19,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "plus.unsplash.com", // optional – for Unsplash images
       },
+      {
+        protocol: "https",
+        hostname: "static.vecteezy.com",
+      },
     ],
   },
 };

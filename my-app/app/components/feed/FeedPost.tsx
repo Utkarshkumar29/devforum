@@ -11,7 +11,11 @@ const FeedPost=({post})=>{
     const handleLikePost=async()=>{
         try {
             const response=await axiosPrivate.post(`/posts/like/${post.slug}`,{reactionType:"love"})
-            setIsPostLiked(true)
+            if(response.data.message=="Reaction removed"){
+                setIsPostLiked(false)    
+            }else{
+                setIsPostLiked(true)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -22,7 +26,7 @@ const FeedPost=({post})=>{
             <div className=" w-full flex justify-between ">
                     <div className=" flex gap-4 ">
                         <div>
-                            <Image src={post?.user?.photo_url} alt="USer" width={50} height={50} className="rounded-full"/>
+                            <Image src={post?.user?.photo_url || "https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpgplus.unsplash.com"} alt="User" width={50} height={50} className="rounded-full"/>
                         </div>
                         <div>
                             <p>{post?.user?.display_name}</p>
@@ -36,10 +40,10 @@ const FeedPost=({post})=>{
             </div>
             <div className=" my-2 border border-[#2c2b47] "></div>
             <div className=" flex justify-between px-[12px] ">
-                {isPostLiked ? <i className="fa-solid fa-heart text-red-500 cursor-pointer"></i>:<i class={`fa-regular fa-heart cursor-pointer ${isPostLiked && "text-red-500"} `} onClick={()=>handleLikePost()}></i>}
+                {isPostLiked ? <i className="fa-solid fa-heart text-red-500 cursor-pointer" onClick={()=>handleLikePost()}></i>:<i className={`fa-regular fa-heart cursor-pointer ${isPostLiked && "text-red-500"} `} onClick={()=>handleLikePost()}></i>}
                 <p onClick={()=>setShowComments(prev=>!prev)} ><i className={`fa-regular fa-comment cursor-pointer ${showComments ? "text-white" : ""}`}></i></p>
-                <i class="fa-solid fa-arrow-rotate-left cursor-pointer"></i>
-                <i class="fa-solid fa-share cursor-pointer"></i>
+                <i className="fa-solid fa-arrow-rotate-left cursor-pointer"></i>
+                <i className="fa-solid fa-share cursor-pointer"></i>
             </div>
             {showComments && (
                 <>

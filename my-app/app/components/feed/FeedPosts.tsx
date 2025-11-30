@@ -64,8 +64,7 @@ const FeedPosts = () => {
 
         return (
           <FeedPost post={fullPost} key={index} />
-
-        );
+        )
       })}
       </div>
     </InfiniteScroll>

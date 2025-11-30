@@ -31,6 +31,7 @@ export interface IPost extends Document{
   user:mongoose.Types.ObjectId
   description:string
   imageArray?:string[]
+  video?:string
   likes:ILike[]
   comments:IComment[]
   repost?:IRepost[]
@@ -61,6 +62,9 @@ const postSchema = new mongoose.Schema<IPost>(
         type: String,
       },
     ],
+    video:{
+      type: String
+    },
     likes: [
       {
         user: {
