@@ -44,6 +44,10 @@ const createPost = async (req:AuthRequest, res:Response) => {
             newPostData.document = document
         }
 
+        if(video){
+            newPostData.video=video
+        }
+
         if (poll_description && Array.isArray(pollOptions) && pollOptions.length > 0) {
             newPostData.poll = {
                 poll_description,
