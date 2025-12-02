@@ -4,6 +4,7 @@ import { Request, Response } from "express"
 import mongoose from "mongoose"
 import { redisClient } from "../redis/redisClient"
 import { User } from "../models/userSchema"
+import { postQueue } from "../queues/postQueue"
 
 interface AuthRequest extends Request{
     user?: {_id:string}
@@ -24,7 +25,8 @@ const createPost = async (req:AuthRequest, res:Response) => {
         pollOptions,
         isRepost,
         repostUserId,
-        repostDescription
+        repostDescription,
+        schedule_time
     } = req.body
     try {
         if (!req.user || !req.user._id) {
@@ -76,6 +78,16 @@ const createPost = async (req:AuthRequest, res:Response) => {
         newPostData.slug=`slug-${uuidv4()}`
         const post = new Post(newPostData)
         await post.save()
+
+        if (schedule_time) {
+        const delay = new Date(schedule_time).getTime() - Date.now();
+
+        await postQueue.add(
+            "publish-post",
+            { postId: post._id.toString() },
+            { delay }
+        );
+}
 
         const keys = await redisClient.keys("posts:*")
         if (keys.length > 0) {
@@ -131,12 +143,12 @@ const getPaginatedPosts=async(req:AuthRequest,res:Response)=>{
         }
 
         console.log("Cache Miss")
-        const totalCount=await Post.countDocuments()        
+        const totalCount = await Post.countDocuments({ published_at: { $ne: null } })
         const skip=(page-1)*limit
         const totalPages=Math.ceil(totalCount/limit)
 
-        const posts=await Post.find({})
-            .sort({createdAt:-1})
+        const posts=await Post.find({ published_at: { $ne: null } })
+            .sort({published_at:-1})
             .skip(skip)
             .limit(limit)
             .select("slug _id")
@@ -424,6 +436,22 @@ const likePost=async(req:AuthRequest,res:Response)=>{
         console.log(error)
         res.status(500).send({
             message:"Internal Server Error",
+            error:error
+        })
+    }
+}
+
+const schedulePost=async(req:AuthRequest,res:Response)=>{
+    try {
+        const {
+            time,
+            date
+        }=req.body
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            message:"Internal Server error",
             error:error
         })
     }

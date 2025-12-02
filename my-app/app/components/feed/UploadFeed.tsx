@@ -27,6 +27,9 @@ const UploadFeed = () => {
     const [description, setDescription] = useState("")
     const imageInputRef = useRef(null)
     const videoInputRef=useRef(null)
+    const [openSchedulePost,setOpenSchedulePost]=useState(false)
+    const [date,setDate]=useState(null)
+    const [time,setTime]=useState(null)
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
@@ -89,6 +92,11 @@ const UploadFeed = () => {
         setPollOptions((prev)=>[...prev,""])
     }
 
+    const handleSchedulePost=()=>{
+        setAddImageModal(false)
+        setOpenSchedulePost(true)
+    }
+
     const handleCreatePost = async (e: any) => {
     e.preventDefault();
 
@@ -146,6 +154,7 @@ const UploadFeed = () => {
                             <i className="fa-solid fa-poll text-[#614fae]  "></i>
                             <span className=" text-[#614fae] ">Poll</span>
                         </div>
+                        
                     </div>
                     <div onClick={handleCreatePost} className=" cursor-pointer flex justify-center items-center bg-[#7d42f5] px-[24px] py-[6px] rounded-[8px] font-semibold ">Post</div>
                 </div>
@@ -223,7 +232,13 @@ const UploadFeed = () => {
 
                                 </DialogDescription>
 
-                                <div className=" border border-[#2c2b47] flex justify-end py-[16px] px-[24px] ">
+                                <div className=" flex gap-4 border border-[#2c2b47] justify-end py-[16px] px-[24px] ">
+                                    <button
+                                        onClick={handleSchedulePost}
+                                        className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-6 py-2 rounded-xl font-medium"
+                                    >
+                                        Schedule Post
+                                    </button>
                                     <button
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
@@ -243,7 +258,6 @@ const UploadFeed = () => {
             <Transition show={addImageModal} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={handleCreatePostClose}>
 
-                    {/* BACKDROP */}
                     <TransitionChild
                         as={Fragment}
                         enter="ease-out duration-200"
@@ -279,6 +293,13 @@ const UploadFeed = () => {
                                 <Description as="div" className="space-y-6">
 
                                     <form onSubmit={handleCreatePost} className=" w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px] ">
+                                        {time && date && (
+                                            <div className="cursor-pointer border-[#2c2b47] w-full px-[24px] py-[16px] rounded-2xl bg-[#1e2035] flex justify-between items-center ">
+                                                <span>Posting on {date} at {time}</span>
+                                                <button className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-[24px] py-[2px] rounded-xl font-medium">Edit</button>
+                                            </div>
+                                        )}
+
                                         <textarea
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
@@ -344,7 +365,13 @@ const UploadFeed = () => {
 
                                 </Description>
 
-                                <div className=" border border-[#2c2b47] flex justify-end py-[16px] px-[24px] ">
+                                <div className=" border border-[#2c2b47] flex justify-end py-[16px] px-[24px] gap-4 ">
+                                    <button
+                                        onClick={handleSchedulePost}
+                                        className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-6 py-2 rounded-xl font-medium"
+                                    >
+                                        Schedule Post
+                                    </button>
                                     <button
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
@@ -590,8 +617,8 @@ const UploadFeed = () => {
 
                         <DialogTitle>
                             <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
-                            <span className="text-[20px] font-semibold">Upload File</span>
-                            <i onClick={() => setAddFileModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                            <span className="text-[20px] font-semibold">Upload Poll</span>
+                            <i onClick={() => setAddPollModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
                             </div>
                         </DialogTitle>
 
@@ -642,6 +669,80 @@ const UploadFeed = () => {
                             className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                             >
                             Post
+                            </button>
+                        </div>
+
+                        </DialogPanel>
+
+                    </TransitionChild>
+
+                    </div>
+
+                </Dialog>
+            </Transition>   
+
+            <Transition show={openSchedulePost} as={Fragment}>
+                <Dialog as="div" className="relative z-50" onClose={() => setAddFileModal(false)}>
+                    
+                    <TransitionChild
+                    as={Fragment}
+                    enter="ease-out duration-200"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                    >
+                    <div className="fixed inset-0 bg-black/50" />
+                    </TransitionChild>
+
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
+
+                    <TransitionChild
+                        as={Fragment}
+                        enter="ease-out duration-200"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                    >
+
+                        <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+
+                        <DialogTitle>
+                            <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                            <span className="text-[20px] font-semibold">Schedule Post for later</span>
+                            <i onClick={() => setOpenSchedulePost(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                            </div>
+                        </DialogTitle>
+
+                        <Description as="div" className="space-y-6">
+
+                            <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
+                            
+                            <div className=" flex flex-col ">
+                                <label>Date</label>
+                                <input onChange={(e)=>setDate(e.target.value)} type="Date" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] "/>
+                            </div>
+
+                            <div className=" flex flex-col ">
+                                <label>Time</label>
+                                <input onChange={(e)=>setTime(e.target.value)} type="time" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] "/>
+                            </div>
+
+                            </form>
+                        </Description>
+
+                        <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                            <button
+                            onClick={()=>{
+                                setAddImageModal(true)
+                                setOpenSchedulePost(false)
+                            }}
+                            className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
+                            >
+                            Next
                             </button>
                         </div>
 

@@ -39,6 +39,8 @@ export interface IPost extends Document{
   poll?:IPoll
   createdAt:Date
   updatedAt:Date
+  schedule_time?:Date
+  published_at?:Date
 }
 
 
@@ -125,6 +127,14 @@ const postSchema = new mongoose.Schema<IPost>(
         },
       ],
     },
+    schedule_time:{
+      type:Date,
+      default: null
+    },
+    published_at:{
+      type:Date,
+      default: null
+    }
   },
   { timestamps: true }
 );
