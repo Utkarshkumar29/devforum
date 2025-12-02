@@ -1,6 +1,6 @@
 import { Worker } from "bullmq";
 import Post from "../models/postSchema"
-import { redisBullConfig } from "../redis/redisClient"
+import { redisBullConfig } from "../redis/redisBull"
 
 new Worker(
     "scheduled-posts",
