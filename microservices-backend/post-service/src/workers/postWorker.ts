@@ -14,7 +14,7 @@ new Worker(
             post.published_at = new Date()
             await post.save()
         }
-    }
+    },
     {
     connection: redisBullConfig,
   }
