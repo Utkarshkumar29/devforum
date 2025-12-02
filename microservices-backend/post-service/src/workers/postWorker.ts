@@ -5,7 +5,7 @@ import { redisBullConfig } from "../redis/redisClient"
 new Worker(
     "scheduled-posts",
     async(job)=>{
-        const { postId }=job.data,
+        const { postId }=job.data
 
         const post=await Post.findById(postId)
         if(post) return
