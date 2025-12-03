@@ -38,7 +38,14 @@ const createPost = async (req:AuthRequest, res:Response) => {
         const newPostData: Partial<IPost> = { 
             user: new mongoose.Types.ObjectId(req.user._id),
             description: description
-         }
+        }
+
+        if (!schedule_time) {
+            newPostData.published_at = new Date()
+        } else {
+            newPostData.schedule_time = schedule_time
+        }
+
         if (imageArray && imageArray.length > 0) {
             newPostData.imageArray = imageArray
         }
@@ -80,14 +87,14 @@ const createPost = async (req:AuthRequest, res:Response) => {
         await post.save()
 
         if (schedule_time) {
-        const delay = new Date(schedule_time).getTime() - Date.now();
+            const delay = new Date(schedule_time).getTime() - Date.now()
 
-        await postQueue.add(
-            "publish-post",
-            { postId: post._id.toString() },
-            { delay }
-        );
-}
+            await postQueue.add(
+                "publish-post",
+                { postId: post._id.toString() },
+                { delay }
+            )
+        }
 
         const keys = await redisClient.keys("posts:*")
         if (keys.length > 0) {
@@ -147,7 +154,7 @@ const getPaginatedPosts=async(req:AuthRequest,res:Response)=>{
         const skip=(page-1)*limit
         const totalPages=Math.ceil(totalCount/limit)
 
-        const posts=await Post.find({ published_at: { $ne: null } })
+        const posts = await Post.find({ published_at: { $exists: true, $ne: null } })
             .sort({published_at:-1})
             .skip(skip)
             .limit(limit)
