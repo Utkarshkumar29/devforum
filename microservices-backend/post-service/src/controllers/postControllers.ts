@@ -63,7 +63,8 @@ const createPost = async (req:AuthRequest, res:Response) => {
                 options: pollOptions.map((opt) => ({
                     optionText: opt,
                     votes: 0
-                }))
+                })),
+                voters: []
             }
         }
 
