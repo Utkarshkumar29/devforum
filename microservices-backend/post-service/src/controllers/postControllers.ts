@@ -492,7 +492,7 @@ const votePoll = async (req: AuthRequest, res: Response) => {
 
         optionSelected.votes += 1
 
-        post.poll.voters.push(userId)
+        post.poll.voters.push(new mongoose.Types.ObjectId(userId))
 
         await post.save()
 
