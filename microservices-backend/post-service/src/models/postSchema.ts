@@ -126,6 +126,12 @@ const postSchema = new mongoose.Schema<IPost>(
           },
         },
       ],
+      voters: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ]
     },
     schedule_time:{
       type:Date,

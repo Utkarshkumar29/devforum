@@ -109,6 +109,11 @@ const UploadFeed = () => {
             }
         }
 
+        let schedule_time = null
+        if(date && time){
+            schedule_time= new Date(`${date}T${time}`)
+        }
+
         const body: any = {
             description,
             imageArray: uploadedImages,
@@ -119,10 +124,11 @@ const UploadFeed = () => {
             isRepost,
             repostUserId,
             repostDescription,
+            schedule_time
         }
 
         const response = await axiosPrivate.post("/posts/createPost", body);
-
+        setAddImageModal(false)
         } catch (error) {
             console.log(error);
         }

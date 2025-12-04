@@ -55,7 +55,7 @@ const FeedPosts = () => {
       dataLength={posts.length}
       next={loadMorePosts}
       hasMore={hasMore}
-      loader={<div className="text-center py-2">Loading//...</div>}
+      loader={<div className="text-center"><FeedLoader/></div>}
       endMessage={<p className="text-center py-2">No more posts</p>}
     >
       <div className=" flex gap-4 flex-col ">

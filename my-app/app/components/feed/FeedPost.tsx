@@ -45,7 +45,7 @@ const FeedPost=({post})=>{
                 {post?.imageArray && post?.imageArray.map((img,index)=>{
                     console.log(img,"thene")
                     return(
-                        <Image src={img} alt="Error" key={index} width={200} height={200}/>
+                        <Image src={img} alt="Error" key={index} width={200} height={200} className=" w-full h-auto rounded-2xl "/>
                     )
                 })}
 
