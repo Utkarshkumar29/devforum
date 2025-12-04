@@ -45,6 +45,7 @@ const postSlice=createSlice({
         totalPages: 1,
         loading: false,
         hasMore: true,
+        creatingPost: false
     },
     reducers:{
         nextPage:(state)=>{
@@ -54,6 +55,12 @@ const postSlice=createSlice({
             state.posts=[]
             state.page=1
             state.hasMore=true
+        },
+        addNewPost: (state, action) => {
+            state.posts = [action.payload, ...state.posts]
+        },
+        setCreatingPost(state, action) {
+            state.creatingPost = action.payload;
         }
     },
     extraReducers:(builder)=>{
@@ -105,5 +112,5 @@ const postSlice=createSlice({
     }
 })
 
-export const { nextPage,resetPosts } = postSlice.actions
+export const { nextPage,resetPosts,addNewPost,setCreatingPost } = postSlice.actions
 export default postSlice.reducer

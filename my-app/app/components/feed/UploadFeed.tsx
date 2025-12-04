@@ -2,13 +2,15 @@
 
 import Image from "next/image"
 import { Fragment, useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Description, Dialog, DialogDescription, DialogPanel, DialogTitle, Textarea, Transition, TransitionChild } from "@headlessui/react"
 import axios from "axios"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { uploadFileToFirebase } from "@/app/utils/uploadtoFirebase"
+import { addNewPost, setCreatingPost } from "@/app/redux/feedPostslice"
 
 const UploadFeed = () => {
+    const dispatch = useDispatch()
     const userDetails = useSelector((state) => state.userDetails)
     const [createPost, setCreatePost] = useState(false)
     const [addImageModal, setAddImageModal] = useState(false)
@@ -17,19 +19,19 @@ const UploadFeed = () => {
     const [addPollModal, setAddPollModal] = useState(false)
     const [imageArray, setImageArray] = useState([])
     const [imageArrayIndex, setImageArrayIndex] = useState(0)
-    const [document,setDocument]=useState(null)
+    const [document, setDocument] = useState(null)
     const [videoPreview, setVideoPreview] = useState(null)
-    const [poll_description,setPoll_Description]=useState(null)
-    const [isRepost,setIsRepost]=useState(false)
-    const [pollOptions,setPollOptions]=useState(["",""])
-    const [repostUserId,setRepostUserId]=useState(null)
-    const [repostDescription,setRepostDescription]=useState(null)
+    const [poll_description, setPoll_Description] = useState(null)
+    const [isRepost, setIsRepost] = useState(false)
+    const [pollOptions, setPollOptions] = useState(["", ""])
+    const [repostUserId, setRepostUserId] = useState(null)
+    const [repostDescription, setRepostDescription] = useState(null)
     const [description, setDescription] = useState("")
     const imageInputRef = useRef(null)
-    const videoInputRef=useRef(null)
-    const [openSchedulePost,setOpenSchedulePost]=useState(false)
-    const [date,setDate]=useState(null)
-    const [time,setTime]=useState(null)
+    const videoInputRef = useRef(null)
+    const [openSchedulePost, setOpenSchedulePost] = useState(false)
+    const [date, setDate] = useState(null)
+    const [time, setTime] = useState(null)
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
@@ -48,7 +50,7 @@ const UploadFeed = () => {
         setImageArray((prev) => [...prev, ...imagePreview])
     }
 
-    const handleVideo = async(files: FileList | File[]) => {
+    const handleVideo = async (files: FileList | File[]) => {
         const file = Array.isArray(files) ? files[0] : files?.[0]
         if (!file) return
 
@@ -60,12 +62,12 @@ const UploadFeed = () => {
         }
     }
 
-    const handleFile=async(file)=>{
-        console.log(file[0],"paper")
+    const handleFile = async (file) => {
+        console.log(file[0], "paper")
         if (!file) return;
         setFileName(file[0].name)
         try {
-            const fileUrl=await uploadFileToFirebase(file)
+            const fileUrl = await uploadFileToFirebase(file)
             setFileObj(fileUrl)
         } catch (error) {
             console.error("Error uploading file:", error)
@@ -79,60 +81,68 @@ const UploadFeed = () => {
     const handlePrevImage = () => {
         setImageArrayIndex((prev) => (prev - 1 + imageArray.length) % imageArray.length);
     }
-    
 
-    const handleImageModalclose=()=>{
+
+    const handleImageModalclose = () => {
         setAddImageModal(false)
         setImageArray([])
         setDescription("")
     }
 
-    const handleAddOptions=(e)=>{
+    const handleAddOptions = (e) => {
         e.preventDefault()
-        setPollOptions((prev)=>[...prev,""])
+        setPollOptions((prev) => [...prev, ""])
     }
 
-    const handleSchedulePost=()=>{
+    const handleSchedulePost = () => {
         setAddImageModal(false)
         setOpenSchedulePost(true)
     }
 
-    const handleCreatePost = async (e: any) => {
-    e.preventDefault();
+    const handleCreatePost = async (e) => {
+        e.preventDefault();
 
-    try {        
-        let uploadedImages: string[] = [];
+        dispatch(setCreatingPost(true));   // 👈 start loader
+
+        try {
+            let uploadedImages = [];
             if (imageArray.length > 0) {
-            for (const imgObj of imageArray) {
-                const url = await uploadFileToFirebase(imgObj.file);
-                uploadedImages.push(url);
+                for (const imgObj of imageArray) {
+                    const url = await uploadFileToFirebase(imgObj.file);
+                    uploadedImages.push(url);
+                }
             }
-        }
 
-        let schedule_time = null
-        if(date && time){
-            schedule_time= new Date(`${date}T${time}`)
-        }
+            let schedule_time = null;
+            if (date && time) {
+                schedule_time = new Date(`${date}T${time}`);
+            }
 
-        const body: any = {
-            description,
-            imageArray: uploadedImages,
-            document: fileObj,
-            video: videoPreview,
-            poll_description,
-            pollOptions,
-            isRepost,
-            repostUserId,
-            repostDescription,
-            schedule_time
-        }
+            const body = {
+                description,
+                imageArray: uploadedImages,
+                document: fileObj,
+                video: videoPreview,
+                poll_description,
+                pollOptions,
+                isRepost,
+                repostUserId,
+                repostDescription,
+                schedule_time,
+            };
 
-        const response = await axiosPrivate.post("/posts/createPost", body);
-        setAddImageModal(false)
+            const response = await axiosPrivate.post("/posts/createPost", body);
+            console.log(response, "responseresponse")
+            dispatch(addNewPost(response.data.post))
+            setAddImageModal(false)
+            setCreatePost(false)
         } catch (error) {
             console.log(error);
+        } finally {
+            dispatch(setCreatingPost(false)); // 👈 stop loader
         }
-    }
+    };
+
 
 
     return (
@@ -144,23 +154,23 @@ const UploadFeed = () => {
                 </div>
                 <div className=" justify-between flex pt-[16px] ">
                     <div className=" flex flex-row justify-center gap-4">
-                        <div onClick={()=>setAddImageModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
+                        <div onClick={() => setAddImageModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
                             <i className="fa-solid fa-image text-[#614fae]  "></i>
                             <span className=" text-[#614fae] ">Image</span>
                         </div>
-                        <div onClick={()=>setAddVideoModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
+                        <div onClick={() => setAddVideoModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
                             <i className="fa-solid fa-video text-[#614fae]  "></i>
                             <span className=" text-[#614fae] ">Video</span>
                         </div>
-                        <div onClick={()=>setAddFileModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
+                        <div onClick={() => setAddFileModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
                             <i className="fa-solid fa-file text-[#614fae]  "></i>
                             <span className=" text-[#614fae] ">File</span>
                         </div>
-                        <div onClick={()=>setAddPollModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
+                        <div onClick={() => setAddPollModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
                             <i className="fa-solid fa-poll text-[#614fae]  "></i>
                             <span className=" text-[#614fae] ">Poll</span>
                         </div>
-                        
+
                     </div>
                     <div onClick={handleCreatePost} className=" cursor-pointer flex justify-center items-center bg-[#7d42f5] px-[24px] py-[6px] rounded-[8px] font-semibold ">Post</div>
                 </div>
@@ -292,7 +302,7 @@ const UploadFeed = () => {
                                 <DialogTitle>
                                     <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
                                         <span className="text-[20px] font-semibold">Upload Images</span>
-                                        <i onClick={()=>handleImageModalclose()} className="fa-solid fa-xmark cursor-pointer"></i>
+                                        <i onClick={() => handleImageModalclose()} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
                                 </DialogTitle>
 
@@ -307,11 +317,11 @@ const UploadFeed = () => {
                                         )}
 
                                         <textarea
-                                        value={description}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                        placeholder="Write what's on your mind"
-                                        className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
-                                    />
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            placeholder="Write what's on your mind"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                        />
 
                                         <div
                                             className="  cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035] "
@@ -338,7 +348,7 @@ const UploadFeed = () => {
                                                         onClick={imageArray.length > 0 ? handlePrevImage : undefined}
                                                         className={` ${imageArray.length <= 1 ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
                                                     >
-                                                        <i className={`fa-solid fa-arrow-left `}/>
+                                                        <i className={`fa-solid fa-arrow-left `} />
                                                     </div>
 
 
@@ -361,7 +371,7 @@ const UploadFeed = () => {
                                                         onClick={imageArray.length > 0 ? handleNextImage : undefined}
                                                         className={` ${imageArray.length <= 1 ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
                                                     >
-                                                        <i className={`fa-solid fa-arrow-right `}/>
+                                                        <i className={`fa-solid fa-arrow-right `} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -426,7 +436,7 @@ const UploadFeed = () => {
                                 <DialogTitle>
                                     <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
                                         <span className="text-[20px] font-semibold">Upload Videos</span>
-                                        <i onClick={()=>setAddVideoModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                                        <i onClick={() => setAddVideoModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
                                 </DialogTitle>
 
@@ -434,11 +444,11 @@ const UploadFeed = () => {
 
                                     <form onSubmit={handleCreatePost} className=" w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px] ">
                                         <textarea
-                                        value={description}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                        placeholder="Write what's on your mind"
-                                        className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
-                                    />
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            placeholder="Write what's on your mind"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                        />
 
                                         <div
                                             className="cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035]"
@@ -449,7 +459,7 @@ const UploadFeed = () => {
                                                 const file = e.dataTransfer.files[0];
                                                 if (file) handleVideo([file]);
                                             }}
-                                            >
+                                        >
                                             <input
                                                 ref={videoInputRef}
                                                 accept="video/*"
@@ -457,21 +467,21 @@ const UploadFeed = () => {
                                                 id="videoUpload"
                                                 type="file"
                                                 onChange={(e) => {
-                                                if (e.target.files) handleVideo(e.target.files);
+                                                    if (e.target.files) handleVideo(e.target.files);
                                                 }}
                                             />
 
                                             <span className="text-[20px]">Click to upload a video</span>
                                             <span>Drag or Drop</span>
-                                            </div>
+                                        </div>
 
-                                            {videoPreview && (
-                                                <video
-                                                    src={videoPreview}
-                                                    controls
-                                                    className="w-full max-h-[300px] rounded-xl mt-4"
-                                                />
-                                            )}
+                                        {videoPreview && (
+                                            <video
+                                                src={videoPreview}
+                                                controls
+                                                className="w-full max-h-[300px] rounded-xl mt-4"
+                                            />
+                                        )}
                                     </form>
 
                                 </Description>
@@ -495,271 +505,271 @@ const UploadFeed = () => {
 
             <Transition show={addFileModal} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={() => setAddFileModal(false)}>
-                    
+
                     {/* BACKDROP */}
                     <TransitionChild
-                    as={Fragment}
-                    enter="ease-out duration-200"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
+                        as={Fragment}
+                        enter="ease-out duration-200"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
                     >
-                    <div className="fixed inset-0 bg-black/50" />
+                        <div className="fixed inset-0 bg-black/50" />
                     </TransitionChild>
 
                     <div className="fixed inset-0 flex items-center justify-center p-4">
 
-                    <TransitionChild
-                        as={Fragment}
-                        enter="ease-out duration-200"
-                        enterFrom="opacity-0 scale-95"
-                        enterTo="opacity-100 scale-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100 scale-100"
-                        leaveTo="opacity-0 scale-95"
-                    >
+                        <TransitionChild
+                            as={Fragment}
+                            enter="ease-out duration-200"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
 
-                        <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
 
-                        <DialogTitle>
-                            <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
-                            <span className="text-[20px] font-semibold">Upload File</span>
-                            <i onClick={() => setAddFileModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
-                            </div>
-                        </DialogTitle>
+                                <DialogTitle>
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                        <span className="text-[20px] font-semibold">Upload File</span>
+                                        <i onClick={() => setAddFileModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                                    </div>
+                                </DialogTitle>
 
-                        <Description as="div" className="space-y-6">
+                                <Description as="div" className="space-y-6">
 
-                            <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
+                                    <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
 
-                            <textarea
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Write what's on your mind"
-                                className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
-                            />
+                                        <textarea
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            placeholder="Write what's on your mind"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                        />
 
-                            <div
-                                className="cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035]"
-                                onClick={() => fileInputRef.current?.click()}
-                                onDragOver={(e) => e.preventDefault()}
-                                onDrop={(e) => {
-                                e.preventDefault();
-                                const file = e.dataTransfer.files[0];
-                                if (file) handleFile([file]);
-                                }}
-                            >
-                                <input
-                                ref={fileInputRef}
-                                accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,.csv,.json"
-                                type="file"
-                                className="hidden"
-                                onChange={(e) => {
-                                    if (e.target.files) handleFile(e.target.files);
-                                }}
-                                />
+                                        <div
+                                            className="cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035]"
+                                            onClick={() => fileInputRef.current?.click()}
+                                            onDragOver={(e) => e.preventDefault()}
+                                            onDrop={(e) => {
+                                                e.preventDefault();
+                                                const file = e.dataTransfer.files[0];
+                                                if (file) handleFile([file]);
+                                            }}
+                                        >
+                                            <input
+                                                ref={fileInputRef}
+                                                accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip,.csv,.json"
+                                                type="file"
+                                                className="hidden"
+                                                onChange={(e) => {
+                                                    if (e.target.files) handleFile(e.target.files);
+                                                }}
+                                            />
 
-                                <span className="text-[20px]">Click to upload a file</span>
-                                <span>Drag or Drop</span>
-                            </div>
+                                            <span className="text-[20px]">Click to upload a file</span>
+                                            <span>Drag or Drop</span>
+                                        </div>
 
-                            {fileName && (
-                                <div className="p-4 bg-[#1e2035] rounded-xl text-white mt-2">
-                                Uploaded File: <strong>{fileName}</strong>
+                                        {fileName && (
+                                            <div className="p-4 bg-[#1e2035] rounded-xl text-white mt-2">
+                                                Uploaded File: <strong>{fileName}</strong>
+                                            </div>
+                                        )}
+
+                                    </form>
+                                </Description>
+
+                                <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                                    <button
+                                        onClick={handleCreatePost}
+                                        className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
+                                    >
+                                        Post
+                                    </button>
                                 </div>
-                            )}
 
-                            </form>
-                        </Description>
+                            </DialogPanel>
 
-                        <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
-                            <button
-                            onClick={handleCreatePost}
-                            className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
-                            >
-                            Post
-                            </button>
-                        </div>
-
-                        </DialogPanel>
-
-                    </TransitionChild>
+                        </TransitionChild>
 
                     </div>
 
                 </Dialog>
             </Transition>
-                            
-             <Transition show={addPollModal} as={Fragment}>
-                <Dialog as="div" className="relative z-50" onClose={() => setAddFileModal(false)}>
-                    
-                    <TransitionChild
-                    as={Fragment}
-                    enter="ease-out duration-200"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                    >
-                    <div className="fixed inset-0 bg-black/50" />
-                    </TransitionChild>
 
-                    <div className="fixed inset-0 flex items-center justify-center p-4">
+            <Transition show={addPollModal} as={Fragment}>
+                <Dialog as="div" className="relative z-50" onClose={() => setAddFileModal(false)}>
 
                     <TransitionChild
                         as={Fragment}
                         enter="ease-out duration-200"
-                        enterFrom="opacity-0 scale-95"
-                        enterTo="opacity-100 scale-100"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
                         leave="ease-in duration-200"
-                        leaveFrom="opacity-100 scale-100"
-                        leaveTo="opacity-0 scale-95"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
                     >
-
-                        <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
-
-                        <DialogTitle>
-                            <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
-                            <span className="text-[20px] font-semibold">Upload Poll</span>
-                            <i onClick={() => setAddPollModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
-                            </div>
-                        </DialogTitle>
-
-                        <Description as="div" className="space-y-6">
-
-                            <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
-
-                            <textarea
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Write what's on your mind"
-                                className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
-                            />
-
-                            <div>
-                                <div>
-                                    <span>Poll Question</span>
-                                    <input type="text" className=" w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none " value={poll_description} onChange={(e)=>setPoll_Description(e.target.value)}/>
-                                </div>
-
-                                <div className=" flex flex-col gap-4 mt-4 w-full ">
-                                    <span>Poll Options</span>
-                                    {pollOptions.map((option,index)=>{
-                                        return(
-                                            <div className=" flex flex-col gap-1 ">
-                                                <span>Option {index+1}</span>
-                                                <input 
-                                                    value={option}
-                                                    onChange={(e)=>{
-                                                        const update=[...pollOptions]
-                                                        update[index]=e.target.value
-                                                        setPollOptions(update)
-                                                    }}
-                                                    type="text" placeholder="Option" className=" min-w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none "/>
-                                            </div>
-                                        )
-                                    })}
-                                    {pollOptions.length<4 && (<div><button onClick={handleAddOptions} className=" border border-[#7D42F5] text-[#7D42F5] rounded-2xl px-[16px] py-[8px] cursor-pointer ">Add Option</button></div>)}
-                                </div>
-                            </div>
-
-                            </form>
-                        </Description>
-
-                        <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
-                            <button
-                            onClick={handleCreatePost}
-                            className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
-                            >
-                            Post
-                            </button>
-                        </div>
-
-                        </DialogPanel>
-
+                        <div className="fixed inset-0 bg-black/50" />
                     </TransitionChild>
+
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
+
+                        <TransitionChild
+                            as={Fragment}
+                            enter="ease-out duration-200"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+
+                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+
+                                <DialogTitle>
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                        <span className="text-[20px] font-semibold">Upload Poll</span>
+                                        <i onClick={() => setAddPollModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                                    </div>
+                                </DialogTitle>
+
+                                <Description as="div" className="space-y-6">
+
+                                    <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
+
+                                        <textarea
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value)}
+                                            placeholder="Write what's on your mind"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                        />
+
+                                        <div>
+                                            <div>
+                                                <span>Poll Question</span>
+                                                <input type="text" className=" w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none " value={poll_description} onChange={(e) => setPoll_Description(e.target.value)} />
+                                            </div>
+
+                                            <div className=" flex flex-col gap-4 mt-4 w-full ">
+                                                <span>Poll Options</span>
+                                                {pollOptions.map((option, index) => {
+                                                    return (
+                                                        <div className=" flex flex-col gap-1 ">
+                                                            <span>Option {index + 1}</span>
+                                                            <input
+                                                                value={option}
+                                                                onChange={(e) => {
+                                                                    const update = [...pollOptions]
+                                                                    update[index] = e.target.value
+                                                                    setPollOptions(update)
+                                                                }}
+                                                                type="text" placeholder="Option" className=" min-w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none " />
+                                                        </div>
+                                                    )
+                                                })}
+                                                {pollOptions.length < 4 && (<div><button onClick={handleAddOptions} className=" border border-[#7D42F5] text-[#7D42F5] rounded-2xl px-[16px] py-[8px] cursor-pointer ">Add Option</button></div>)}
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </Description>
+
+                                <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                                    <button
+                                        onClick={handleCreatePost}
+                                        className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
+                                    >
+                                        Post
+                                    </button>
+                                </div>
+
+                            </DialogPanel>
+
+                        </TransitionChild>
 
                     </div>
 
                 </Dialog>
-            </Transition>   
+            </Transition>
 
             <Transition show={openSchedulePost} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={() => setAddFileModal(false)}>
-                    
-                    <TransitionChild
-                    as={Fragment}
-                    enter="ease-out duration-200"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                    >
-                    <div className="fixed inset-0 bg-black/50" />
-                    </TransitionChild>
-
-                    <div className="fixed inset-0 flex items-center justify-center p-4">
 
                     <TransitionChild
                         as={Fragment}
                         enter="ease-out duration-200"
-                        enterFrom="opacity-0 scale-95"
-                        enterTo="opacity-100 scale-100"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
                         leave="ease-in duration-200"
-                        leaveFrom="opacity-100 scale-100"
-                        leaveTo="opacity-0 scale-95"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
                     >
-
-                        <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
-
-                        <DialogTitle>
-                            <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
-                            <span className="text-[20px] font-semibold">Schedule Post for later</span>
-                            <i onClick={() => setOpenSchedulePost(false)} className="fa-solid fa-xmark cursor-pointer"></i>
-                            </div>
-                        </DialogTitle>
-
-                        <Description as="div" className="space-y-6">
-
-                            <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
-                            
-                            <div className=" flex flex-col ">
-                                <label>Date</label>
-                                <input onChange={(e)=>setDate(e.target.value)} type="Date" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] "/>
-                            </div>
-
-                            <div className=" flex flex-col ">
-                                <label>Time</label>
-                                <input onChange={(e)=>setTime(e.target.value)} type="time" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] "/>
-                            </div>
-
-                            </form>
-                        </Description>
-
-                        <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
-                            <button
-                            onClick={()=>{
-                                setAddImageModal(true)
-                                setOpenSchedulePost(false)
-                            }}
-                            className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
-                            >
-                            Next
-                            </button>
-                        </div>
-
-                        </DialogPanel>
-
+                        <div className="fixed inset-0 bg-black/50" />
                     </TransitionChild>
+
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
+
+                        <TransitionChild
+                            as={Fragment}
+                            enter="ease-out duration-200"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+
+                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+
+                                <DialogTitle>
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                        <span className="text-[20px] font-semibold">Schedule Post for later</span>
+                                        <i onClick={() => setOpenSchedulePost(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                                    </div>
+                                </DialogTitle>
+
+                                <Description as="div" className="space-y-6">
+
+                                    <form className="w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px]">
+
+                                        <div className=" flex flex-col ">
+                                            <label>Date</label>
+                                            <input onChange={(e) => setDate(e.target.value)} type="Date" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] " />
+                                        </div>
+
+                                        <div className=" flex flex-col ">
+                                            <label>Time</label>
+                                            <input onChange={(e) => setTime(e.target.value)} type="time" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] " />
+                                        </div>
+
+                                    </form>
+                                </Description>
+
+                                <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                                    <button
+                                        onClick={() => {
+                                            setAddImageModal(true)
+                                            setOpenSchedulePost(false)
+                                        }}
+                                        className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+
+                            </DialogPanel>
+
+                        </TransitionChild>
 
                     </div>
 
                 </Dialog>
-            </Transition>               
+            </Transition>
         </>
     )
 }
