@@ -17,6 +17,7 @@ export interface IRepost{
 }
 
 export interface IPollOption{
+  _id?:string
   optionText:string
   votes:number
 }
@@ -24,6 +25,7 @@ export interface IPollOption{
 export interface IPoll{
   poll_description?:string
   options: IPollOption[]
+  voters: mongoose.Types.ObjectId[]
 }
 
 export interface IPost extends Document{

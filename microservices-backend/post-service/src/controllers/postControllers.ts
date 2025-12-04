@@ -448,50 +448,67 @@ const likePost=async(req:AuthRequest,res:Response)=>{
     }
 }
 
-const votePoll=async(req:AuthRequest,res:Response)=>{
+const votePoll = async (req: AuthRequest, res: Response) => {
     try {
-        const slug=req.params.slug
-        const {optionId}=req.body
-        const post=await Post.findOne({slug})
-        if(!post){
-            res.status(404).send({
-                message:"Post not found",
-                success:false
-            })
-        }
-        if(post.poll.voters.includes(req.user._id)){
-            return res.status(404).send({
-                message:"You already voted",
-            })
+        const slug = req.params.slug
+        const { optionId } = req.body
+        const userId = req.user._id
+
+        const post = await Post.findOne({ slug })
+        if (!post) {
+        return res.status(404).send({
+            message: "Post not found",
+            success: false
+        })
         }
 
-        const optionSelected=post.poll.options.find(option => option._id.toString() == optionId)
-
-        if(optionSelected){
-            post.poll.options[optionSelected].votes+=1
-            post.poll.voters.push(req.user._id)
-        }else{
-            return res.status(404).send({
-                message:"Option not found",
-                success:false
-            })
+        if (!post.poll) {
+        return res.status(400).send({
+            message: "Poll does not exist on this post",
+            success: false
+        })
         }
+
+        if (!post.poll.voters) post.poll.voters = []
+
+        if (post.poll.voters.some(v => v.toString() === userId.toString())) {
+        return res.status(400).send({
+            message: "You already voted",
+            success: false
+        })
+        }
+
+        const optionSelected = post.poll.options.find(
+        option => option._id?.toString() === optionId
+        )
+
+        if (!optionSelected) {
+        return res.status(404).send({
+            message: "Option not found",
+            success: false
+        })
+        }
+
+        optionSelected.votes += 1
+
+        post.poll.voters.push(userId)
+
         await post.save()
 
-        res.status(200).send({
-            message:"Vote Added",
-            success:true,
-            poll: post.poll,
+        return res.status(200).send({
+        message: "Vote Added",
+        success: true,
+        poll: post.poll
         })
 
-
-
     } catch (error) {
-        res.status(500).send({
-            message:"Internal Server Error",
-            error:error
+        console.log(error)
+        return res.status(500).send({
+        message: "Internal Server Error",
+        error
         })
     }
 }
+
 
 export { createPost, getPaginatedPosts, getSinglePost, editPost, addComment, likePost, getCommentsPaginated, votePoll }
