@@ -67,7 +67,7 @@ const FeedComments=({ post }:{ post: PostType })=>{
             <div className=" flex gap-2 ">
                 <Image src={post?.user?.photo_url} alt="User" width={20} height={20} className=" max-h-[20px] rounded-full border border-purple-600 " />
             <div className=" flex w-full flex-col ">
-                <textarea onChange={(e)=>setCommentText(e.target.value)} type="textarea" className=" w-full outline-none bg-[#181621] border border-[#2c2b47] p-[24px] rounded-[8px] h-[100px] " placeholder="Add a comment...." />
+                <textarea onChange={(e)=>setCommentText(e.target.value)} className=" w-full outline-none bg-[#181621] border border-[#2c2b47] p-[24px] rounded-[8px] h-[100px] " placeholder="Add a comment...." />
                 <div className=" flex justify-end mt-3 ">
                     <button className=" bg-[#7D42F5] px-4 py-2 rounded-[8px] " onClick={handleAddComment}>Post Comment</button>
                 </div>
