@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 interface UserInfo{
     _id:string,
     display_name:string,
-    photo_URL:string
+    photo_url:string
 }
 
 interface Comment {
