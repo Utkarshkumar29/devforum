@@ -26,9 +26,16 @@ export interface IPoll {
   voters: string[];
 }
 
+
+export interface UserInfo{
+    _id:string,
+    display_name:string,
+    photo_url:string
+}
+
 export interface IPost {
   slug: string;
-  user: string;
+  user: UserInfo;
   description: string;
   imageArray?: string[];
   video?: string;

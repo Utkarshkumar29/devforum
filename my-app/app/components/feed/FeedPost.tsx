@@ -4,7 +4,7 @@ import FeedComments from "./FeedComments"
 import { useState } from "react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
-import { IPost } from "@/app/utils/types/post.types"
+import { IPollOption, IPost } from "@/app/utils/types/post.types"
 
 interface PollOption {
   _id: string;
@@ -30,7 +30,7 @@ const FeedPost = ({ post }: { post: IPost }) => {
     }
 
     //const [pollLoading, setPollLoading] = useState(false)
-    const handleVote = async (option: PollOption) => {
+    const handleVote = async (option: IPollOption) => {
         try {
             //setPollLoading(true)
             const optionId = option._id
@@ -96,7 +96,7 @@ const FeedPost = ({ post }: { post: IPost }) => {
                         <span>Poll: {post?.poll?.poll_description}</span>
                         {post?.poll?.options && post?.poll?.options.map((option, index) => {
                             const vote = option.votes
-                            const totalVotes = post?.poll?.options.reduce((acc, curr) => acc + curr.votes, 0)
+                            const totalVotes: number = ((post?.poll?.options ?? []).reduce((acc, curr) => acc + (curr.votes ?? 0),0)) || 0
                             const percent = totalVotes === 0 ? 0 : ((vote / totalVotes) * 100).toFixed(2)
                             return (
                                 <div
