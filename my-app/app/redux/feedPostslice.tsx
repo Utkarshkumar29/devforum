@@ -1,17 +1,31 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosPrivate } from "../axios/axiosInstance";
 
-// -------------------------
+// ----------------------------
 // Types
-// -------------------------
+// ----------------------------
 
+// Post slug item
+export interface PostSlug {
+  slug: string;
+  [key: string]: unknown;
+}
+
+// Full post detail
+export interface FullPost {
+  slug: string;
+  [key: string]: unknown;
+}
+
+// Thunk args
 interface FetchSlugsArgs {
   page: number;
   limit: number;
 }
 
+// API response for list
 interface FetchSlugsResponse {
-  posts: any[];
+  posts: PostSlug[];
   page: number;
   totalPages: number;
   limit: number;
@@ -23,12 +37,12 @@ interface FetchDetailsArgs {
 
 interface UpdatePostArgs {
   slug: string;
-  updatedData: Record<string, any>;
+  updatedData: Record<string, unknown>;
 }
 
-// -------------------------
+// ----------------------------
 // Thunks
-// -------------------------
+// ----------------------------
 
 export const fetchPostSlugs = createAsyncThunk<
   FetchSlugsResponse,
@@ -41,48 +55,61 @@ export const fetchPostSlugs = createAsyncThunk<
   const data = res.data;
 
   return {
-    posts: data.results,
+    posts: data.results as PostSlug[],
     page: data.current_page_number ?? data.page_number,
     totalPages: data.total_pages,
     limit: data.per_page,
   };
 });
 
-export const fetchPostDetails = createAsyncThunk<any, FetchDetailsArgs>(
+export const fetchPostDetails = createAsyncThunk<FullPost, FetchDetailsArgs>(
   "posts/fetchPostDetails",
   async ({ slug }) => {
     const response = await axiosPrivate.get(`/posts/singlePost/${slug}`);
-    return response.data.result.post;
+    return response.data.result.post as FullPost;
   }
 );
 
-export const updatePost = createAsyncThunk<any, UpdatePostArgs>(
+export const updatePost = createAsyncThunk<FullPost, UpdatePostArgs>(
   "posts/updatePost",
   async ({ slug, updatedData }) => {
     const res = await axiosPrivate.put(
       `/posts/editPost/${slug}`,
       updatedData
     );
-    return res.data.result.post;
+    return res.data.result.post as FullPost;
   }
 );
 
-// -------------------------
+// ----------------------------
 // Slice
-// -------------------------
+// ----------------------------
+
+interface PostState {
+  posts: PostSlug[];
+  postDetails: Record<string, FullPost>;
+  page: number;
+  limit: number;
+  totalPages: number;
+  loading: boolean;
+  hasMore: boolean;
+  creatingPost: boolean;
+}
+
+const initialState: PostState = {
+  posts: [],
+  postDetails: {},
+  page: 1,
+  limit: 5,
+  totalPages: 1,
+  loading: false,
+  hasMore: true,
+  creatingPost: false,
+};
 
 const postSlice = createSlice({
   name: "posts",
-  initialState: {
-    posts: [] as any[],
-    postDetails: {} as Record<string, any>,
-    page: 1,
-    limit: 5,
-    totalPages: 1,
-    loading: false,
-    hasMore: true,
-    creatingPost: false,
-  },
+  initialState,
   reducers: {
     nextPage: (state) => {
       state.page += 1;
@@ -101,7 +128,6 @@ const postSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // FETCH SLUGS
       .addCase(fetchPostSlugs.pending, (state) => {
         state.loading = true;
       })
@@ -113,29 +139,15 @@ const postSlice = createSlice({
         state.limit = limit;
         state.hasMore = page < totalPages;
 
-        if (page === 1) {
-          state.posts = posts;
-        } else {
-          state.posts = [...state.posts, ...posts];
-        }
-      })
-      .addCase(fetchPostSlugs.rejected, (state) => {
-        state.loading = false;
+        if (page === 1) state.posts = posts;
+        else state.posts = [...state.posts, ...posts];
       })
 
-      // FETCH DETAILS
-      .addCase(fetchPostDetails.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(fetchPostDetails.fulfilled, (state, action) => {
         const fullPost = action.payload;
         state.postDetails[fullPost.slug] = fullPost;
       })
 
-      // UPDATE POST
-      .addCase(updatePost.pending, (state) => {
-        state.loading = true;
-      })
       .addCase(updatePost.fulfilled, (state, action) => {
         const updatedPost = action.payload;
 
