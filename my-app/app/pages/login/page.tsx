@@ -33,13 +33,17 @@ const Login = () => {
             router.push("/pages/feed");
         } catch (error: unknown) {
             console.error(error);
-            if (
-                error &&
-                typeof error === "object" &&
-                "response" in error &&
-                (error as any).response?.data?.message
-            ) {
-                alert((error as any).response.data.message);
+
+            const axiosErr = error as {
+                response?: {
+                    data?: {
+                        message?: string;
+                    };
+                };
+            };
+
+            if (axiosErr.response?.data?.message) {
+                alert(axiosErr.response.data.message);
             }
         }
     };
