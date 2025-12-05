@@ -7,11 +7,23 @@ import postRoutes from "./routes/postRoutes";
 dotenv.config()
 const app = express()
 
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
-  credentials: true
-}));
+const allowedOrigins = process.env.CLIENT_URL.split(",");
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("❌ CORS Blocked (Post Service):", origin);
+      return callback(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+    credentials: true
+  })
+)
 app.use(express.json());
 
 

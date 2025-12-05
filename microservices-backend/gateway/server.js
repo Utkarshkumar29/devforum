@@ -1,54 +1,64 @@
-const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const dotenv = require('dotenv');
-const cors = require('cors');
+const express = require("express");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
-const CLIENT = process.env.CLIENT_URL || "http://localhost:3000";
 const PORT = process.env.PORT || 8000;
 
-// 1. CORS - Handle it here so User Service doesn't have to worry about it
-app.use(cors({
-  origin: CLIENT,
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
 
-// ❗ IMPORTANT: Do NOT use express.json() here.
-// Let the data pass through raw to the User Service.
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(",")
+  : ["http://localhost:3000"];
 
-// 2. USER SERVICE PROXY
+console.log("Allowed Origins:", allowedOrigins);
+
 app.use(
-  "/api/users",
-  createProxyMiddleware({
-    // FIX: Target includes the base path because Express strips it
-    target: process.env.USER_SERVICE_URL + '/api/users', 
-    changeOrigin: true,
-    onProxyRes: (proxyRes) => {
-      proxyRes.headers["Access-Control-Allow-Origin"] = CLIENT;
-      proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
+  cors({
+    origin: function (origin, callback) {
+    
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("❌ CORS Blocked:", origin);
+      return callback(new Error("Not allowed by CORS"));
     },
-    onError: (err, req, res) => {
-      console.error("🔥 PROXY ERROR:", err.code);
-      console.error("   Trying to reach:", process.env.USER_SERVICE_URL + req.url);
-      res.status(500).json({ message: "Gateway could not reach User Service", error: err.code });
-    }
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// 3. POST SERVICE PROXY
+
+const setProxyHeaders = (proxyRes, req) => {
+  proxyRes.headers["Access-Control-Allow-Origin"] = req.headers.origin;
+  proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
+};
+
+app.use(
+  "/api/users",
+  createProxyMiddleware({
+    target: process.env.USER_SERVICE_URL + "/api/users",
+    changeOrigin: true,
+    onProxyRes: setProxyHeaders,
+    onError: (err, req, res) => {
+      console.error("🔥 USER SERVICE ERROR:", err.code);
+      res.status(500).json({ message: "User Service unreachable", error: err.code });
+    },
+  })
+);
+
 app.use(
   "/api/posts",
   createProxyMiddleware({
-    target: process.env.POST_SERVICE_URL + '/api/posts',
+    target: process.env.POST_SERVICE_URL + "/api/posts",
     changeOrigin: true,
-    onProxyRes: (proxyRes) => {
-      proxyRes.headers["Access-Control-Allow-Origin"] = CLIENT;
-      proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
-    },
+    onProxyRes: setProxyHeaders,
   })
 );
 
@@ -59,6 +69,6 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`---------------------------------------`);
   console.log(`✅ Gateway running on port ${PORT}`);
-  console.log(`🔗 Target User Service: ${process.env.USER_SERVICE_URL}`);
+  console.log(`🔗 Allowed Origins:`, allowedOrigins);
   console.log(`---------------------------------------`);
 });
