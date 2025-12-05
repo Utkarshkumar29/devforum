@@ -23,7 +23,6 @@ interface PostType {
 }
 
 const FeedComments=({ post }:{ post: PostType })=>{
-    const userDetails=useSelector((state:any)=>state.user)
     const [commentText,setCommentText]=useState("")
     const [commentPage,setCommentPage]=useState(1)
     const [userComments,setUserComments]=useState<Comment[]>([])

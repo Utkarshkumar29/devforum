@@ -1,5 +1,4 @@
 'use client'
-import { useState } from "react"
 import { auth, googleProvider, githubProvider, signInWithPopup } from "../../firebase/fireabase"
 import { useRouter } from "next/navigation"
 import { useDispatch } from "react-redux"
@@ -53,7 +52,7 @@ const Login = () => {
             const user = response.user
             console.log("Google Login Success:", user)
             router.push('/pages/feed')
-        } catch (error) {
+        } catch (error: any) {
             console.log(error)
         }
     }

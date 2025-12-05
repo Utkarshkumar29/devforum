@@ -4,6 +4,7 @@ import FeedComments from "./FeedComments"
 import { useState } from "react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
+import { IPost } from "@/app/utils/types/post.types"
 
 interface PollOption {
   _id: string;
@@ -11,7 +12,7 @@ interface PollOption {
   votes: number;
 }
 
-const FeedPost = ({ post }: { post: any }) => {
+const FeedPost = ({ post }: { post: IPost }) => {
     const [showComments, setShowComments] = useState(false)
     const [isPostLiked, setIsPostLiked] = useState(false)
 
