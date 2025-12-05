@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector  } from "react-redux";
 import {
   fetchPostSlugs,
   fetchPostDetails,
@@ -13,10 +13,10 @@ import FeedPost from "./FeedPost";
 import type { RootState } from "../../redux/store";
 
 const FeedPosts = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { posts, postDetails, page, limit, hasMore, loading } =
-    useSelector((state: RootState) => state.posts);
+    useAppSelector((state: RootState) => state.posts);
 
   // Load initial posts
   useEffect(() => {
