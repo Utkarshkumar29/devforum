@@ -20,13 +20,10 @@ const Login = () => {
                 authProvider: "google",
             };
 
-            // Login through API Gateway -> User Service
             const result = await axiosPublic.post("/users/login",loginPayload);
 
-            // Save token
             localStorage.setItem("accessToken", result.data.token);
 
-            // Save backend user (not Firebase user)
             const backendUser = result.data.user;
 
             dispatch(addUser(backendUser));
@@ -34,12 +31,15 @@ const Login = () => {
             console.log("Login success:", backendUser);
 
             router.push("/pages/feed");
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(error);
-
-            // If backend rejects because email is local account
-            if (error?.response?.data?.message) {
-                alert(error.response.data.message);
+            if (
+                error &&
+                typeof error === "object" &&
+                "response" in error &&
+                (error as any).response?.data?.message
+            ) {
+                alert((error as any).response.data.message);
             }
         }
     };
@@ -52,7 +52,7 @@ const Login = () => {
             const user = response.user
             console.log("Google Login Success:", user)
             router.push('/pages/feed')
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.log(error)
         }
     }

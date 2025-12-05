@@ -77,7 +77,7 @@ const FeedComments=({ post }:{ post: PostType })=>{
             <div className=" flex flex-col gap-2 ">
                 {userComments && userComments.length>0 && userComments.map((comment,index)=>{
                     return(
-                        <div className=" flex gap-2 ">
+                        <div className=" flex gap-2 " key={index}>
                             <Image src={comment?.user?.photo_url} alt="User" width={20} height={20} className=" max-h-[20px] rounded-full border border-purple-600 " />
                             <div className=" bg-[#252235] w-full h-full px-[24px] py-[16px] rounded-[8px] ">
                                 <span>{comment?.user?.display_name}</span>
