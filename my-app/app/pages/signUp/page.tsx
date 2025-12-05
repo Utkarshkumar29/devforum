@@ -9,7 +9,7 @@ import { axiosPublic } from "@/app/axios/axiosInstance"
 
 const SignUp=()=>{
     const router=useRouter()
-    const [user,setUser]=useState<any>("")
+    
     const [fileUrl, setFileUrl] = useState<string | null>(null);
     const [display_name,setDisplayName]=useState("")
     const [email,setEmail]=useState("")
@@ -43,7 +43,7 @@ const SignUp=()=>{
             const response=await signInWithPopup(auth,githubProvider)
             const user=response.user
             console.log("Google Login Success:", user)
-            setUser(user)
+            
             router.push('/pages/feed')
         } catch (error) {
             console.log(error)

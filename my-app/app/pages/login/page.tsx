@@ -5,12 +5,10 @@ import { useRouter } from "next/navigation"
 import { useDispatch } from "react-redux"
 import { addUser } from "@/app/redux/userSlice"
 import { axiosPublic } from "@/app/axios/axiosInstance"
-import axios from "axios"
 
 const Login = () => {
     const router = useRouter()
     const dispatch = useDispatch()
-    const [user, setUser] = useState<any>("")
 
     const handleGoogleSignIn = async () => {
         try {
@@ -54,7 +52,6 @@ const Login = () => {
             const response = await signInWithPopup(auth, githubProvider)
             const user = response.user
             console.log("Google Login Success:", user)
-            setUser(user)
             router.push('/pages/feed')
         } catch (error) {
             console.log(error)

@@ -1,11 +1,17 @@
 'use client'
 import Image from "next/image"
 import FeedComments from "./FeedComments"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
 
-const FeedPost = ({ post }) => {
+interface PollOption {
+  _id: string;
+  optionText: string;
+  votes: number;
+}
+
+const FeedPost = ({ post }: { post: any }) => {
     const [showComments, setShowComments] = useState(false)
     const [isPostLiked, setIsPostLiked] = useState(false)
 
@@ -22,10 +28,10 @@ const FeedPost = ({ post }) => {
         }
     }
 
-    const [pollLoading, setPollLoading] = useState(false)
-    const handleVote = async (option: any) => {
+    //const [pollLoading, setPollLoading] = useState(false)
+    const handleVote = async (option: PollOption) => {
         try {
-            setPollLoading(true)
+            //setPollLoading(true)
             const optionId = option._id
             const response = await axiosPrivate.post(`/posts/vote/${post.slug}`, { optionId })
             if (response.status == 200) {
@@ -36,7 +42,7 @@ const FeedPost = ({ post }) => {
         } catch (error) {
             console.log(error)
         } finally {
-            setPollLoading(false)
+            //setPollLoading(false)
         }
     }
 

@@ -3,8 +3,7 @@
 import Image from "next/image"
 import { Fragment, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Description, Dialog, DialogDescription, DialogPanel, DialogTitle, Textarea, Transition, TransitionChild } from "@headlessui/react"
-import axios from "axios"
+import { Description, Dialog, DialogDescription, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { uploadFileToFirebase } from "@/app/utils/uploadtoFirebase"
 import { addNewPost, setCreatingPost } from "@/app/redux/feedPostslice"
@@ -102,10 +101,10 @@ const UploadFeed = () => {
     const handleCreatePost = async (e) => {
         e.preventDefault();
 
-        dispatch(setCreatingPost(true));   // 👈 start loader
+        dispatch(setCreatingPost(true))
 
         try {
-            let uploadedImages = [];
+            const uploadedImages: string[] = []
             if (imageArray.length > 0) {
                 for (const imgObj of imageArray) {
                     const url = await uploadFileToFirebase(imgObj.file);
@@ -659,7 +658,7 @@ const UploadFeed = () => {
                                                 <span>Poll Options</span>
                                                 {pollOptions.map((option, index) => {
                                                     return (
-                                                        <div className=" flex flex-col gap-1 ">
+                                                        <div className=" flex flex-col gap-1 " key={index}>
                                                             <span>Option {index + 1}</span>
                                                             <input
                                                                 value={option}

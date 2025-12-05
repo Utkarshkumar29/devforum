@@ -4,14 +4,25 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
+interface UserInfo{
+    _id:string,
+    display_name:string,
+    photo_URL:string
+}
+
 interface Comment {
   _id: string;
   text: string;
-  user: any;
+  user: UserInfo;
   createdAt: string;
 }
 
-const FeedComments=({post})=>{
+interface PostType {
+  slug: string;
+  user: UserInfo;
+}
+
+const FeedComments=({ post }:{ post: PostType })=>{
     const userDetails=useSelector((state:any)=>state.user)
     const [commentText,setCommentText]=useState("")
     const [commentPage,setCommentPage]=useState(1)

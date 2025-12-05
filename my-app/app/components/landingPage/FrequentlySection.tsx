@@ -13,7 +13,7 @@ const FrequentlySection=()=>{
                 </div>
                 <div className=" flex justify-between py-[30px]">
                     <span className=" text-[20px] leading-[30px] font-semibold ">How do I? </span>
-                    <span className=" text-[16px] leading-[26px] ">Simply click the 'Join' button and follow instructions. </span>
+                    <span className=" text-[16px] leading-[26px] ">Simply click the &apos;Join&apos; button and follow instructions. </span>
                 </div>
             </div>
 

@@ -25,7 +25,7 @@ const AboutSection = () => {
           </span>
           <span className=" text-white text-[18px] leading-[26px] font-medium ">
             DevForum is a vibrant community where developers connect, share
-            knowledge, and discover opportunities. Join us to shape tomorrow's
+            knowledge, and discover opportunities. Join us to shape tomorrow&apos;s
             tech landscape.{" "}
           </span>
           <span className=" rounded-[100px] text-black text-[18px] leading-[28px] font-bold bg-white max-w-[165px] h-[60px] px-[42px] py-[10px] whitespace-nowrap flex items-center justify-center  ">
