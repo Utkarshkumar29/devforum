@@ -10,12 +10,13 @@ import {
 } from "../../redux/feedPostslice";
 import FeedLoader from "../../components/loaders/FeedLoader";
 import FeedPost from "./FeedPost";
+import type { RootState } from "../../redux/store";
 
 const FeedPosts = () => {
   const dispatch = useDispatch();
 
   const { posts, postDetails, page, limit, hasMore, loading } =
-    useSelector((state: any) => state.posts);
+    useSelector((state: RootState) => state.posts);
 
   // Load initial posts
   useEffect(() => {
@@ -51,12 +52,19 @@ const FeedPosts = () => {
   };
 
   return (
-    <div id="scrollableDiv" className="flex flex-col w-full max-w-[700px] mx-auto">
+    <div
+      id="scrollableDiv"
+      className="flex flex-col w-full max-w-[700px] mx-auto"
+    >
       <InfiniteScroll
         dataLength={posts.length}
         next={loadMorePosts}
         hasMore={hasMore}
-        loader={<div className="text-center"><FeedLoader /></div>}
+        loader={
+          <div className="text-center">
+            <FeedLoader />
+          </div>
+        }
         endMessage={<p className="text-center py-2">No more posts</p>}
       >
         <div className="flex gap-4 flex-col">

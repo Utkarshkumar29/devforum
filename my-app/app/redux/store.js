@@ -5,6 +5,9 @@ import postsReducer from "./feedPostslice";
 export const store = configureStore({
   reducer: {
     userDetails: userReducer,
-    posts: postsReducer
+    posts: postsReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
