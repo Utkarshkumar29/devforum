@@ -9,9 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 
-const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(",")
-  : ["http://localhost:3000"];
+const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(",") : ["http://localhost:3000"];
 
 console.log("Allowed Origins:", allowedOrigins);
 
