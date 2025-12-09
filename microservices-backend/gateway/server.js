@@ -8,40 +8,49 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-
-const allowedOrigins = process.env.CLIENT_URL ? process.env.CLIENT_URL.split(",") : ["http://localhost:3000"];
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(",")
+  : ["http://localhost:3000"];
 
 console.log("Allowed Origins:", allowedOrigins);
 
+// FIX 1: Handle preflight before proxy
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+// Normal CORS
 app.use(
   cors({
     origin: function (origin, callback) {
-    
       if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+      if (allowedOrigins.includes(origin)) return callback(null, true);
 
       console.log("❌ CORS Blocked:", origin);
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-
+// Proxy response headers
 const setProxyHeaders = (proxyRes, req) => {
   proxyRes.headers["Access-Control-Allow-Origin"] = req.headers.origin;
   proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
 };
 
+// USER SERVICE PROXY
 app.use(
   "/api/users",
   createProxyMiddleware({
-    target: process.env.USER_SERVICE_URL + "/api/users",
+    target: process.env.USER_SERVICE_URL, // FIX 2
     changeOrigin: true,
     onProxyRes: setProxyHeaders,
     onError: (err, req, res) => {
@@ -51,10 +60,11 @@ app.use(
   })
 );
 
+// POST SERVICE PROXY
 app.use(
   "/api/posts",
   createProxyMiddleware({
-    target: process.env.POST_SERVICE_URL + "/api/posts",
+    target: process.env.POST_SERVICE_URL, // FIX 2
     changeOrigin: true,
     onProxyRes: setProxyHeaders,
   })
