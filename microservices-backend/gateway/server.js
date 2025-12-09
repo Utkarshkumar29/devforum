@@ -46,6 +46,12 @@ const setProxyHeaders = (proxyRes, req) => {
   proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
 };
 
+app.use("/api/users", (req, res, next) => {
+  console.log("👉 Incoming to Gateway:", req.originalUrl);
+  console.log("👉 After Express strips prefix:", req.url);
+  next();
+});
+
 // USER SERVICE PROXY
 app.use(
   "/api/users",
