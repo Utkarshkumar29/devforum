@@ -53,7 +53,7 @@ app.use(
     target: process.env.USER_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: {
-      "^/api/users": "/api/users",
+      "^/api/users": "",
     },
     onProxyRes: setProxyHeaders,
     onError: (err, req, res) => {
