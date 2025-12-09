@@ -58,9 +58,13 @@ app.use(
   createProxyMiddleware({
     target: process.env.USER_SERVICE_URL,
     changeOrigin: true,
-    pathRewrite: {
-      "^/api/users": "",
+    pathRewrite: { "^/api/users": "" },
+
+    // 👇 ADD THIS
+    onProxyReq: (proxyReq, req, res) => {
+      console.log("🚀 PROXY SENDING TO:", proxyReq.path);
     },
+
     onProxyRes: setProxyHeaders,
     onError: (err, req, res) => {
       console.error("🔥 USER SERVICE ERROR:", err.code);
@@ -68,6 +72,7 @@ app.use(
     },
   })
 );
+
 
 
 // POST SERVICE PROXY
