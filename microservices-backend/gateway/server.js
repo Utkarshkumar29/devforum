@@ -37,20 +37,21 @@ app.use(
     target: process.env.USER_SERVICE_URL,
     changeOrigin: true,
 
-    // ❌ REMOVE or COMMENT OUT this block
-    // pathRewrite: {
-    //   "^/api/users": "",
-    // },
+    // ⭐ RE-ADD THE NECESSARY PREFIX ⭐
+    // The incoming path is now '/login' due to Express stripping '/api/users'.
+    // We must rewrite it back to '/api/users/login' for the target service.
+    pathRewrite: (path, req) => {
+      // path here will be '/login' (req.url)
+      // We return '/api/users' + '/login'
+      return "/api/users" + path;
+    },
 
     onProxyReq: (proxyReq, req) => {
-      // Log to verify the path being sent
-      console.log("🚀 PROXY:", req.originalUrl, "=>", proxyReq.path); 
+      // 🔍 DEBUG: Log the FINAL path sent to the service
+      console.log("🚀 PROXY FINAL PATH:", proxyReq.path); 
     },
-
-    onProxyRes: (proxyRes, req) => {
-      proxyRes.headers["Access-Control-Allow-Origin"] = req.headers.origin;
-      proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
-    },
+    
+    // ... rest of your configuration (onProxyRes, etc.)
   })
 );
 
