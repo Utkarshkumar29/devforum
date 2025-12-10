@@ -30,19 +30,21 @@ app.use("/api/users", (req, res, next) => {
 });
 
 // -------- USER SERVICE PROXY --------
+// -------- USER SERVICE PROXY --------
 app.use(
   "/api/users",
   createProxyMiddleware({
-    target: process.env.USER_SERVICE_URL,   // e.g. https://devforum-2.onrender.com
+    target: process.env.USER_SERVICE_URL,
     changeOrigin: true,
 
-    // ⭐ FINAL CORRECT REWRITE ⭐
-    pathRewrite: {
-      "^/api/users": "",
-    },
+    // ❌ REMOVE or COMMENT OUT this block
+    // pathRewrite: {
+    //   "^/api/users": "",
+    // },
 
     onProxyReq: (proxyReq, req) => {
-      console.log("🚀 PROXY:", req.originalUrl, "=>", proxyReq.path);
+      // Log to verify the path being sent
+      console.log("🚀 PROXY:", req.originalUrl, "=>", proxyReq.path); 
     },
 
     onProxyRes: (proxyRes, req) => {
