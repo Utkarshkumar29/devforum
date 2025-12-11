@@ -12,6 +12,6 @@ Router.post('/addComment/:slug',protect,addComment)
 Router.get('/getComments/:slug',protect,getCommentsPaginated)
 Router.post('/like/:slug',protect,likePost)
 Router.post('/vote/:slug',protect,votePoll)
-Pouter.delte('/delete/:slug',protect,deletePost)
+Router.delete('/delete/:slug',protect,deletePost)
 
 export default Router
