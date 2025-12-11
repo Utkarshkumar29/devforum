@@ -7,9 +7,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-
 RUN npm run build
 
 EXPOSE 5002
 
-CMD ["sh", "-c", "if [ \"$SERVICE_TYPE\" = \"worker\" ]; then node dist/workers/postWorker.js; else node dist/workers/server.js; fi"]
+CMD ["sh", "-c", "if [ \"$SERVICE_TYPE\" = \"worker\" ]; then node dist/workers/postWorker.js; else node dist/server.js; fi"]

@@ -94,7 +94,7 @@ const UploadFeed = () => {
     }
 
     const handleSchedulePost = () => {
-        setAddImageModal(false)
+        //setAddImageModal(false)
         setOpenSchedulePost(true)
     }
 
@@ -752,7 +752,7 @@ const UploadFeed = () => {
                                 <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
                                     <button
                                         onClick={() => {
-                                            setAddImageModal(true)
+                                            //setAddImageModal(true)
                                             setOpenSchedulePost(false)
                                         }}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
