@@ -31,6 +31,7 @@ const UploadFeed = () => {
     const [openSchedulePost, setOpenSchedulePost] = useState(false)
     const [date, setDate] = useState(null)
     const [time, setTime] = useState(null)
+    const [isLaoding,setIsLoading]=useState(false)
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
@@ -41,6 +42,7 @@ const UploadFeed = () => {
     }
 
     const handleImages = (files) => {
+        setIsLoading(true)
         const fileArray = Array.from(files)
         const imagePreview = fileArray.map((file) => ({
             file,
@@ -50,6 +52,7 @@ const UploadFeed = () => {
     }
 
     const handleVideo = async (files: FileList | File[]) => {
+        setIsLoading(true)
         const file = Array.isArray(files) ? files[0] : files?.[0]
         if (!file) return
 
@@ -62,6 +65,7 @@ const UploadFeed = () => {
     }
 
     const handleFile = async (file) => {
+        setIsLoading(true)
         console.log(file[0], "paper")
         if (!file) return;
         setFileName(file[0].name)
@@ -99,6 +103,7 @@ const UploadFeed = () => {
     }
 
     const handleCreatePost = async (e) => {
+        setIsLoading(true)
         e.preventDefault();
 
         dispatch(setCreatingPost(true))
@@ -131,14 +136,25 @@ const UploadFeed = () => {
             };
 
             const response = await axiosPrivate.post("/posts/createPost", body);
+            setIsLoading(false)
             console.log(response, "responseresponse")
             dispatch(addNewPost(response.data.post))
             setAddImageModal(false)
             setCreatePost(false)
+            setTime(null)
+            setDate(null)
+            setDescription("")
+            setAddFileModal(false)
+            setAddImageModal(false)
+            setAddPollModal(false)
+            setAddVideoModal(false)
+            setImageArray([])
+            setImageArrayIndex(0)
         } catch (error) {
             console.log(error);
         } finally {
             dispatch(setCreatingPost(false)); // 👈 stop loader
+            setIsLoading(false)
         }
     };
 
@@ -212,6 +228,12 @@ const UploadFeed = () => {
                                 </DialogTitle>
 
                                 <DialogDescription as="div" className="p-8 space-y-6">
+                                    {time && date && (
+                                            <div className="cursor-pointer border-[#2c2b47] w-full px-[24px] py-[16px] rounded-2xl bg-[#1e2035] flex justify-between items-center ">
+                                                <span>Posting on {date} at {time}</span>
+                                                <button className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-[24px] py-[2px] rounded-xl font-medium">Edit</button>
+                                            </div>
+                                    )}
 
                                     <textarea
                                         value={description}
@@ -258,7 +280,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        Post
+                                        {isLaoding ? "Loading...":"Post"}
                                     </button>
                                 </div>
 
@@ -391,7 +413,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        Post
+                                        {isLaoding ? "Loading...":"Post"}
                                     </button>
                                 </div>
 
@@ -490,7 +512,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        Post
+                                        {isLaoding ? "Loading...":"Post"}
                                     </button>
                                 </div>
 
@@ -588,7 +610,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        Post
+                                        {isLaoding ? "Loading...":"Post"}
                                     </button>
                                 </div>
 
@@ -683,7 +705,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        Post
+                                        {isLaoding ? "Loading...":"Post"}
                                     </button>
                                 </div>
 

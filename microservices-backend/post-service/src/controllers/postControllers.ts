@@ -511,5 +511,29 @@ const votePoll = async (req: AuthRequest, res: Response) => {
     }
 }
 
+const deletePost=async(req:AuthRequest,res:Response)=>{
+    try {
+        const slug  =req.params.slug
+        const post=await Post.findOneAndDelete({slug})
+        if(!post){
+            return res.status(404).send({
+                message:"Post not found",
+                success:false
+            })
+        }
 
-export { createPost, getPaginatedPosts, getSinglePost, editPost, addComment, likePost, getCommentsPaginated, votePoll }
+        res.status(200).send({
+            message:"Post deleted Successfully",
+            success:true
+        })
+
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error",
+            error:error
+        })
+    }
+}
+
+
+export { createPost, getPaginatedPosts, getSinglePost, editPost, addComment, likePost, getCommentsPaginated, votePoll, deletePost }

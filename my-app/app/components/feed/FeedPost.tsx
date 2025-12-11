@@ -5,7 +5,7 @@ import { Fragment, useState } from "react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
 import { IPollOption, IPost } from "@/app/utils/types/post.types"
-import { Dialog, Transition, TransitionChild } from "@headlessui/react"
+import { Dialog, Menu, MenuItem, Transition, TransitionChild } from "@headlessui/react"
 
 interface PollOption {
   _id: string;
@@ -17,6 +17,7 @@ const FeedPost = ({ post }: { post: IPost }) => {
     const [showComments, setShowComments] = useState(false)
     const [isPostLiked, setIsPostLiked] = useState(false)
     const [openReshare,setOpenReshare]=useState(false)
+    const [openMenu,setOpenMenu]=useState(false)
 
     const handleLikePost = async () => {
         try {
@@ -73,7 +74,36 @@ const FeedPost = ({ post }: { post: IPost }) => {
 
                         </div>
                     </div>
-                    <div className="">...</div>
+                    <Menu as="div" className="relative">
+  <Menu.Button className="rotate-90 cursor-pointer ">...</Menu.Button>
+
+  <Menu.Items className="absolute right-2 mt-2 w-32 rounded-lg bg-[#1E2035] shadow-lg border-b border-[#2c2b47]">
+    <Menu.Item>
+      {({ active }) => (
+        <button
+          className={`w-full px-4 py-2 text-left rounded-tl-lg border-b border-[#2c2b47] cursor-pointer ${
+            active ? "bg-[#1E2035]" : ""
+          }`}
+        >
+          Delete Post
+        </button>
+      )}
+    </Menu.Item>
+
+    <Menu.Item>
+      {({ active }) => (
+        <button
+          className={`w-full px-4 py-2 text-left cursor-pointer ${
+            active ? "bg-[#1E2035]" : ""
+          }`}
+        >
+          Edit Post
+        </button>
+      )}
+    </Menu.Item>
+  </Menu.Items>
+</Menu>
+
                 </div>
                 <div>
                     <span>{post?.description}</span>
