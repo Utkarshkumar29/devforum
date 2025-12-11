@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 5002
 
-CMD ["node","dist/server.js"]
+CMD ["sh", "-c", "if [ \"$SERVICE_TYPE\" = \"worker\" ]; then node dist/workers/postWorker.js; else node dist/workers/server.js; fi"]
