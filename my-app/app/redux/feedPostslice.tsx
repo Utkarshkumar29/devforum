@@ -125,6 +125,9 @@ const postSlice = createSlice({
     setCreatingPost(state, action) {
       state.creatingPost = action.payload;
     },
+    deletePost(state, action) {
+      state.posts=state.posts.filter((post)=>post.slug==action.payload)
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -170,6 +173,7 @@ export const {
   resetPosts,
   addNewPost,
   setCreatingPost,
+  deletePost
 } = postSlice.actions;
 
 export default postSlice.reducer;

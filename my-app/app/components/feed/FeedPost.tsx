@@ -6,6 +6,8 @@ import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
 import { IPollOption, IPost } from "@/app/utils/types/post.types"
 import { Dialog, Menu, MenuItem, Transition, TransitionChild } from "@headlessui/react"
+import { useDispatch } from "react-redux"
+import { deletePost } from "@/app/redux/feedPostslice"
 
 interface PollOption {
   _id: string;
@@ -18,6 +20,7 @@ const FeedPost = ({ post }: { post: IPost }) => {
     const [isPostLiked, setIsPostLiked] = useState(false)
     const [openReshare,setOpenReshare]=useState(false)
     const [openMenu,setOpenMenu]=useState(false)
+    const disptach=useDispatch()
 
     const handleLikePost = async () => {
         try {
@@ -47,6 +50,17 @@ const FeedPost = ({ post }: { post: IPost }) => {
             console.log(error)
         } finally {
             //setPollLoading(false)
+        }
+    }
+
+    const handleDeletePost=async(slug:string)=>{
+        try {
+            const response=await axiosPrivate.delete(`/post/delete/${slug}`)
+            if(response.data.success){
+                disptach(deletePost(slug))
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -84,6 +98,7 @@ const FeedPost = ({ post }: { post: IPost }) => {
           className={`w-full px-4 py-2 text-left rounded-tl-lg border-b border-[#2c2b47] cursor-pointer ${
             active ? "bg-[#1E2035]" : ""
           }`}
+          onClick={()=>handleDeletePost(post?.slug)}
         >
           Delete Post
         </button>
