@@ -216,7 +216,7 @@ const getSinglePost = async (req: AuthRequest, res: Response) => {
 
     const post = await Post.findOne({ slug }).populate([
       { path: "user", select: "id email display_name photo_url" },
-      { path: "repost.user", select: "id email display_name photo_url" },
+      { path: "repost.user", select: "id email display_name photo_url authProvider" },
     ])
 
     if (!post) {
@@ -450,66 +450,61 @@ const likePost=async(req:AuthRequest,res:Response)=>{
 }
 
 const votePoll = async (req: AuthRequest, res: Response) => {
-    try {
-        const slug = req.params.slug
-        const { optionId } = req.body
-        const userId = req.user._id
+  try {
+    const slug = req.params.slug;
+    const { optionId } = req.body;
+    const userId = req.user._id;
 
-        const post = await Post.findOne({ slug })
-        if (!post) {
-        return res.status(404).send({
-            message: "Post not found",
-            success: false
-        })
-        }
-
-        if (!post.poll) {
-        return res.status(400).send({
-            message: "Poll does not exist on this post",
-            success: false
-        })
-        }
-
-        if (!post.poll.voters) post.poll.voters = []
-
-        if (post.poll.voters.some(v => v.toString() === userId.toString())) {
-        return res.status(400).send({
-            message: "You already voted",
-            success: false
-        })
-        }
-
-        const optionSelected = post.poll.options.find(
-        option => option._id?.toString() === optionId
-        )
-
-        if (!optionSelected) {
-        return res.status(404).send({
-            message: "Option not found",
-            success: false
-        })
-        }
-
-        optionSelected.votes += 1
-
-        post.poll.voters.push(new mongoose.Types.ObjectId(userId))
-
-        await post.save()
-
-        return res.status(200).send({
-        message: "Vote Added",
-        success: true,
-        poll: post.poll
-        })
-
-    } catch (error) {
-        console.log(error)
-        return res.status(500).send({
-        message: "Internal Server Error",
-        error
-        })
+    const post = await Post.findOne({ slug });
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
     }
-}
+
+    if (!post.poll) {
+      return res.status(400).json({ success: false, message: "Poll does not exist" });
+    }
+
+    // Prevent multiple votes
+    if (post.poll.voters.some(v => v.userId.toString() === userId.toString())) {
+      return res.status(400).json({ success: false, message: "You already voted" });
+    }
+
+    // Find chosen option
+    const selectedOption = post.poll.options.find(
+      opt => opt._id.toString() === optionId
+    );
+
+    if (!selectedOption) {
+      return res.status(404).json({ success: false, message: "Option not found" });
+    }
+
+    // Update vote count
+    selectedOption.votes += 1;
+
+    // Add voter
+    post.poll.voters.push({
+      userId: new mongoose.Types.ObjectId(userId),
+      optionId: new mongoose.Types.ObjectId(optionId)
+    });
+
+    // REQUIRED: Tell Mongoose nested object changed
+    post.markModified("poll");
+
+    await post.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Vote added",
+      poll: post.poll
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: "Internal Server Error", error });
+  }
+};
+
+
 
 const deletePost=async(req:AuthRequest,res:Response)=>{
     try {

@@ -1,60 +1,64 @@
-import mongoose, { Document,Schema } from "mongoose"
+import mongoose, { Document, Schema } from "mongoose";
 
-export interface ILike{
-  user:mongoose.Types.ObjectId
-  reactionType:string
+export interface ILike {
+  user: mongoose.Types.ObjectId;
+  reactionType: string;
 }
 
-export interface IComment{
-  text:string,
-  user:mongoose.Types.ObjectId
-  createdAt:Date
+export interface IComment {
+  text: string;
+  user: mongoose.Types.ObjectId;
+  createdAt: Date;
 }
 
-export interface IRepost{
-  user:mongoose.Types.ObjectId
-  repost_description?:string
+export interface IRepost {
+  user: mongoose.Types.ObjectId;
+  repost_description?: string;
 }
 
-export interface IPollOption{
-  _id?:string
-  optionText:string
-  votes:number
+export interface IPollOption {
+  _id?: string;
+  optionText: string;
+  votes: number;
 }
 
-export interface IPoll{
-  poll_description?:string
-  options: IPollOption[]
-  voters: mongoose.Types.ObjectId[]
+export interface IPollVoter {
+  userId: mongoose.Types.ObjectId;
+  optionId: mongoose.Types.ObjectId;
 }
 
-export interface IPost extends Document{
-  slug:string
-  user:mongoose.Types.ObjectId
-  description:string
-  imageArray?:string[]
-  video?:string
-  likes:ILike[]
-  comments:IComment[]
-  repost?:IRepost[]
-  document?:string
-  poll?:IPoll
-  createdAt:Date
-  updatedAt:Date
-  schedule_time?:Date
-  published_at?:Date
+export interface IPoll {
+  poll_description?: string;
+  options: IPollOption[];
+  voters: IPollVoter[];
 }
 
+export interface IPost extends Document {
+  slug: string;
+  user: mongoose.Types.ObjectId;
+  description: string;
+  imageArray?: string[];
+  video?: string;
+  likes: ILike[];
+  comments: IComment[];
+  repost?: IRepost[];
+  document?: string;
+  poll?: IPoll;
+  createdAt: Date;
+  updatedAt: Date;
+  schedule_time?: Date;
+  published_at?: Date;
+}
 
 const postSchema = new mongoose.Schema<IPost>(
   {
-    slug:{
-      type:String,
-      unique:true
+    slug: {
+      type: String,
+      unique: true,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     description: {
@@ -66,18 +70,18 @@ const postSchema = new mongoose.Schema<IPost>(
         type: String,
       },
     ],
-    video:{
-      type: String
+    video: {
+      type: String,
     },
     likes: [
       {
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
+          ref: "User",
         },
         reactionType: {
           type: String,
-          default: 'like',
+          default: "like",
         },
       },
     ],
@@ -89,7 +93,7 @@ const postSchema = new mongoose.Schema<IPost>(
         },
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
+          ref: "User",
           required: true,
         },
         createdAt: {
@@ -102,7 +106,7 @@ const postSchema = new mongoose.Schema<IPost>(
       {
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
+          ref: "User",
           required: true,
         },
         repost_description: {
@@ -117,34 +121,36 @@ const postSchema = new mongoose.Schema<IPost>(
       poll_description: {
         type: String,
       },
-      options: [
-        {
-          optionText: {
-            type: String,
+      options: {
+        type: [
+          {
+            _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+            optionText: String,
+            votes: { type: Number, default: 0 },
           },
-          votes: {
-            type: Number,
-            default: 0,
+        ],
+        default: [],
+      },
+      voters: {
+        type: [
+          {
+            userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+            optionId: { type: mongoose.Schema.Types.ObjectId, required: true },
           },
-        },
-      ],
-      voters: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      }
-    ]
+        ],
+        default: [],
+      },
     },
-    schedule_time:{
-      type:Date,
-      default: null
+    schedule_time: {
+      type: Date,
+      default: null,
     },
-    published_at:{
-      type:Date,
-      default: null
-    }
+    published_at: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<IPost>("Post", postSchema)
+export default mongoose.model<IPost>("Post", postSchema);

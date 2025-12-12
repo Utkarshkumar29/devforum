@@ -3,11 +3,11 @@ import ContentLoader from "react-content-loader";
 const FeedLoader = ({ }) => {
   
   return (
-    <div className={` bg-[#23253c]  rounded-2xl border border-[#4c4b75] mb-3 overflow-hidden max-w-[700px] max-h-[679px] w-[700px] h-[679px]`}>
+    <div className={` bg-[#1a1a1a]  rounded-2xl border border-[#262626] mb-3 overflow-hidden max-w-[700px] max-h-[679px] w-[700px] h-[679px]`}>
       <ContentLoader
         viewBox="0 0 400 490"
-        backgroundColor={"#303048"}
-        foregroundColor={`#303048`}
+        backgroundColor={"#583871"}
+        foregroundColor={`#583871`}
       >
         <circle cx="20" cy="20" r="7" />
         <rect x="35" y="14" rx="2" ry="2" width="180" height="12" />

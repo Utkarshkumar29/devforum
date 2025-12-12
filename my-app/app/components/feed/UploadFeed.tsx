@@ -11,6 +11,7 @@ import { addNewPost, setCreatingPost } from "@/app/redux/feedPostslice"
 const UploadFeed = () => {
     const dispatch = useDispatch()
     const userDetails = useSelector((state) => state.userDetails)
+    console.log(userDetails?.user?.photo_url,"userDetails")
     const [createPost, setCreatePost] = useState(false)
     const [addImageModal, setAddImageModal] = useState(false)
     const [addVideoModal, setAddVideoModal] = useState(false)
@@ -162,32 +163,30 @@ const UploadFeed = () => {
 
     return (
         <>
-            <div className=" w-full max-w-[700px] bg-[#23253c] rounded-[8px] border border-[#2c2b47] px-[24px] py-[16px] ">
-                <div className=" flex items-center justify-center gap-6 border-b border-[#2c2b47] pb-[16px] ">
-                    {/*<Image src={userDetails?.user?.photo_url} width={60} height={60} className=" rounded-full " alt="Profile Error"/>*/}
-                    <input onClick={() => setCreatePost(true)} className=" outline-none px-[16px] py-[4px] rounded-[16px] text-[#4f4f5a] w-full bg-[#1e2035] h-[44px] " placeholder=" What's on your mind developer? " />
+            <div className=" w-full max-w-[700px] bg-[#1a1a1a] rounded-[16px] border border-[#262626] px-[24px] py-[16px] ">
+                <div className=" flex items-center justify-center gap-3 border-b border-[#262626] pb-[12px] ">
+                    <Image src={userDetails?.user?.photo_url || "/default-avatar.png"}  width={40} height={40} className=" rounded-full " alt="Profile Error"/>
+                    <input onClick={() => setCreatePost(true)} className=" outline-none px-[16px] py-[4px] rounded-[16px] text-[#666666] w-full h-[44px] " placeholder=" What's on your mind developer? " />
                 </div>
-                <div className=" justify-between flex pt-[16px] ">
+                <div className=" justify-between items-center flex pt-[16px] ">
                     <div className=" flex flex-row justify-center gap-4">
-                        <div onClick={() => setAddImageModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
-                            <i className="fa-solid fa-image text-[#614fae]  "></i>
-                            <span className=" text-[#614fae] ">Image</span>
+                        <div onClick={() => setAddImageModal(true)} className=" cursor-pointer">
+                            <i className="fa-solid fa-image text-[#a053de]  "></i>
                         </div>
-                        <div onClick={() => setAddVideoModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
-                            <i className="fa-solid fa-video text-[#614fae]  "></i>
-                            <span className=" text-[#614fae] ">Video</span>
+                        <div onClick={() => setAddVideoModal(true)} className=" cursor-pointer">
+                            <i className="fa-solid fa-video text-[#a053de]  "></i>
+
                         </div>
-                        <div onClick={() => setAddFileModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
-                            <i className="fa-solid fa-file text-[#614fae]  "></i>
-                            <span className=" text-[#614fae] ">File</span>
+                        <div onClick={() => setAddFileModal(true)} className=" cursor-pointer">
+                            <i className="fa-solid fa-file text-[#a053de]  "></i>
                         </div>
-                        <div onClick={() => setAddPollModal(true)} className=" cursor-pointer border border-[#4b497c] bg-[#2d294c] p-[8px] rounded-[8px] flex gap-2 items-center">
-                            <i className="fa-solid fa-poll text-[#614fae]  "></i>
-                            <span className=" text-[#614fae] ">Poll</span>
+                        <div onClick={() => setAddPollModal(true)} className=" cursor-pointer">
+                            <i className="fa-solid fa-poll text-[#a053de]  "></i>
+                            
                         </div>
 
                     </div>
-                    <div onClick={handleCreatePost} className=" cursor-pointer flex justify-center items-center bg-[#7d42f5] px-[24px] py-[6px] rounded-[8px] font-semibold ">Post</div>
+                    <div onClick={handleCreatePost} className=" cursor-pointer flex justify-center items-center bg-[#a053de] px-[24px] py-[6px] rounded-[16px] font-semibold ">Post</div>
                 </div>
             </div>
 
@@ -218,18 +217,18 @@ const UploadFeed = () => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <DialogPanel className="w-[700px] max-h-[500px] bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] max-h-[500px] bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
 
                                 <DialogTitle>
-                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
-                                        <span className="text-[20px] font-semibold">Create Post</span>
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
+                                        <span className="text-[20px] font-semibold text-[#FFFFFF] ">Create Post</span>
                                         <i onClick={handleCreatePostClose} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
                                 </DialogTitle>
 
                                 <DialogDescription as="div" className="p-8 space-y-6">
                                     {time && date && (
-                                            <div className="cursor-pointer border-[#2c2b47] w-full px-[24px] py-[16px] rounded-2xl bg-[#1e2035] flex justify-between items-center ">
+                                            <div className="cursor-pointer border-[#262626] w-full px-[24px] py-[16px] rounded-2xl bg-[#2a2a2a] flex justify-between items-center ">
                                                 <span>Posting on {date} at {time}</span>
                                                 <button className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-[24px] py-[2px] rounded-xl font-medium">Edit</button>
                                             </div>
@@ -239,7 +238,7 @@ const UploadFeed = () => {
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="Write what's on your mind"
-                                        className="w-full min-h-[200px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                        className="w-full min-h-[200px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
                                     />
 
                                     {/*<div className="flex gap-4 justify-evenly">
@@ -269,7 +268,7 @@ const UploadFeed = () => {
 
                                 </DialogDescription>
 
-                                <div className=" flex gap-4 border border-[#2c2b47] justify-end py-[16px] px-[24px] ">
+                                <div className=" flex gap-4 border border-[#262626] justify-end py-[16px] px-[24px] ">
                                     <button
                                         onClick={handleSchedulePost}
                                         className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-6 py-2 rounded-xl font-medium"
@@ -318,10 +317,10 @@ const UploadFeed = () => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] h-auto bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
 
                                 <DialogTitle>
-                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
                                         <span className="text-[20px] font-semibold">Upload Images</span>
                                         <i onClick={() => handleImageModalclose()} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
@@ -331,7 +330,7 @@ const UploadFeed = () => {
 
                                     <form onSubmit={handleCreatePost} className=" w-full h-full p-[34px] flex gap-6 flex-col overflow-y-auto max-h-[400px] ">
                                         {time && date && (
-                                            <div className="cursor-pointer border-[#2c2b47] w-full px-[24px] py-[16px] rounded-2xl bg-[#1e2035] flex justify-between items-center ">
+                                            <div className="cursor-pointer border-[#262626] w-full px-[24px] py-[16px] rounded-2xl bg-[#2a2a2a] flex justify-between items-center ">
                                                 <span>Posting on {date} at {time}</span>
                                                 <button className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-[24px] py-[2px] rounded-xl font-medium">Edit</button>
                                             </div>
@@ -341,11 +340,11 @@ const UploadFeed = () => {
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
                                             placeholder="Write what's on your mind"
-                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
                                         />
 
                                         <div
-                                            className="  cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035] "
+                                            className="  cursor-pointer border border-dashed border-[#262626] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#2a2a2a] "
                                             onClick={() => imageInputRef.current?.click()}
                                             onDragOver={(e) => e.preventDefault()}
                                             onDrop={(e) => {
@@ -402,7 +401,7 @@ const UploadFeed = () => {
 
                                 </Description>
 
-                                <div className=" border border-[#2c2b47] flex justify-end py-[16px] px-[24px] gap-4 ">
+                                <div className=" border border-[#262626] flex justify-end py-[16px] px-[24px] gap-4 ">
                                     <button
                                         onClick={handleSchedulePost}
                                         className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-6 py-2 rounded-xl font-medium"
@@ -452,10 +451,10 @@ const UploadFeed = () => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] h-auto bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
 
                                 <DialogTitle>
-                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
                                         <span className="text-[20px] font-semibold">Upload Videos</span>
                                         <i onClick={() => setAddVideoModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
@@ -468,11 +467,11 @@ const UploadFeed = () => {
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
                                             placeholder="Write what's on your mind"
-                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
                                         />
 
                                         <div
-                                            className="cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035]"
+                                            className="cursor-pointer border border-dashed border-[#262626] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#2a2a2a]"
                                             onClick={() => videoInputRef.current?.click()}
                                             onDragOver={(e) => e.preventDefault()}
                                             onDrop={(e) => {
@@ -507,7 +506,7 @@ const UploadFeed = () => {
 
                                 </Description>
 
-                                <div className=" border border-[#2c2b47] flex justify-end py-[16px] px-[24px] ">
+                                <div className=" border border-[#262626] flex justify-end py-[16px] px-[24px] ">
                                     <button
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
@@ -552,10 +551,10 @@ const UploadFeed = () => {
                             leaveTo="opacity-0 scale-95"
                         >
 
-                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] h-auto bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
 
                                 <DialogTitle>
-                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
                                         <span className="text-[20px] font-semibold">Upload File</span>
                                         <i onClick={() => setAddFileModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
@@ -569,11 +568,11 @@ const UploadFeed = () => {
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
                                             placeholder="Write what's on your mind"
-                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
                                         />
 
                                         <div
-                                            className="cursor-pointer border border-dashed border-[#2c2b47] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#1e2035]"
+                                            className="cursor-pointer border border-dashed border-[#262626] w-full min-h-[150px] flex flex-col justify-center items-center rounded-3xl bg-[#2a2a2a]"
                                             onClick={() => fileInputRef.current?.click()}
                                             onDragOver={(e) => e.preventDefault()}
                                             onDrop={(e) => {
@@ -597,7 +596,7 @@ const UploadFeed = () => {
                                         </div>
 
                                         {fileName && (
-                                            <div className="p-4 bg-[#1e2035] rounded-xl text-white mt-2">
+                                            <div className="p-4 bg-[#2a2a2a] rounded-xl text-white mt-2">
                                                 Uploaded File: <strong>{fileName}</strong>
                                             </div>
                                         )}
@@ -605,7 +604,7 @@ const UploadFeed = () => {
                                     </form>
                                 </Description>
 
-                                <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                                <div className="border border-[#262626] flex justify-end py-[16px] px-[24px]">
                                     <button
                                         onClick={handleCreatePost}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
@@ -650,10 +649,10 @@ const UploadFeed = () => {
                             leaveTo="opacity-0 scale-95"
                         >
 
-                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] h-auto bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
 
                                 <DialogTitle>
-                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
                                         <span className="text-[20px] font-semibold">Upload Poll</span>
                                         <i onClick={() => setAddPollModal(false)} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
@@ -667,13 +666,13 @@ const UploadFeed = () => {
                                             value={description}
                                             onChange={(e) => setDescription(e.target.value)}
                                             placeholder="Write what's on your mind"
-                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#1e2035] outline-none resize-none"
+                                            className="w-full min-h-[100px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
                                         />
 
                                         <div>
                                             <div>
                                                 <span>Poll Question</span>
-                                                <input type="text" className=" w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none " value={poll_description} onChange={(e) => setPoll_Description(e.target.value)} />
+                                                <input type="text" className=" w-full mt-2 p-3 rounded-lg bg-[#2a2a2a] outline-none " value={poll_description} onChange={(e) => setPoll_Description(e.target.value)} />
                                             </div>
 
                                             <div className=" flex flex-col gap-4 mt-4 w-full ">
@@ -689,7 +688,7 @@ const UploadFeed = () => {
                                                                     update[index] = e.target.value
                                                                     setPollOptions(update)
                                                                 }}
-                                                                type="text" placeholder="Option" className=" min-w-full mt-2 p-3 rounded-lg bg-[#1e2035] outline-none " />
+                                                                type="text" placeholder="Option" className=" min-w-full mt-2 p-3 rounded-lg bg-[#2a2a2a] outline-none " />
                                                         </div>
                                                     )
                                                 })}
@@ -700,7 +699,7 @@ const UploadFeed = () => {
                                     </form>
                                 </Description>
 
-                                <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                                <div className="border border-[#262626] flex justify-end py-[16px] px-[24px]">
                                     <button
                                         onClick={handleCreatePost}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
@@ -745,10 +744,10 @@ const UploadFeed = () => {
                             leaveTo="opacity-0 scale-95"
                         >
 
-                            <DialogPanel className="w-[700px] h-auto bg-[#23253c] rounded-2xl overflow-y-auto shadow-xl">
+                            <DialogPanel className="w-[700px] h-auto bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
 
                                 <DialogTitle>
-                                    <div className="flex justify-between px-6 py-4 border-b border-[#2c2b47]">
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
                                         <span className="text-[20px] font-semibold">Schedule Post for later</span>
                                         <i onClick={() => setOpenSchedulePost(false)} className="fa-solid fa-xmark cursor-pointer"></i>
                                     </div>
@@ -760,18 +759,18 @@ const UploadFeed = () => {
 
                                         <div className=" flex flex-col ">
                                             <label>Date</label>
-                                            <input onChange={(e) => setDate(e.target.value)} type="Date" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] " />
+                                            <input onChange={(e) => setDate(e.target.value)} type="Date" className="  cursor-pointer border border-dashed border-[#262626] w-full px-[24px] py-[16px] rounded-3xl bg-[#2a2a2a] " />
                                         </div>
 
                                         <div className=" flex flex-col ">
                                             <label>Time</label>
-                                            <input onChange={(e) => setTime(e.target.value)} type="time" className="  cursor-pointer border border-dashed border-[#2c2b47] w-full px-[24px] py-[16px] rounded-3xl bg-[#1e2035] " />
+                                            <input onChange={(e) => setTime(e.target.value)} type="time" className="  cursor-pointer border border-dashed border-[#262626] w-full px-[24px] py-[16px] rounded-3xl bg-[#2a2a2a] " />
                                         </div>
 
                                     </form>
                                 </Description>
 
-                                <div className="border border-[#2c2b47] flex justify-end py-[16px] px-[24px]">
+                                <div className="border border-[#262626] flex justify-end py-[16px] px-[24px]">
                                     <button
                                         onClick={() => {
                                             //setAddImageModal(true)

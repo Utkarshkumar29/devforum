@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+
 import ReduxProvider from "./redux/ReduxProvider";
 import { ToastContainer } from "react-toastify";
+import HydrateUser from "./redux/HydrateUser"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,16 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ReduxProvider>
+          <HydrateUser />   {/* This runs on CLIENT */}
           {children}
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            pauseOnHover
-            draggable
-          />
+          <ToastContainer />
         </ReduxProvider>
       </body>
     </html>

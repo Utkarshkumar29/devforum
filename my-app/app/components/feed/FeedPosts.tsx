@@ -69,9 +69,9 @@ const FeedPosts = () => {
         endMessage={<p className="text-center py-2">No more posts</p>}
       >
         <div className="flex gap-4 flex-col">
-          {posts.map((post) => {
+          {posts.map((post,index) => {
             const fullPost = postDetails?.[post.slug];
-            return <FeedPost post={fullPost} key={post.slug} />;
+            return <FeedPost post={fullPost} key={index} />;
           })}
         </div>
       </InfiniteScroll>

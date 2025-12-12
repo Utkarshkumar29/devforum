@@ -127,6 +127,16 @@ const postSlice = createSlice({
     },
     deletePost(state, action) {
       state.posts=state.posts.filter((post)=>post.slug==action.payload)
+    },
+    updatePostDescription(state, action) {
+      const { slug, description } = action.payload
+      const currentPost = state.posts.find(post => post.slug === slug)
+      if (currentPost) {
+        currentPost.description = description
+      }
+      if (state.postDetails[slug]) {
+        state.postDetails[slug].description = description;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -173,7 +183,8 @@ export const {
   resetPosts,
   addNewPost,
   setCreatingPost,
-  deletePost
+  deletePost,
+  updatePostDescription
 } = postSlice.actions;
 
 export default postSlice.reducer;
