@@ -8,21 +8,37 @@ import GridSections from "./components/landingPage/girdSection";
 import CollaborationSection from "./components/landingPage/collaborationSection";
 import FrequentlySection from "./components/landingPage/FrequentlySection";
 import FooterSection from "./components/landingPage/FooterSection";
+import { useEffect } from "react";
 
 export default function Home() {
 
+  useEffect(() => {
+    // Wake up backend microservices (Render cold start)
+    const services = [
+      "https://devforum-gateway.onrender.com/",
+      "https://devforum-2.onrender.com/",
+      "https://devforum-post-service.onrender.com/",
+    ];
+
+    services.forEach((url) => {
+      fetch(url, { method: "GET" }).catch(() => {
+        // Fail silently — intentional
+      });
+    });
+  }, []);
+
   return (
     <div>
-      <Navbar/>
-      <HeroSection/>
-      <AboutSection/>
-      <DiverseSection/>
-      <ServicesSection/>
-      <ExploreSection/>
-      <GridSections/>
-      <CollaborationSection/>
-      <FrequentlySection/>
-      <FooterSection/>
+      <Navbar />
+      <HeroSection />
+      <AboutSection />
+      <DiverseSection />
+      <ServicesSection />
+      <ExploreSection />
+      <GridSections />
+      <CollaborationSection />
+      <FrequentlySection />
+      <FooterSection />
     </div>
   );
 }

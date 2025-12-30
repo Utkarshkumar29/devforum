@@ -464,12 +464,10 @@ const votePoll = async (req: AuthRequest, res: Response) => {
       return res.status(400).json({ success: false, message: "Poll does not exist" });
     }
 
-    // Prevent multiple votes
     if (post.poll.voters.some(v => v.userId.toString() === userId.toString())) {
       return res.status(400).json({ success: false, message: "You already voted" });
     }
 
-    // Find chosen option
     const selectedOption = post.poll.options.find(
       opt => opt._id.toString() === optionId
     );
@@ -478,16 +476,13 @@ const votePoll = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ success: false, message: "Option not found" });
     }
 
-    // Update vote count
     selectedOption.votes += 1;
 
-    // Add voter
     post.poll.voters.push({
       userId: new mongoose.Types.ObjectId(userId),
       optionId: new mongoose.Types.ObjectId(optionId)
     });
 
-    // REQUIRED: Tell Mongoose nested object changed
     post.markModified("poll");
 
     await post.save();

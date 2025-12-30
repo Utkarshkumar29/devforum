@@ -7,6 +7,7 @@ import { Description, Dialog, DialogDescription, DialogPanel, DialogTitle, Trans
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { uploadFileToFirebase } from "@/app/utils/uploadtoFirebase"
 import { addNewPost, setCreatingPost } from "@/app/redux/feedPostslice"
+import PostEditor from "./PostEditor"
 
 const UploadFeed = () => {
     const dispatch = useDispatch()
@@ -234,12 +235,15 @@ const UploadFeed = () => {
                                             </div>
                                     )}
 
-                                    <textarea
+                                    {/*<textarea
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="Write what's on your mind"
                                         className="w-full min-h-[200px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
-                                    />
+                                    />*/}
+
+                                    <PostEditor value={description}
+                                        setValue={setDescription} />
 
                                     {/*<div className="flex gap-4 justify-evenly">
                                         <div

@@ -7,7 +7,8 @@ import { toast } from "react-toastify"
 import { IPollOption, IPost } from "@/app/utils/types/post.types"
 import { Dialog, DialogDescription, DialogPanel, DialogTitle, Menu, MenuItem, Transition, TransitionChild } from "@headlessui/react"
 import { useDispatch, useSelector } from "react-redux"
-import { deletePost, updatePostDescription } from "@/app/redux/feedPostslice"
+import { addNewPost, deletePost, updatePostDescription } from "@/app/redux/feedPostslice"
+import ReSharePost from "./ReSharePost"
 
 interface PollOption {
     _id: string;
@@ -113,16 +114,48 @@ console.log(post, "isha",userDetails.user.id)
         return `${years} yr ago`;
     }
 
+    const handleReShare = async () => {
+    try {
+        
+
+        const body = {
+            description: newDescription,
+            isRepost: true,
+            repostUserId: post?.user?._id,
+            repostDescription: newDescription,
+        };
+
+        const response = await axiosPrivate.post("/posts/createPost", body);
+
+        if (response.data.success) {
+            dispatch(addNewPost(response.data.post));
+            setOpenReshare(false);
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        
+    }
+}
+
+const formatHashtags=(text:string)=>{
+    if(!text) return ""
+
+    return text.replace(/#(\w+)/g, (match) => {
+        return `<span class="text-[#7D42F5] font-semibold cursor-pointer">${match}</span>`;
+    })
+}
+
     return (
         <>
-            <div className=" w-full h-auto max-w-[700px] bg-[#1a1a1a] rounded-[8px] border border-[#262626] px-[24px] py-[16px] gap-4 flex flex-col ">
+            <div className=" w-full h-auto max-w-[700px] bg-[#1a1a1a] rounded-[16px] border border-[#262626] px-[24px] py-[16px] gap-4 flex flex-col ">
                 <div className=" w-full flex justify-between ">
                     <div className=" flex gap-4 ">
                         <div>
                             <Image src={post?.user?.photo_url || "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg"} alt="User" width={50} height={50} className="rounded-full" />
                         </div>
                         <div>
-                            <p className=" font-semibold ">{post?.user?.display_name}<i className="fa-solid fa-check"></i></p>
+                            <p className=" font-semibold ">{post?.user?.display_name}</p>
                             <p className=" text-[#909090] ">{post?.createdAt ? timeAgo(post?.createdAt) : ""}</p>
 
                         </div>
@@ -162,7 +195,16 @@ console.log(post, "isha",userDetails.user.id)
 
                 </div>
                 <div>
-                    <span>{post?.description}</span>
+                    <span
+  className="text-white font-semibold"
+  dangerouslySetInnerHTML={{
+    __html: formatHashtags(
+      post?.repost?.[0]
+        ? post?.repost[0]?.repost_description
+        : post?.description
+    ),
+  }}
+/>
                 </div>
 
                 {post?.imageArray && post?.imageArray.map((img, index) => {
@@ -217,6 +259,12 @@ console.log(post, "isha",userDetails.user.id)
                     />
                 )}
 
+                {post?.repost[0] && (
+                    <div>
+                        <ReSharePost post={post}/>
+                    </div>
+                )}
+
 
                 <div className=" mb-2 border border-[#262626] "></div>
                 <div className=" flex justify-between px-[12px] ">
@@ -233,23 +281,77 @@ console.log(post, "isha",userDetails.user.id)
             </div>
 
             <Transition show={openReshare} as={Fragment}>
-                <Dialog as="div" className={"relative z-50"} onClose={() => setOpenReshare(false)}>
+                <Dialog as="div" className="relative z-50" onClose={() => setOpenEditor(false)} >
 
+                    {/* BACKDROP */}
                     <TransitionChild
                         as={Fragment}
+                        enter="ease-out duration-200"
                         enterFrom="opacity-0"
                         enterTo="opacity-100"
-                        enter="ease-out duration-200"
                         leave="ease-in duration-200"
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className=" fixed inset-0 bg/black-50 " />
+                        <div className="fixed inset-0 bg-black/50" />
                     </TransitionChild>
 
-                    <div></div>
-                </Dialog>
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
 
+                        <TransitionChild
+                            as={Fragment}
+                            enter="ease-out duration-200"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+                            <DialogPanel className="w-[700px]  bg-[#1a1a1a] rounded-2xl overflow-y-auto shadow-xl">
+
+                                <DialogTitle>
+                                    <div className="flex justify-between px-6 py-4 border-b border-[#262626]">
+                                        <span className="text-[20px] font-semibold">Reshare Post</span>
+                                        <i onClick={() => setOpenEditor(false)} className="fa-solid fa-xmark cursor-pointer"></i>
+                                    </div>
+                                </DialogTitle>
+
+                                <DialogDescription as="div" className="p-8 space-y-6">
+
+                                    <textarea
+                                        value={newDescription}
+                                        onChange={(e) => setNewDescription(e.target.value)}
+                                        placeholder="Write what's on your mind"
+                                        className="w-full min-h-[200px] p-6 rounded-2xl bg-[#2a2a2a] outline-none resize-none"
+                                    />
+
+                                </DialogDescription>
+
+                                <div className=" px-[32px] mb-[24px] ">
+                                    <ReSharePost post={post} />
+                                </div>
+
+
+                                <div className=" flex gap-4 border border-[#262626] justify-end py-[16px] px-[24px] ">
+                                    <button
+                                        onClick={() => setOpenReshare(false)}
+                                        className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-6 py-2 rounded-xl font-medium"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={() => handleReShare(post?.slug)}
+                                        className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
+                                    >
+                                        {isEditLoading ? "Loading..." : "Save"}
+                                    </button>
+                                </div>
+                            </DialogPanel>
+                        </TransitionChild>
+
+                    </div>
+
+                </Dialog>
             </Transition>
 
             <Transition show={openEditor} as={Fragment}>
