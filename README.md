@@ -46,6 +46,6 @@ Improved scalability using microservices and async job queues
 
 🌐 Live Demo
 
-👉 [DevForum Live Demo](https://devforum.vercel.app)
+👉 [DevForum Live Demo](https://devforum-nine.vercel.app/)
 
 📎 Backend services hosted on Render; first request may take 30–60 seconds due to cold start.
