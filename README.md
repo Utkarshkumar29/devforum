@@ -11,7 +11,7 @@ DevForum is a social media scheduling and posting platform built with Next.js, R
 
 ⚡ Optimized performance through Redis caching
 
-🔔 Notification and queue-based microservice architecture
+🔔 Queue-based microservice architecture
 
 💻 Responsive and secure UI with reusable Next.js components
 
