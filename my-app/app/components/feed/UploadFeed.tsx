@@ -12,7 +12,7 @@ import PostEditor from "./PostEditor"
 const UploadFeed = () => {
     const dispatch = useDispatch()
     const userDetails = useSelector((state) => state.userDetails)
-    console.log(userDetails?.user?.photo_url,"userDetails")
+    console.log(userDetails?.user?.photo_url, "userDetails")
     const [createPost, setCreatePost] = useState(false)
     const [addImageModal, setAddImageModal] = useState(false)
     const [addVideoModal, setAddVideoModal] = useState(false)
@@ -33,7 +33,7 @@ const UploadFeed = () => {
     const [openSchedulePost, setOpenSchedulePost] = useState(false)
     const [date, setDate] = useState(null)
     const [time, setTime] = useState(null)
-    const [isLaoding,setIsLoading]=useState(false)
+    const [isLaoding, setIsLoading] = useState(false)
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
@@ -166,7 +166,7 @@ const UploadFeed = () => {
         <>
             <div className=" w-full max-w-[700px] bg-[#1a1a1a] rounded-[16px] border border-[#262626] px-[24px] py-[16px] ">
                 <div className=" flex items-center justify-center gap-3 border-b border-[#262626] pb-[12px] ">
-                    <Image src={userDetails?.user?.photo_url || "/default-avatar.png"}  width={40} height={40} className=" rounded-full " alt="Profile Error"/>
+                    <Image src={userDetails?.user?.photo_url || "/default-avatar.png"} width={40} height={40} className=" rounded-full " alt="Profile Error" />
                     <input onClick={() => setCreatePost(true)} className=" outline-none px-[16px] py-[4px] rounded-[16px] text-[#666666] w-full h-[44px] " placeholder=" What's on your mind developer? " />
                 </div>
                 <div className=" justify-between items-center flex pt-[16px] ">
@@ -183,7 +183,7 @@ const UploadFeed = () => {
                         </div>
                         <div onClick={() => setAddPollModal(true)} className=" cursor-pointer">
                             <i className="fa-solid fa-poll text-[#a053de]  "></i>
-                            
+
                         </div>
 
                     </div>
@@ -229,10 +229,10 @@ const UploadFeed = () => {
 
                                 <DialogDescription as="div" className="p-8 space-y-6">
                                     {time && date && (
-                                            <div className="cursor-pointer border-[#262626] w-full px-[24px] py-[16px] rounded-2xl bg-[#2a2a2a] flex justify-between items-center ">
-                                                <span>Posting on {date} at {time}</span>
-                                                <button className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-[24px] py-[2px] rounded-xl font-medium">Edit</button>
-                                            </div>
+                                        <div className="cursor-pointer border-[#262626] w-full px-[24px] py-[16px] rounded-2xl bg-[#2a2a2a] flex justify-between items-center ">
+                                            <span>Posting on {date} at {time}</span>
+                                            <button className=" cursor-pointer text-[#7D42F5] border border-[#7D42F5] px-[24px] py-[2px] rounded-xl font-medium">Edit</button>
+                                        </div>
                                     )}
 
                                     {/*<textarea
@@ -283,7 +283,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        {isLaoding ? "Loading...":"Post"}
+                                        {isLaoding ? "Loading..." : "Post"}
                                     </button>
                                 </div>
 
@@ -416,7 +416,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        {isLaoding ? "Loading...":"Post"}
+                                        {isLaoding ? "Loading..." : "Post"}
                                     </button>
                                 </div>
 
@@ -515,7 +515,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className=" cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        {isLaoding ? "Loading...":"Post"}
+                                        {isLaoding ? "Loading..." : "Post"}
                                     </button>
                                 </div>
 
@@ -613,7 +613,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        {isLaoding ? "Loading...":"Post"}
+                                        {isLaoding ? "Loading..." : "Post"}
                                     </button>
                                 </div>
 
@@ -708,7 +708,7 @@ const UploadFeed = () => {
                                         onClick={handleCreatePost}
                                         className="cursor-pointer bg-[#7D42F5] px-6 py-2 rounded-xl font-medium hover:bg-[#6c37d6] transition"
                                     >
-                                        {isLaoding ? "Loading...":"Post"}
+                                        {isLaoding ? "Loading..." : "Post"}
                                     </button>
                                 </div>
 
