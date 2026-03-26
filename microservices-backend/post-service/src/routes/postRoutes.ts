@@ -1,6 +1,6 @@
 import express from "express";
 import { protect } from "../middleware/authMiddleware";
-import { addComment, createPost, editPost, getCommentsPaginated, getPaginatedPosts, getSinglePost, likePost, votePoll, deletePost } from "../controllers/postControllers";
+import { addComment, createPost, editPost, getCommentsPaginated, getPaginatedPosts, getSinglePost, likePost, votePoll, deletePost, generatPost } from "../controllers/postControllers";
 
 const Router = express.Router()
 
@@ -13,5 +13,6 @@ Router.get('/getComments/:slug',protect,getCommentsPaginated)
 Router.post('/like/:slug',protect,likePost)
 Router.post('/vote/:slug',protect,votePoll)
 Router.delete('/delete/:slug',protect,deletePost)
+Router.post('/generate-post-text',protect,generatPost)
 
 export default Router

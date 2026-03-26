@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "bullmq": "^5.65.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -19,7 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.20.0",
     "redis": "^5.10.0",
-    "uuid": "^13.0.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

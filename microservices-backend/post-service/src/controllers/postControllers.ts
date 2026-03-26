@@ -1,10 +1,11 @@
 import Post, { IPost } from "../models/postSchema"
-import { v4 as uuidv4 } from "uuid"
+const { v4: uuidv4 } = require("uuid")
 import { Request, Response } from "express" 
 import mongoose from "mongoose"
 import { redisClient } from "../redis/redisClient"
 import { User } from "../models/userSchema"
 import { postQueue } from "../queues/postQueue"
+import { generatePostText } from "../services/gemini"
 
 interface AuthRequest extends Request{
     user?: {_id:string}
@@ -500,7 +501,6 @@ const votePoll = async (req: AuthRequest, res: Response) => {
 };
 
 
-
 const deletePost=async(req:AuthRequest,res:Response)=>{
     try {
         const slug  =req.params.slug
@@ -525,5 +525,21 @@ const deletePost=async(req:AuthRequest,res:Response)=>{
     }
 }
 
+const generatPost=async(req:AuthRequest,res:Response)=>{
+    try {
+        const {prompt}=req.body
+        if (!prompt || typeof prompt !== "string" || prompt.trim().length < 3) {
+            return res.status(400).json({ error: "Prompt is required (min 3 chars)" });
+        }
+        const response=await generatePostText(prompt.trim())
+        return res.json({ success: true, response });
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error",
+            error:error
+        })
+    }
+}
 
-export { createPost, getPaginatedPosts, getSinglePost, editPost, addComment, likePost, getCommentsPaginated, votePoll, deletePost }
+
+export { createPost, getPaginatedPosts, getSinglePost, editPost, addComment, likePost, getCommentsPaginated, votePoll, deletePost,generatPost }
