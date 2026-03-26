@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const authMiddleware_1 = require("../middleware/authMiddleware");
+const postControllers_1 = require("../controllers/postControllers");
+const Router = express_1.default.Router();
+Router.post('/createPost', authMiddleware_1.protect, postControllers_1.createPost);
+Router.get('/getPosts', authMiddleware_1.protect, postControllers_1.getPaginatedPosts);
+Router.get('/singlePost/:slug', authMiddleware_1.protect, postControllers_1.getSinglePost);
+Router.patch('/editPost/:slug', authMiddleware_1.protect, postControllers_1.editPost);
+Router.post('/addComment/:slug', authMiddleware_1.protect, postControllers_1.addComment);
+Router.get('/getComments/:slug', authMiddleware_1.protect, postControllers_1.getCommentsPaginated);
+Router.post('/like/:slug', authMiddleware_1.protect, postControllers_1.likePost);
+Router.post('/vote/:slug', authMiddleware_1.protect, postControllers_1.votePoll);
+Router.delete('/delete/:slug', authMiddleware_1.protect, postControllers_1.deletePost);
+Router.post('/generate-post-text', authMiddleware_1.protect, postControllers_1.generatPost);
+exports.default = Router;
