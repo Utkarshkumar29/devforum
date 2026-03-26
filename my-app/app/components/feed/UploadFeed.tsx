@@ -188,7 +188,7 @@ const UploadFeed = () => {
             const response = await axiosPrivate.post("/posts/generate-post-text", {
                 prompt: aiPrompt.trim(),
             })
-            setDescription(response.data.text)  // populates PostEditor
+            setDescription(response.data.response)
             setShowAiInput(false)
             setAiPrompt("")
         } catch (err: any) {
