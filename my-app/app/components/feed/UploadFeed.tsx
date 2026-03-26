@@ -185,7 +185,7 @@ const UploadFeed = () => {
         setAiError(null)
 
         try {
-            const response = await axiosPrivate.post("/api/ai/generate-post-text", {
+            const response = await axiosPrivate.post("/posts/generate-post-text", {
                 prompt: aiPrompt.trim(),
             })
             setDescription(response.data.text)  // populates PostEditor
@@ -214,7 +214,7 @@ const UploadFeed = () => {
                     setShowAiInput(!showAiInput)
                     setAiError(null)
                 }}
-                className="flex items-center gap-2 text-[#a053de] text-sm font-medium hover:text-[#b97de8] transition"
+                className="flex items-center gap-2 text-[#a053de] text-sm font-medium hover:text-[#b97de8] transition cursor-pointer"
             >
                 <i className="fa-solid fa-wand-magic-sparkles" />
                 {showAiInput ? "Close AI Writer" : "✨ Write with AI"}
@@ -248,7 +248,7 @@ const UploadFeed = () => {
                             disabled={aiLoading || !aiPrompt.trim()}
                             className="flex items-center gap-2 bg-[#7D42F5] hover:bg-[#6c37d6]
                                        disabled:opacity-40 disabled:cursor-not-allowed
-                                       px-4 py-2 rounded-xl text-sm font-medium transition whitespace-nowrap"
+                                       px-4 py-2 rounded-xl text-sm font-medium transition whitespace-nowrap cursor-pointer"
                         >
                             {aiLoading ? (
                                 <>
@@ -376,12 +376,12 @@ const UploadFeed = () => {
                             <i className="fa-solid fa-poll text-[#a053de]" />
                         </div>
                     </div>
-                    <div
+                    {/*<div
                         onClick={handleCreatePost}
                         className="cursor-pointer flex justify-center items-center bg-[#a053de] px-[24px] py-[6px] rounded-[16px] font-semibold"
                     >
                         Post
-                    </div>
+                    </div>*/}
                 </div>
             </div>
 

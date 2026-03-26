@@ -528,12 +528,14 @@ const deletePost=async(req:AuthRequest,res:Response)=>{
 const generatPost=async(req:AuthRequest,res:Response)=>{
     try {
         const {prompt}=req.body
+        console.log(prompt,"prompt")
         if (!prompt || typeof prompt !== "string" || prompt.trim().length < 3) {
             return res.status(400).json({ error: "Prompt is required (min 3 chars)" });
         }
         const response=await generatePostText(prompt.trim())
         return res.json({ success: true, response });
     } catch (error) {
+        console.error("❌ Gemini error:", error?.message || error)
         res.status(500).send({
             message:"Internal Server Error",
             error:error
