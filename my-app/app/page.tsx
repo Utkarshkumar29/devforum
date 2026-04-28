@@ -13,6 +13,7 @@ import FrequentlySection from "./components/FrequentlySection";
 
 export default function Home() {
 
+  
   return (
     <div>
       <Navbar/>
