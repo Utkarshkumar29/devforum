@@ -1,0 +1,24 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/my-app"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "npm"
+    directory: "/microservices-backend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
