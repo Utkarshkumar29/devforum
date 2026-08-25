@@ -4,7 +4,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/my-app"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 10
     groups:
       minor-patch:
@@ -15,7 +15,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/microservices-backend"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 10
     groups:
       minor-patch:
