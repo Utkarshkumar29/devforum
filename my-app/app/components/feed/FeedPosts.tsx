@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 const FeedPosts = () => {
   const dispatch = useAppDispatch();
 
-  const { posts, postDetails, page, limit, hasMore, loading } =
+  const { posts, postDetails, page, limit, hasMore } =
     useAppSelector((state: RootState) => state.posts);
 
   // Load initial posts

@@ -1,48 +1,10 @@
 'use client'
 import Image from "next/image"
-import FeedComments from "./FeedComments"
-import { Fragment, useEffect, useState } from "react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
 import { IPollOption, IPost } from "@/app/utils/types/post.types"
-import { Dialog, DialogDescription, DialogPanel, DialogTitle, Menu, MenuItem, Transition, TransitionChild } from "@headlessui/react"
-import { useDispatch, useSelector } from "react-redux"
-import { deletePost, updatePostDescription } from "@/app/redux/feedPostslice"
-
-interface PollOption {
-    _id: string;
-    optionText: string;
-    votes: number;
-}
 
 const ReSharePost = ({ post }: { post: IPost }) => {
-    
-    const [showComments, setShowComments] = useState(false)
-    const [isPostLiked, setIsPostLiked] = useState(false)
-    const [openReshare, setOpenReshare] = useState(false)
-    const [openMenu, setOpenMenu] = useState(false)
-    const [newDescription, setNewDescription] = useState(post?.description)
-    const [openEditor, setOpenEditor] = useState(false)
-    const [isEditLoading, serIsEditLoading] = useState(false)
-    const dispatch = useDispatch()
-    const userDetails = useSelector((state) => state.userDetails)
-console.log(post, "isha",userDetails.user.id)
-    useEffect(() => {
-        console.log(newDescription, "descriptiondescription")
-    }, [newDescription])
-
-    const handleLikePost = async () => {
-        try {
-            const response = await axiosPrivate.post(`/posts/like/${post.slug}`, { reactionType: "love" })
-            if (response.data.message == "Reaction removed") {
-                setIsPostLiked(false)
-            } else {
-                setIsPostLiked(true)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     //const [pollLoading, setPollLoading] = useState(false)
     const handleVote = async (option: IPollOption) => {
@@ -62,33 +24,7 @@ console.log(post, "isha",userDetails.user.id)
         }
     }
 
-    const handleDeletePost = async (slug: string) => {
-        try {
-            const response = await axiosPrivate.delete(`/posts/delete/${slug}`)
-            if (response.data.success) {
-                dispatch(deletePost(slug))
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
-    const handleEditPost = async (slug: string) => {
-        try {
-            serIsEditLoading(true)
-            const data = { description: newDescription }
-            const response = await axiosPrivate.patch(`/posts/editPost/${slug}`, data)
-            if (response.data.success) {
-                console.log("running")
-                dispatch(updatePostDescription({ slug, description: newDescription }))
-                setOpenEditor(false)
-            }
-        } catch (error) {
-            console.log(error)
-        } finally {
-            serIsEditLoading(false)
-        }
-    }
     function timeAgo(dateString: string) {
         const date = new Date(dateString);
         const now = new Date();
@@ -156,7 +92,7 @@ console.log(post, "isha",userDetails.user.id)
                             const totalVotes: number = ((post?.poll?.options ?? []).reduce((acc, curr) => acc + (curr.votes ?? 0), 0)) || 0
                             const percent = totalVotes === 0 ? 0 : ((vote / totalVotes) * 100).toFixed(2)
                             return (
-                                <div onClick={() => handleVote(option)} className="cursor-pointer w-full mt-3 bg-[#2a2a2a] rounded-lg h-[44px] relative overflow-hidden">
+                                <div key={index} onClick={() => handleVote(option)} className="cursor-pointer w-full mt-3 bg-[#2a2a2a] rounded-lg h-[44px] relative overflow-hidden">
                                     {/* Progress bar */}
                                     <div
                                         className="h-full transition-all duration-300 "

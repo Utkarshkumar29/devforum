@@ -13,7 +13,7 @@ export default function HydrateUser() {
     if (stored) {
       dispatch(addUser(JSON.parse(stored)));
     }
-  }, []);
+  }, [dispatch]);
 
   return null;
 }
