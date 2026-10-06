@@ -5,23 +5,16 @@ import { Fragment, useEffect, useState } from "react"
 import { axiosPrivate } from "@/app/axios/axiosInstance"
 import { toast } from "react-toastify"
 import { IPollOption, IPost } from "@/app/utils/types/post.types"
-import { Dialog, DialogDescription, DialogPanel, DialogTitle, Menu, MenuItem, Transition, TransitionChild } from "@headlessui/react"
+import { Dialog, DialogDescription, DialogPanel, DialogTitle, Menu, Transition, TransitionChild } from "@headlessui/react"
 import { useDispatch, useSelector } from "react-redux"
 import { addNewPost, deletePost, updatePostDescription } from "@/app/redux/feedPostslice"
 import ReSharePost from "./ReSharePost"
-
-interface PollOption {
-    _id: string;
-    optionText: string;
-    votes: number;
-}
 
 const FeedPost = ({ post }: { post: IPost }) => {
     
     const [showComments, setShowComments] = useState(false)
     const [isPostLiked, setIsPostLiked] = useState(false)
     const [openReshare, setOpenReshare] = useState(false)
-    const [openMenu, setOpenMenu] = useState(false)
     const [newDescription, setNewDescription] = useState(post?.description)
     const [openEditor, setOpenEditor] = useState(false)
     const [isEditLoading, serIsEditLoading] = useState(false)
@@ -229,7 +222,7 @@ const formatHashtags=(text:string)=>{
                             const totalVotes: number = ((post?.poll?.options ?? []).reduce((acc, curr) => acc + (curr.votes ?? 0), 0)) || 0
                             const percent = totalVotes === 0 ? 0 : ((vote / totalVotes) * 100).toFixed(2)
                             return (
-                                <div onClick={() => handleVote(option)} className="cursor-pointer w-full mt-3 bg-[#2a2a2a] rounded-lg h-[44px] relative overflow-hidden">
+                                <div key={index} onClick={() => handleVote(option)} className="cursor-pointer w-full mt-3 bg-[#2a2a2a] rounded-lg h-[44px] relative overflow-hidden">
                                     {/* Progress bar */}
                                     <div
                                         className="h-full transition-all duration-300 "

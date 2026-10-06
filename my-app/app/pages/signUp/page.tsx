@@ -18,8 +18,6 @@ const SignUp=()=>{
     const handleGoogleSignIn = async () => {
   try {
     const response = await signInWithPopup(auth, googleProvider)
-    const user = response.user
-    console.log("Google Login Success:", response)
 
     const result = await axiosPublic.post('/users/signUp', {
       email: response.user.email,

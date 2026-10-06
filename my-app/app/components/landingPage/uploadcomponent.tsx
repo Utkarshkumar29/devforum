@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/fireabase";
+import Image from "next/image";
 
 const UploadComponent = ({fileUrl,setFileUrl}) => {
-  const [file, setFile] = useState<File | null>(null);
   
   const [progress, setProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -50,7 +50,7 @@ const UploadComponent = ({fileUrl,setFileUrl}) => {
         className="relative w-24 h-24 rounded-full border border-white/30 bg-white/5 backdrop-blur-md flex items-center justify-center cursor-pointer hover:border-[#ff357a] transition-all duration-300 overflow-hidden shadow-[0_0_10px_rgba(255,255,255,0.15)]"
       >
         {fileUrl ? (
-          <img
+          <Image
             src={fileUrl}
             alt="Profile"
             className="w-full h-full object-cover rounded-full"
