@@ -2,6 +2,6 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/mongoose": "^5.11.97",
-    "@types/node": "^26.6.4"
+    "@types/node": "^26.6.5"
   }
 }
