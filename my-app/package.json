@@ -12,30 +12,30 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@headlessui/react": "^2.2.9",
-    "@lexical/react": "^0.39.0",
+    "@lexical/react": "^0.52.0",
     "@reduxjs/toolkit": "^2.10.1",
     "axios": "^1.12.2",
     "firebase": "^12.4.0",
     "framer-motion": "^13.5.1",
-    "lexical": "^0.39.0",
-    "next": "^16.0.8",
+    "lexical": "^0.52.0",
+    "next": "^16.4.0",
     "react": "^19.2.1",
     "react-content-loader": "^7.1.1",
     "react-dom": "^19.2.1",
     "react-infinite-scroll-component": "^7.2.1",
     "react-redux": "^9.2.0",
     "react-toastify": "^11.0.5",
-    "uuid": "^14.0.2"
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^26.6.4",
+    "@types/node": "^26.6.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "baseline-browser-mapping": "^2.10.10",
+    "baseline-browser-mapping": "^2.11.28",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.3.3",
+    "eslint-config-next": "^16.4.0",
     "tailwindcss": "^4",
     "typescript": "^5.9.3"
   }
