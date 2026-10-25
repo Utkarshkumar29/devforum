@@ -1,7 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage"
-import {getAuth,GoogleAuthProvider,signInWithPopup, GithubAuthProvider } from "firebase/auth"
+import { getStorage } from "firebase/storage";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  GithubAuthProvider,
+} from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,15 +18,15 @@ const firebaseConfig = {
   storageBucket: "chatrooms-2f5bc.appspot.com",
   messagingSenderId: "998170279518",
   appId: "1:998170279518:web:f7a302a4da160f15e5becf",
-  measurementId: "G-26HY49WL31"
+  measurementId: "G-26HY49WL31",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const storage=getStorage(app)
+const storage = getStorage(app);
 
-const auth=getAuth()
-const googleProvider=new GoogleAuthProvider()
-const githubProvider=new GithubAuthProvider()
+const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
-export { storage, auth, googleProvider, githubProvider, signInWithPopup }
+export { storage, auth, googleProvider, githubProvider, signInWithPopup };

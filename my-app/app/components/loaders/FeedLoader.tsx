@@ -1,9 +1,10 @@
 import ContentLoader from "react-content-loader";
 
-const FeedLoader = ({ }) => {
-  
+const FeedLoader = ({}) => {
   return (
-    <div className={` bg-[#1a1a1a]  rounded-2xl border border-[#262626] mb-3 overflow-hidden max-w-[700px] max-h-[679px] w-[700px] h-[679px]`}>
+    <div
+      className={` bg-[#1a1a1a]  rounded-2xl border border-[#262626] mb-3 overflow-hidden max-w-[700px] max-h-[679px] w-[700px] h-[679px]`}
+    >
       <ContentLoader
         viewBox="0 0 400 490"
         backgroundColor={"#583871"}
@@ -29,9 +30,7 @@ const FeedLoader = ({ }) => {
         <rect x="15" y="160" rx="10" ry="10" width="370" height="205" />
 
         {/* Footer icons */}
-        
-
-      </ContentLoader>     
+      </ContentLoader>
     </div>
   );
 };

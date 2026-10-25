@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Navbar from "./components/landingPage/navbar";
 import HeroSection from "./components/landingPage/heroSection";
 import AboutSection from "./components/landingPage/aboutSection";
@@ -12,7 +12,6 @@ import FooterSection from "./components/landingPage/FooterSection";
 import { useEffect } from "react";
 
 export default function Home() {
-
   useEffect(() => {
     // Wake up backend microservices (Render cold start)
     const services = [

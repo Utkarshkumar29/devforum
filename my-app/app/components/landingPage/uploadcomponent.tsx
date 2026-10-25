@@ -4,8 +4,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/fireabase";
 import Image from "next/image";
 
-const UploadComponent = ({fileUrl,setFileUrl}) => {
-  
+const UploadComponent = ({ fileUrl, setFileUrl }) => {
   const [progress, setProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
@@ -29,7 +28,7 @@ const UploadComponent = ({fileUrl,setFileUrl}) => {
         const url = await getDownloadURL(uploadTask.snapshot.ref);
         setFileUrl(url);
         setIsUploading(false);
-      }
+      },
     );
   };
 

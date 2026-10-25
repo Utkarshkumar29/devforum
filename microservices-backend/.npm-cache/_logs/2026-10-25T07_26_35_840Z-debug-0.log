@@ -1,0 +1,40 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.7
+2 info using node@v22.22.2
+3 silly config load:file:D:\nvm\v22.22.2\node_modules\npm\npmrc
+4 silly config load:file:D:\New folder\devforum\microservices-backend\.npmrc
+5 silly config load:file:C:\Users\ukyp2\.npmrc
+6 silly config load:file:C:\nvm4w\nodejs\etc\npmrc
+7 verbose title npm update @types/node
+8 verbose argv "update" "@types/node" "--package-lock-only" "--ignore-scripts" "--no-audit" "--no-fund" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:D:\New folder\devforum\microservices-backend\.npm-cache\_logs\2026-10-25T07_26_35_840Z-
+10 verbose logfile D:\New folder\devforum\microservices-backend\.npm-cache\_logs\2026-10-25T07_26_35_840Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+13 silly idealTree buildDeps
+14 silly fetch manifest @types/node@^26.6.5
+15 silly packumentCache full:https://registry.npmjs.org/@types%2fnode cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/npm 1320ms
+17 http fetch GET 200 https://registry.npmjs.org/@types%2fnode 3903ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/@types%2fnode set size:undefined disposed:false
+19 silly placeDep ROOT @types/node@26.6.5 REPLACE for:  want: ^26.6.5
+20 silly fetch manifest @types/node@*
+21 silly packumentCache full:https://registry.npmjs.org/@types%2fnode cache-miss
+22 http cache https://registry.npmjs.org/@types%2fnode 30ms (cache hit)
+23 silly packumentCache full:https://registry.npmjs.org/@types%2fnode set size:11180437 disposed:false
+24 silly placeDep ROOT @types/node@26.6.5 KEEP for: @types/body-parser@1.19.6 want: *
+25 silly placeDep ROOT @types/node@26.6.5 KEEP for: @types/connect@3.4.38 want: *
+26 silly placeDep ROOT @types/node@26.6.5 KEEP for: @types/express-serve-static-core@5.1.0 want: *
+27 silly placeDep ROOT @types/node@26.6.5 KEEP for: @types/send@1.2.1 want: *
+28 silly placeDep ROOT @types/node@26.6.5 KEEP for: @types/serve-static@2.2.0 want: *
+29 verbose cwd D:\New folder\devforum\microservices-backend
+30 verbose os Windows_NT 10.0.26200
+31 verbose node v22.22.2
+32 verbose npm  v10.9.7
+33 notice
+33 notice New major version of npm available! 10.9.7 -> 12.2.1
+33 notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+33 notice To update run: npm install -g npm@12.2.1
+33 notice  { force: true, [Symbol(proc-log.meta)]: true }
+34 verbose exit 0
+35 info ok

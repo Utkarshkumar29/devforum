@@ -67,18 +67,15 @@ export const fetchPostDetails = createAsyncThunk<FullPost, FetchDetailsArgs>(
   async ({ slug }) => {
     const response = await axiosPrivate.get(`/posts/singlePost/${slug}`);
     return response.data.result.post as FullPost;
-  }
+  },
 );
 
 export const updatePost = createAsyncThunk<FullPost, UpdatePostArgs>(
   "posts/updatePost",
   async ({ slug, updatedData }) => {
-    const res = await axiosPrivate.put(
-      `/posts/editPost/${slug}`,
-      updatedData
-    );
+    const res = await axiosPrivate.put(`/posts/editPost/${slug}`, updatedData);
     return res.data.result.post as FullPost;
-  }
+  },
 );
 
 // ----------------------------
@@ -126,18 +123,18 @@ const postSlice = createSlice({
       state.creatingPost = action.payload;
     },
     deletePost(state, action) {
-      state.posts=state.posts.filter((post)=>post.slug==action.payload)
+      state.posts = state.posts.filter((post) => post.slug == action.payload);
     },
     updatePostDescription(state, action) {
-      const { slug, description } = action.payload
-      const currentPost = state.posts.find(post => post.slug === slug)
+      const { slug, description } = action.payload;
+      const currentPost = state.posts.find((post) => post.slug === slug);
       if (currentPost) {
-        currentPost.description = description
+        currentPost.description = description;
       }
       if (state.postDetails[slug]) {
         state.postDetails[slug].description = description;
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -165,7 +162,7 @@ const postSlice = createSlice({
         const updatedPost = action.payload;
 
         const index = state.posts.findIndex(
-          (post) => post.slug === updatedPost.slug
+          (post) => post.slug === updatedPost.slug,
         );
 
         if (index !== -1) {
@@ -184,7 +181,7 @@ export const {
   addNewPost,
   setCreatingPost,
   deletePost,
-  updatePostDescription
+  updatePostDescription,
 } = postSlice.actions;
 
 export default postSlice.reducer;

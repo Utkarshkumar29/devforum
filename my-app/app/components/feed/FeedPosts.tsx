@@ -16,8 +16,9 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 const FeedPosts = () => {
   const dispatch = useAppDispatch();
 
-  const { posts, postDetails, page, limit, hasMore } =
-    useAppSelector((state: RootState) => state.posts);
+  const { posts, postDetails, page, limit, hasMore } = useAppSelector(
+    (state: RootState) => state.posts,
+  );
 
   // Load initial posts
   useEffect(() => {
@@ -69,7 +70,7 @@ const FeedPosts = () => {
         endMessage={<p className="text-center py-2">No more posts</p>}
       >
         <div className="flex gap-4 flex-col">
-          {posts.map((post,index) => {
+          {posts.map((post, index) => {
             const fullPost = postDetails?.[post.slug];
             return <FeedPost post={fullPost} key={index} />;
           })}

@@ -1,0 +1,963 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.7
+2 info using node@v22.22.2
+3 silly config load:file:D:\nvm\v22.22.2\node_modules\npm\npmrc
+4 silly config load:file:D:\New folder\devforum\my-app\.npmrc
+5 silly config load:file:C:\Users\ukyp2\.npmrc
+6 silly config load:file:C:\nvm4w\nodejs\etc\npmrc
+7 verbose title npm install @lexical/react@0.52.0 lexical@0.52.0 next@16.4.2 react@19.3.1 react-dom@19.3.1 uuid@14.0.3 @types/node@26.6.5 baseline-browser-mapping@2.11.29 eslint-config-next@16.4.2
+8 verbose argv "install" "--package-lock-only" "--ignore-scripts" "--no-audit" "--no-fund" "--cache" ".npm-cache" "@lexical/react@0.52.0" "lexical@0.52.0" "next@16.4.2" "react@19.3.1" "react-dom@19.3.1" "uuid@14.0.3" "@types/node@26.6.5" "baseline-browser-mapping@2.11.29" "eslint-config-next@16.4.2"
+9 verbose logfile logs-max:10 dir:D:\New folder\devforum\my-app\.npm-cache\_logs\2026-10-25T07_26_54_589Z-
+10 verbose logfile D:\New folder\devforum\my-app\.npm-cache\_logs\2026-10-25T07_26_54_589Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+13 silly idealTree buildDeps
+14 silly fetch manifest @lexical/react@0.52.0
+15 silly packumentCache full:https://registry.npmjs.org/@lexical%2freact cache-miss
+16 http cache https://registry.npmjs.org/@lexical%2freact 81ms (cache hit)
+17 silly packumentCache full:https://registry.npmjs.org/@lexical%2freact set size:30757396 disposed:false
+18 silly fetch manifest react@19.3.1
+19 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+20 http cache https://registry.npmjs.org/react 17ms (cache hit)
+21 silly packumentCache full:https://registry.npmjs.org/react set size:7083349 disposed:false
+22 silly fetch manifest react-dom@19.3.1
+23 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+24 http cache https://registry.npmjs.org/react-dom 22ms (cache hit)
+25 silly packumentCache full:https://registry.npmjs.org/react-dom set size:9561261 disposed:false
+26 silly fetch manifest typescript@^7.0.2
+27 silly packumentCache full:https://registry.npmjs.org/typescript cache-miss
+28 http cache https://registry.npmjs.org/typescript 31ms (cache hit)
+29 silly packumentCache full:https://registry.npmjs.org/typescript set size:15844443 disposed:false
+30 silly fetch manifest yjs@>=13.5.37
+31 silly packumentCache full:https://registry.npmjs.org/yjs cache-miss
+32 http cache https://registry.npmjs.org/yjs 6ms (cache hit)
+33 silly packumentCache full:https://registry.npmjs.org/yjs set size:1042948 disposed:false
+34 silly fetch manifest lexical@0.52.0
+35 silly packumentCache full:https://registry.npmjs.org/lexical cache-miss
+36 http cache https://registry.npmjs.org/lexical 7ms (cache hit)
+37 silly packumentCache full:https://registry.npmjs.org/lexical set size:1702927 disposed:false
+38 silly fetch manifest next@16.4.2
+39 silly packumentCache full:https://registry.npmjs.org/next cache-miss
+40 http cache https://registry.npmjs.org/next 66ms (cache hit)
+41 silly packumentCache full:https://registry.npmjs.org/next set size:31472200 disposed:false
+42 silly fetch manifest @opentelemetry/api@^1.1.0
+43 silly packumentCache full:https://registry.npmjs.org/@opentelemetry%2fapi cache-miss
+44 http cache https://registry.npmjs.org/@opentelemetry%2fapi 5ms (cache hit)
+45 silly packumentCache full:https://registry.npmjs.org/@opentelemetry%2fapi set size:283794 disposed:false
+46 silly fetch manifest @playwright/test@^1.51.1
+47 silly packumentCache full:https://registry.npmjs.org/@playwright%2ftest cache-miss
+48 http cache https://registry.npmjs.org/@playwright%2ftest 24ms (cache hit)
+49 silly packumentCache full:https://registry.npmjs.org/@playwright%2ftest set size:9682728 disposed:false
+50 silly fetch manifest babel-plugin-react-compiler@*
+51 silly packumentCache full:https://registry.npmjs.org/babel-plugin-react-compiler cache-miss
+52 http cache https://registry.npmjs.org/babel-plugin-react-compiler 8ms (cache hit)
+53 silly packumentCache full:https://registry.npmjs.org/babel-plugin-react-compiler set size:1356999 disposed:false
+54 silly fetch manifest sass@^1.3.0
+55 silly packumentCache full:https://registry.npmjs.org/sass cache-miss
+56 http cache https://registry.npmjs.org/sass 5ms (cache hit)
+57 silly packumentCache full:https://registry.npmjs.org/sass set size:763608 disposed:false
+58 silly fetch manifest uuid@14.0.3
+59 silly packumentCache full:https://registry.npmjs.org/uuid cache-miss
+60 http cache https://registry.npmjs.org/uuid 4ms (cache hit)
+61 silly packumentCache full:https://registry.npmjs.org/uuid set size:265730 disposed:false
+62 silly fetch manifest @types/node@26.6.5
+63 silly packumentCache full:https://registry.npmjs.org/@types%2fnode cache-miss
+64 http cache https://registry.npmjs.org/@types%2fnode 28ms (cache hit)
+65 silly packumentCache full:https://registry.npmjs.org/@types%2fnode set size:11180437 disposed:false
+66 silly fetch manifest baseline-browser-mapping@2.11.29
+67 silly packumentCache full:https://registry.npmjs.org/baseline-browser-mapping cache-miss
+68 http cache https://registry.npmjs.org/baseline-browser-mapping 5ms (cache hit)
+69 silly packumentCache full:https://registry.npmjs.org/baseline-browser-mapping set size:670184 disposed:false
+70 silly fetch manifest eslint-config-next@16.4.2
+71 silly packumentCache full:https://registry.npmjs.org/eslint-config-next cache-miss
+72 http cache https://registry.npmjs.org/eslint-config-next 21ms (cache hit)
+73 silly packumentCache full:https://registry.npmjs.org/eslint-config-next set size:7431591 disposed:false
+74 silly fetch manifest eslint@^10.9.1
+75 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+76 http cache https://registry.npmjs.org/eslint 11ms (cache hit)
+77 silly packumentCache full:https://registry.npmjs.org/eslint set size:2099986 disposed:false
+78 silly fetch manifest jiti@*
+79 silly packumentCache full:https://registry.npmjs.org/jiti cache-miss
+80 http cache https://registry.npmjs.org/jiti 4ms (cache hit)
+81 silly packumentCache full:https://registry.npmjs.org/jiti set size:387989 disposed:false
+82 silly placeDep ROOT @lexical/react@0.52.0 REPLACE for: my-app@0.1.0 want: 0.52.0
+83 silly placeDep ROOT @types/node@26.6.5 REPLACE for: my-app@0.1.0 want: 26.6.5
+84 silly placeDep ROOT baseline-browser-mapping@2.11.29 REPLACE for: my-app@0.1.0 want: 2.11.29
+85 silly placeDep ROOT eslint-config-next@16.4.2 REPLACE for: my-app@0.1.0 want: 16.4.2
+86 silly placeDep ROOT lexical@0.52.0 REPLACE for: my-app@0.1.0 want: 0.52.0
+87 silly placeDep ROOT next@16.4.2 REPLACE for: my-app@0.1.0 want: 16.4.2
+88 silly placeDep ROOT react@19.3.1 REPLACE for: my-app@0.1.0 want: 19.3.1
+89 silly placeDep ROOT react-dom@19.3.1 REPLACE for: my-app@0.1.0 want: 19.3.1
+90 silly placeDep ROOT uuid@14.0.3 REPLACE for: my-app@0.1.0 want: 14.0.3
+91 silly fetch manifest @next/eslint-plugin-next@16.4.2
+92 silly packumentCache full:https://registry.npmjs.org/@next%2feslint-plugin-next cache-miss
+93 silly fetch manifest @next/env@16.4.2
+94 silly packumentCache full:https://registry.npmjs.org/@next%2fenv cache-miss
+95 silly fetch manifest @next/swc-darwin-x64@16.4.2
+96 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-darwin-x64 cache-miss
+97 silly fetch manifest @next/swc-darwin-arm64@16.4.2
+98 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-darwin-arm64 cache-miss
+99 silly fetch manifest @next/swc-linux-x64-gnu@16.4.2
+100 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-x64-gnu cache-miss
+101 silly fetch manifest @next/swc-linux-x64-musl@16.4.2
+102 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-x64-musl cache-miss
+103 silly fetch manifest @next/swc-win32-x64-msvc@16.4.2
+104 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-win32-x64-msvc cache-miss
+105 silly fetch manifest @next/swc-linux-arm64-gnu@16.4.2
+106 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-arm64-gnu cache-miss
+107 silly fetch manifest @next/swc-linux-arm64-musl@16.4.2
+108 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-arm64-musl cache-miss
+109 silly fetch manifest @next/swc-win32-arm64-msvc@16.4.2
+110 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-win32-arm64-msvc cache-miss
+111 http cache https://registry.npmjs.org/@next%2feslint-plugin-next 43ms (cache hit)
+112 silly packumentCache full:https://registry.npmjs.org/@next%2feslint-plugin-next set size:7352535 disposed:false
+113 http cache https://registry.npmjs.org/@next%2fenv 103ms (cache hit)
+114 silly packumentCache full:https://registry.npmjs.org/@next%2fenv set size:7854323 disposed:false
+115 http cache https://registry.npmjs.org/@next%2fswc-darwin-x64 146ms (cache hit)
+116 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-darwin-x64 set size:5712731 disposed:false
+117 http cache https://registry.npmjs.org/@next%2fswc-linux-x64-musl 191ms (cache hit)
+118 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-x64-musl set size:5586258 disposed:false
+119 http cache https://registry.npmjs.org/@next%2fswc-linux-x64-gnu 225ms (cache hit)
+120 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-x64-gnu set size:5830637 disposed:false
+121 http cache https://registry.npmjs.org/@next%2fswc-darwin-arm64 273ms (cache hit)
+122 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-darwin-arm64 set size:5774824 disposed:false
+123 http cache https://registry.npmjs.org/@next%2fswc-linux-arm64-gnu 307ms (cache hit)
+124 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-arm64-gnu set size:5636619 disposed:false
+125 http cache https://registry.npmjs.org/@next%2fswc-win32-x64-msvc 357ms (cache hit)
+126 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-win32-x64-msvc set size:5800507 disposed:false
+127 http cache https://registry.npmjs.org/@next%2fswc-win32-arm64-msvc 397ms (cache hit)
+128 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-win32-arm64-msvc set size:5617221 disposed:false
+129 http cache https://registry.npmjs.org/@next%2fswc-linux-arm64-musl 461ms (cache hit)
+130 silly packumentCache full:https://registry.npmjs.org/@next%2fswc-linux-arm64-musl set size:5656936 disposed:false
+131 silly placeDep ROOT @next/eslint-plugin-next@16.4.2 OK for: eslint-config-next@16.4.2 want: 16.4.2
+132 silly fetch manifest fast-glob@3.3.1
+133 silly packumentCache full:https://registry.npmjs.org/fast-glob cache-miss
+134 silly fetch manifest @eslint-community/eslint-utils@4.9.1
+135 silly packumentCache full:https://registry.npmjs.org/@eslint-community%2feslint-utils cache-miss
+136 http cache https://registry.npmjs.org/@eslint-community%2feslint-utils 4ms (cache hit)
+137 silly packumentCache full:https://registry.npmjs.org/@eslint-community%2feslint-utils set size:108339 disposed:false
+138 http cache https://registry.npmjs.org/fast-glob 6ms (cache hit)
+139 silly packumentCache full:https://registry.npmjs.org/fast-glob set size:220556 disposed:false
+140 silly fetch manifest eslint@^6.0.0 || ^7.0.0 || >=8.0.0
+141 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+142 http cache https://registry.npmjs.org/eslint 6ms (cache hit)
+143 silly packumentCache full:https://registry.npmjs.org/eslint set size:2099986 disposed:false
+144 silly placeDep node_modules/@next/eslint-plugin-next @eslint-community/eslint-utils@4.9.1 OK for: @next/eslint-plugin-next@16.4.2 want: 4.9.1
+145 silly placeDep ROOT fast-glob@3.3.1 OK for: @next/eslint-plugin-next@16.4.2 want: 3.3.1
+146 silly fetch manifest eslint-visitor-keys@^3.4.3
+147 silly packumentCache full:https://registry.npmjs.org/eslint-visitor-keys cache-miss
+148 silly fetch manifest merge2@^1.3.0
+149 silly packumentCache full:https://registry.npmjs.org/merge2 cache-miss
+150 silly fetch manifest micromatch@^4.0.4
+151 silly packumentCache full:https://registry.npmjs.org/micromatch cache-miss
+152 silly fetch manifest glob-parent@^5.1.2
+153 silly packumentCache full:https://registry.npmjs.org/glob-parent cache-miss
+154 silly fetch manifest @nodelib/fs.stat@^2.0.2
+155 silly packumentCache full:https://registry.npmjs.org/@nodelib%2ffs.stat cache-miss
+156 silly fetch manifest @nodelib/fs.walk@^1.2.3
+157 silly packumentCache full:https://registry.npmjs.org/@nodelib%2ffs.walk cache-miss
+158 http cache https://registry.npmjs.org/merge2 11ms (cache hit)
+159 silly packumentCache full:https://registry.npmjs.org/merge2 set size:46159 disposed:false
+160 http cache https://registry.npmjs.org/glob-parent 12ms (cache hit)
+161 silly packumentCache full:https://registry.npmjs.org/glob-parent set size:42445 disposed:false
+162 http cache https://registry.npmjs.org/micromatch 13ms (cache hit)
+163 silly packumentCache full:https://registry.npmjs.org/micromatch set size:240630 disposed:false
+164 http cache https://registry.npmjs.org/eslint-visitor-keys 18ms (cache hit)
+165 silly packumentCache full:https://registry.npmjs.org/eslint-visitor-keys set size:69949 disposed:false
+166 http cache https://registry.npmjs.org/@nodelib%2ffs.stat 18ms (cache hit)
+167 silly packumentCache full:https://registry.npmjs.org/@nodelib%2ffs.stat set size:36993 disposed:false
+168 http cache https://registry.npmjs.org/@nodelib%2ffs.walk 19ms (cache hit)
+169 silly packumentCache full:https://registry.npmjs.org/@nodelib%2ffs.walk set size:41589 disposed:false
+170 silly placeDep ROOT @nodelib/fs.stat@2.0.5 OK for: fast-glob@3.3.1 want: ^2.0.2
+171 silly placeDep ROOT @nodelib/fs.walk@1.2.8 OK for: fast-glob@3.3.1 want: ^1.2.3
+172 silly placeDep node_modules/fast-glob glob-parent@5.1.2 OK for: fast-glob@3.3.1 want: ^5.1.2
+173 silly placeDep ROOT merge2@1.4.1 OK for: fast-glob@3.3.1 want: ^1.3.0
+174 silly placeDep ROOT micromatch@4.0.8 OK for: fast-glob@3.3.1 want: ^4.0.4
+175 silly fetch manifest fastq@^1.6.0
+176 silly packumentCache full:https://registry.npmjs.org/fastq cache-miss
+177 silly fetch manifest @nodelib/fs.scandir@2.1.5
+178 silly packumentCache full:https://registry.npmjs.org/@nodelib%2ffs.scandir cache-miss
+179 silly fetch manifest braces@^3.0.3
+180 silly packumentCache full:https://registry.npmjs.org/braces cache-miss
+181 silly fetch manifest picomatch@^2.3.1
+182 silly packumentCache full:https://registry.npmjs.org/picomatch cache-miss
+183 http cache https://registry.npmjs.org/braces 11ms (cache hit)
+184 silly packumentCache full:https://registry.npmjs.org/braces set size:114529 disposed:false
+185 http cache https://registry.npmjs.org/picomatch 14ms (cache hit)
+186 silly packumentCache full:https://registry.npmjs.org/picomatch set size:134451 disposed:false
+187 http cache https://registry.npmjs.org/@nodelib%2ffs.scandir 18ms (cache hit)
+188 silly packumentCache full:https://registry.npmjs.org/@nodelib%2ffs.scandir set size:49256 disposed:false
+189 http cache https://registry.npmjs.org/fastq 19ms (cache hit)
+190 silly packumentCache full:https://registry.npmjs.org/fastq set size:82997 disposed:false
+191 silly placeDep ROOT @nodelib/fs.scandir@2.1.5 OK for: @nodelib/fs.walk@1.2.8 want: 2.1.5
+192 silly placeDep ROOT fastq@1.20.3 OK for: @nodelib/fs.walk@1.2.8 want: ^1.6.0
+193 silly fetch manifest run-parallel@^1.1.9
+194 silly packumentCache full:https://registry.npmjs.org/run-parallel cache-miss
+195 silly fetch manifest reusify@^1.0.4
+196 silly packumentCache full:https://registry.npmjs.org/reusify cache-miss
+197 http cache https://registry.npmjs.org/reusify 5ms (cache hit)
+198 silly packumentCache full:https://registry.npmjs.org/reusify set size:14249 disposed:false
+199 http cache https://registry.npmjs.org/run-parallel 6ms (cache hit)
+200 silly packumentCache full:https://registry.npmjs.org/run-parallel set size:35172 disposed:false
+201 silly placeDep ROOT run-parallel@1.2.0 OK for: @nodelib/fs.scandir@2.1.5 want: ^1.1.9
+202 silly fetch manifest queue-microtask@^1.2.2
+203 silly packumentCache full:https://registry.npmjs.org/queue-microtask cache-miss
+204 http cache https://registry.npmjs.org/queue-microtask 4ms (cache hit)
+205 silly packumentCache full:https://registry.npmjs.org/queue-microtask set size:36088 disposed:false
+206 silly placeDep ROOT reusify@1.1.0 OK for: fastq@1.20.3 want: ^1.0.4
+207 silly placeDep ROOT braces@3.0.3 OK for: micromatch@4.0.8 want: ^3.0.3
+208 silly placeDep ROOT picomatch@2.3.2 OK for: micromatch@4.0.8 want: ^2.3.1
+209 silly fetch manifest fill-range@^7.1.1
+210 silly packumentCache full:https://registry.npmjs.org/fill-range cache-miss
+211 http cache https://registry.npmjs.org/fill-range 4ms (cache hit)
+212 silly packumentCache full:https://registry.npmjs.org/fill-range set size:90162 disposed:false
+213 silly placeDep ROOT fill-range@7.1.1 OK for: braces@3.0.3 want: ^7.1.1
+214 silly fetch manifest to-regex-range@^5.0.1
+215 silly packumentCache full:https://registry.npmjs.org/to-regex-range cache-miss
+216 http cache https://registry.npmjs.org/to-regex-range 4ms (cache hit)
+217 silly packumentCache full:https://registry.npmjs.org/to-regex-range set size:61569 disposed:false
+218 silly placeDep ROOT to-regex-range@5.0.1 OK for: fill-range@7.1.1 want: ^5.0.1
+219 silly fetch manifest is-number@^7.0.0
+220 silly packumentCache full:https://registry.npmjs.org/is-number cache-miss
+221 http cache https://registry.npmjs.org/is-number 3ms (cache hit)
+222 silly packumentCache full:https://registry.npmjs.org/is-number set size:36183 disposed:false
+223 silly placeDep ROOT @next/env@16.4.2 OK for: next@16.4.2 want: 16.4.2
+224 silly placeDep ROOT @next/swc-darwin-arm64@16.4.2 OK for: next@16.4.2 want: 16.4.2
+225 silly placeDep ROOT @next/swc-darwin-x64@16.4.2 OK for: next@16.4.2 want: 16.4.2
+226 silly placeDep ROOT @next/swc-linux-arm64-gnu@16.4.2 OK for: next@16.4.2 want: 16.4.2
+227 silly placeDep ROOT @next/swc-linux-arm64-musl@16.4.2 OK for: next@16.4.2 want: 16.4.2
+228 silly placeDep ROOT @next/swc-linux-x64-gnu@16.4.2 OK for: next@16.4.2 want: 16.4.2
+229 silly placeDep ROOT @next/swc-linux-x64-musl@16.4.2 OK for: next@16.4.2 want: 16.4.2
+230 silly placeDep ROOT @next/swc-win32-arm64-msvc@16.4.2 OK for: next@16.4.2 want: 16.4.2
+231 silly placeDep ROOT @next/swc-win32-x64-msvc@16.4.2 OK for: next@16.4.2 want: 16.4.2
+232 silly placeDep ROOT queue-microtask@1.2.3 OK for: run-parallel@1.2.0 want: ^1.2.2
+233 silly placeDep ROOT is-number@7.0.0 OK for: to-regex-range@5.0.1 want: ^7.0.0
+234 silly placeDep node_modules/@next/eslint-plugin-next eslint-visitor-keys@3.4.3 OK for: @eslint-community/eslint-utils@4.9.1 want: ^3.4.3
+235 silly fetch manifest eslint@^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8 || ^9
+236 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+237 http cache https://registry.npmjs.org/eslint 8ms (cache hit)
+238 silly packumentCache full:https://registry.npmjs.org/eslint set size:2099986 disposed:false
+239 warn ERESOLVE overriding peer dependency {
+239 warn ERESOLVE   code: 'ERESOLVE',
+239 warn ERESOLVE   edge: {
+239 warn ERESOLVE     type: 'peer',
+239 warn ERESOLVE     name: 'eslint',
+239 warn ERESOLVE     spec: '^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8 || ^9',
+239 warn ERESOLVE     error: 'INVALID',
+239 warn ERESOLVE     from: {
+239 warn ERESOLVE       name: 'eslint-plugin-import',
+239 warn ERESOLVE       version: '2.32.0',
+239 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/eslint-plugin-import',
+239 warn ERESOLVE       isWorkspace: false,
+239 warn ERESOLVE       dependents: [Array]
+239 warn ERESOLVE     }
+239 warn ERESOLVE   },
+239 warn ERESOLVE   dep: {
+239 warn ERESOLVE     name: 'eslint',
+239 warn ERESOLVE     version: '9.39.5',
+239 warn ERESOLVE     whileInstalling: {
+239 warn ERESOLVE       name: 'eslint-plugin-import',
+239 warn ERESOLVE       version: '2.32.0',
+239 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\eslint-plugin-import'
+239 warn ERESOLVE     },
+239 warn ERESOLVE     location: 'node_modules/eslint',
+239 warn ERESOLVE     isWorkspace: false,
+239 warn ERESOLVE     dependents: [ [Object] ]
+239 warn ERESOLVE   },
+239 warn ERESOLVE   force: false,
+239 warn ERESOLVE   isMine: false,
+239 warn ERESOLVE   strictPeerDeps: false,
+239 warn ERESOLVE   current: {
+239 warn ERESOLVE     name: 'eslint',
+239 warn ERESOLVE     version: '10.9.1',
+239 warn ERESOLVE     location: 'node_modules/eslint',
+239 warn ERESOLVE     isWorkspace: false,
+239 warn ERESOLVE     dependents: [
+239 warn ERESOLVE       [Object], [Object],
+239 warn ERESOLVE       [Object], [Object],
+239 warn ERESOLVE       [Object], [Object],
+239 warn ERESOLVE       [Object], [Object],
+239 warn ERESOLVE       [Object], [Object],
+239 warn ERESOLVE       [Object]
+239 warn ERESOLVE     ]
+239 warn ERESOLVE   },
+239 warn ERESOLVE   peerConflict: {
+239 warn ERESOLVE     current: {
+239 warn ERESOLVE       name: 'eslint',
+239 warn ERESOLVE       version: '10.9.1',
+239 warn ERESOLVE       location: 'node_modules/eslint',
+239 warn ERESOLVE       isWorkspace: false,
+239 warn ERESOLVE       dependents: [Array]
+239 warn ERESOLVE     },
+239 warn ERESOLVE     peer: {
+239 warn ERESOLVE       name: 'eslint',
+239 warn ERESOLVE       version: '9.39.5',
+239 warn ERESOLVE       whileInstalling: [Object],
+239 warn ERESOLVE       location: 'node_modules/eslint',
+239 warn ERESOLVE       isWorkspace: false,
+239 warn ERESOLVE       dependents: [Array]
+239 warn ERESOLVE     }
+239 warn ERESOLVE   }
+239 warn ERESOLVE }
+240 silly fetch manifest eslint@^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
+241 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+242 http cache https://registry.npmjs.org/eslint 8ms (cache hit)
+243 silly packumentCache full:https://registry.npmjs.org/eslint set size:2099986 disposed:false
+244 warn ERESOLVE overriding peer dependency {
+244 warn ERESOLVE   code: 'ERESOLVE',
+244 warn ERESOLVE   edge: {
+244 warn ERESOLVE     type: 'peer',
+244 warn ERESOLVE     name: 'eslint',
+244 warn ERESOLVE     spec: '^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9',
+244 warn ERESOLVE     error: 'INVALID',
+244 warn ERESOLVE     from: {
+244 warn ERESOLVE       name: 'eslint-plugin-jsx-a11y',
+244 warn ERESOLVE       version: '6.10.2',
+244 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/eslint-plugin-jsx-a11y',
+244 warn ERESOLVE       isWorkspace: false,
+244 warn ERESOLVE       dependents: [Array]
+244 warn ERESOLVE     }
+244 warn ERESOLVE   },
+244 warn ERESOLVE   dep: {
+244 warn ERESOLVE     name: 'eslint',
+244 warn ERESOLVE     version: '9.39.5',
+244 warn ERESOLVE     whileInstalling: {
+244 warn ERESOLVE       name: 'eslint-plugin-jsx-a11y',
+244 warn ERESOLVE       version: '6.10.2',
+244 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\eslint-plugin-jsx-a11y'
+244 warn ERESOLVE     },
+244 warn ERESOLVE     location: 'node_modules/eslint',
+244 warn ERESOLVE     isWorkspace: false,
+244 warn ERESOLVE     dependents: [ [Object] ]
+244 warn ERESOLVE   },
+244 warn ERESOLVE   force: false,
+244 warn ERESOLVE   isMine: false,
+244 warn ERESOLVE   strictPeerDeps: false,
+244 warn ERESOLVE   current: {
+244 warn ERESOLVE     name: 'eslint',
+244 warn ERESOLVE     version: '10.9.1',
+244 warn ERESOLVE     location: 'node_modules/eslint',
+244 warn ERESOLVE     isWorkspace: false,
+244 warn ERESOLVE     dependents: [
+244 warn ERESOLVE       [Object], [Object],
+244 warn ERESOLVE       [Object], [Object],
+244 warn ERESOLVE       [Object], [Object],
+244 warn ERESOLVE       [Object], [Object],
+244 warn ERESOLVE       [Object], [Object],
+244 warn ERESOLVE       [Object]
+244 warn ERESOLVE     ]
+244 warn ERESOLVE   },
+244 warn ERESOLVE   peerConflict: {
+244 warn ERESOLVE     current: {
+244 warn ERESOLVE       name: 'eslint',
+244 warn ERESOLVE       version: '10.9.1',
+244 warn ERESOLVE       location: 'node_modules/eslint',
+244 warn ERESOLVE       isWorkspace: false,
+244 warn ERESOLVE       dependents: [Array]
+244 warn ERESOLVE     },
+244 warn ERESOLVE     peer: {
+244 warn ERESOLVE       name: 'eslint',
+244 warn ERESOLVE       version: '9.39.5',
+244 warn ERESOLVE       whileInstalling: [Object],
+244 warn ERESOLVE       location: 'node_modules/eslint',
+244 warn ERESOLVE       isWorkspace: false,
+244 warn ERESOLVE       dependents: [Array]
+244 warn ERESOLVE     }
+244 warn ERESOLVE   }
+244 warn ERESOLVE }
+245 silly fetch manifest eslint@^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
+246 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+247 http cache https://registry.npmjs.org/eslint 7ms (cache hit)
+248 silly packumentCache full:https://registry.npmjs.org/eslint set size:2099986 disposed:false
+249 warn ERESOLVE overriding peer dependency {
+249 warn ERESOLVE   code: 'ERESOLVE',
+249 warn ERESOLVE   edge: {
+249 warn ERESOLVE     type: 'peer',
+249 warn ERESOLVE     name: 'eslint',
+249 warn ERESOLVE     spec: '^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7',
+249 warn ERESOLVE     error: 'INVALID',
+249 warn ERESOLVE     from: {
+249 warn ERESOLVE       name: 'eslint-plugin-react',
+249 warn ERESOLVE       version: '7.37.5',
+249 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/eslint-plugin-react',
+249 warn ERESOLVE       isWorkspace: false,
+249 warn ERESOLVE       dependents: [Array]
+249 warn ERESOLVE     }
+249 warn ERESOLVE   },
+249 warn ERESOLVE   dep: {
+249 warn ERESOLVE     name: 'eslint',
+249 warn ERESOLVE     version: '9.39.5',
+249 warn ERESOLVE     whileInstalling: {
+249 warn ERESOLVE       name: 'eslint-plugin-react',
+249 warn ERESOLVE       version: '7.37.5',
+249 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\eslint-plugin-react'
+249 warn ERESOLVE     },
+249 warn ERESOLVE     location: 'node_modules/eslint',
+249 warn ERESOLVE     isWorkspace: false,
+249 warn ERESOLVE     dependents: [ [Object] ]
+249 warn ERESOLVE   },
+249 warn ERESOLVE   force: false,
+249 warn ERESOLVE   isMine: false,
+249 warn ERESOLVE   strictPeerDeps: false,
+249 warn ERESOLVE   current: {
+249 warn ERESOLVE     name: 'eslint',
+249 warn ERESOLVE     version: '10.9.1',
+249 warn ERESOLVE     location: 'node_modules/eslint',
+249 warn ERESOLVE     isWorkspace: false,
+249 warn ERESOLVE     dependents: [
+249 warn ERESOLVE       [Object], [Object],
+249 warn ERESOLVE       [Object], [Object],
+249 warn ERESOLVE       [Object], [Object],
+249 warn ERESOLVE       [Object], [Object],
+249 warn ERESOLVE       [Object], [Object],
+249 warn ERESOLVE       [Object]
+249 warn ERESOLVE     ]
+249 warn ERESOLVE   },
+249 warn ERESOLVE   peerConflict: {
+249 warn ERESOLVE     current: {
+249 warn ERESOLVE       name: 'eslint',
+249 warn ERESOLVE       version: '10.9.1',
+249 warn ERESOLVE       location: 'node_modules/eslint',
+249 warn ERESOLVE       isWorkspace: false,
+249 warn ERESOLVE       dependents: [Array]
+249 warn ERESOLVE     },
+249 warn ERESOLVE     peer: {
+249 warn ERESOLVE       name: 'eslint',
+249 warn ERESOLVE       version: '9.39.5',
+249 warn ERESOLVE       whileInstalling: [Object],
+249 warn ERESOLVE       location: 'node_modules/eslint',
+249 warn ERESOLVE       isWorkspace: false,
+249 warn ERESOLVE       dependents: [Array]
+249 warn ERESOLVE     }
+249 warn ERESOLVE   }
+249 warn ERESOLVE }
+250 silly fetch manifest typescript@>=4.8.4 <6.1.0
+251 silly packumentCache full:https://registry.npmjs.org/typescript cache-miss
+252 http cache https://registry.npmjs.org/typescript 33ms (cache hit)
+253 silly packumentCache full:https://registry.npmjs.org/typescript set size:15844443 disposed:false
+254 warn ERESOLVE overriding peer dependency {
+254 warn ERESOLVE   code: 'ERESOLVE',
+254 warn ERESOLVE   edge: {
+254 warn ERESOLVE     type: 'peer',
+254 warn ERESOLVE     name: 'typescript',
+254 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+254 warn ERESOLVE     error: 'INVALID',
+254 warn ERESOLVE     from: {
+254 warn ERESOLVE       name: 'typescript-eslint',
+254 warn ERESOLVE       version: '8.72.0',
+254 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint',
+254 warn ERESOLVE       isWorkspace: false,
+254 warn ERESOLVE       dependents: [Array]
+254 warn ERESOLVE     }
+254 warn ERESOLVE   },
+254 warn ERESOLVE   dep: {
+254 warn ERESOLVE     name: 'typescript',
+254 warn ERESOLVE     version: '6.0.3',
+254 warn ERESOLVE     whileInstalling: {
+254 warn ERESOLVE       name: 'typescript-eslint',
+254 warn ERESOLVE       version: '8.72.0',
+254 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint'
+254 warn ERESOLVE     },
+254 warn ERESOLVE     location: 'node_modules/typescript',
+254 warn ERESOLVE     isWorkspace: false,
+254 warn ERESOLVE     dependents: [ [Object] ]
+254 warn ERESOLVE   },
+254 warn ERESOLVE   force: false,
+254 warn ERESOLVE   isMine: false,
+254 warn ERESOLVE   strictPeerDeps: false,
+254 warn ERESOLVE   current: {
+254 warn ERESOLVE     name: 'typescript',
+254 warn ERESOLVE     version: '7.0.2',
+254 warn ERESOLVE     location: 'node_modules/typescript',
+254 warn ERESOLVE     isWorkspace: false,
+254 warn ERESOLVE     dependents: [
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object],
+254 warn ERESOLVE       [Object], [Object], [Object]
+254 warn ERESOLVE     ]
+254 warn ERESOLVE   },
+254 warn ERESOLVE   peerConflict: {
+254 warn ERESOLVE     current: {
+254 warn ERESOLVE       name: 'typescript',
+254 warn ERESOLVE       version: '7.0.2',
+254 warn ERESOLVE       location: 'node_modules/typescript',
+254 warn ERESOLVE       isWorkspace: false,
+254 warn ERESOLVE       dependents: [Array]
+254 warn ERESOLVE     },
+254 warn ERESOLVE     peer: {
+254 warn ERESOLVE       name: 'typescript',
+254 warn ERESOLVE       version: '6.0.3',
+254 warn ERESOLVE       whileInstalling: [Object],
+254 warn ERESOLVE       location: 'node_modules/typescript',
+254 warn ERESOLVE       isWorkspace: false,
+254 warn ERESOLVE       dependents: [Array]
+254 warn ERESOLVE     }
+254 warn ERESOLVE   }
+254 warn ERESOLVE }
+255 warn ERESOLVE overriding peer dependency {
+255 warn ERESOLVE   code: 'ERESOLVE',
+255 warn ERESOLVE   edge: {
+255 warn ERESOLVE     type: 'peer',
+255 warn ERESOLVE     name: 'typescript',
+255 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+255 warn ERESOLVE     error: 'INVALID',
+255 warn ERESOLVE     from: {
+255 warn ERESOLVE       name: '@typescript-eslint/eslint-plugin',
+255 warn ERESOLVE       version: '8.72.0',
+255 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/eslint-plugin',
+255 warn ERESOLVE       isWorkspace: false,
+255 warn ERESOLVE       dependents: [Array]
+255 warn ERESOLVE     }
+255 warn ERESOLVE   },
+255 warn ERESOLVE   dep: {
+255 warn ERESOLVE     name: 'typescript',
+255 warn ERESOLVE     version: '6.0.3',
+255 warn ERESOLVE     whileInstalling: {
+255 warn ERESOLVE       name: '@typescript-eslint/eslint-plugin',
+255 warn ERESOLVE       version: '8.72.0',
+255 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\eslint-plugin'
+255 warn ERESOLVE     },
+255 warn ERESOLVE     location: 'node_modules/typescript',
+255 warn ERESOLVE     isWorkspace: false,
+255 warn ERESOLVE     dependents: [ [Object] ]
+255 warn ERESOLVE   },
+255 warn ERESOLVE   force: false,
+255 warn ERESOLVE   isMine: false,
+255 warn ERESOLVE   strictPeerDeps: false,
+255 warn ERESOLVE   current: {
+255 warn ERESOLVE     name: 'typescript',
+255 warn ERESOLVE     version: '7.0.2',
+255 warn ERESOLVE     location: 'node_modules/typescript',
+255 warn ERESOLVE     isWorkspace: false,
+255 warn ERESOLVE     dependents: [
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object],
+255 warn ERESOLVE       [Object], [Object], [Object]
+255 warn ERESOLVE     ]
+255 warn ERESOLVE   },
+255 warn ERESOLVE   peerConflict: {
+255 warn ERESOLVE     current: {
+255 warn ERESOLVE       name: 'typescript',
+255 warn ERESOLVE       version: '7.0.2',
+255 warn ERESOLVE       location: 'node_modules/typescript',
+255 warn ERESOLVE       isWorkspace: false,
+255 warn ERESOLVE       dependents: [Array]
+255 warn ERESOLVE     },
+255 warn ERESOLVE     peer: {
+255 warn ERESOLVE       name: 'typescript',
+255 warn ERESOLVE       version: '6.0.3',
+255 warn ERESOLVE       whileInstalling: [Object],
+255 warn ERESOLVE       location: 'node_modules/typescript',
+255 warn ERESOLVE       isWorkspace: false,
+255 warn ERESOLVE       dependents: [Array]
+255 warn ERESOLVE     }
+255 warn ERESOLVE   }
+255 warn ERESOLVE }
+256 warn ERESOLVE overriding peer dependency {
+256 warn ERESOLVE   code: 'ERESOLVE',
+256 warn ERESOLVE   edge: {
+256 warn ERESOLVE     type: 'peer',
+256 warn ERESOLVE     name: 'typescript',
+256 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+256 warn ERESOLVE     error: 'INVALID',
+256 warn ERESOLVE     from: {
+256 warn ERESOLVE       name: '@typescript-eslint/parser',
+256 warn ERESOLVE       version: '8.72.0',
+256 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/parser',
+256 warn ERESOLVE       isWorkspace: false,
+256 warn ERESOLVE       dependents: [Array]
+256 warn ERESOLVE     }
+256 warn ERESOLVE   },
+256 warn ERESOLVE   dep: {
+256 warn ERESOLVE     name: 'typescript',
+256 warn ERESOLVE     version: '6.0.3',
+256 warn ERESOLVE     whileInstalling: {
+256 warn ERESOLVE       name: '@typescript-eslint/parser',
+256 warn ERESOLVE       version: '8.72.0',
+256 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\parser'
+256 warn ERESOLVE     },
+256 warn ERESOLVE     location: 'node_modules/typescript',
+256 warn ERESOLVE     isWorkspace: false,
+256 warn ERESOLVE     dependents: [ [Object] ]
+256 warn ERESOLVE   },
+256 warn ERESOLVE   force: false,
+256 warn ERESOLVE   isMine: false,
+256 warn ERESOLVE   strictPeerDeps: false,
+256 warn ERESOLVE   current: {
+256 warn ERESOLVE     name: 'typescript',
+256 warn ERESOLVE     version: '7.0.2',
+256 warn ERESOLVE     location: 'node_modules/typescript',
+256 warn ERESOLVE     isWorkspace: false,
+256 warn ERESOLVE     dependents: [
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object],
+256 warn ERESOLVE       [Object], [Object], [Object]
+256 warn ERESOLVE     ]
+256 warn ERESOLVE   },
+256 warn ERESOLVE   peerConflict: {
+256 warn ERESOLVE     current: {
+256 warn ERESOLVE       name: 'typescript',
+256 warn ERESOLVE       version: '7.0.2',
+256 warn ERESOLVE       location: 'node_modules/typescript',
+256 warn ERESOLVE       isWorkspace: false,
+256 warn ERESOLVE       dependents: [Array]
+256 warn ERESOLVE     },
+256 warn ERESOLVE     peer: {
+256 warn ERESOLVE       name: 'typescript',
+256 warn ERESOLVE       version: '6.0.3',
+256 warn ERESOLVE       whileInstalling: [Object],
+256 warn ERESOLVE       location: 'node_modules/typescript',
+256 warn ERESOLVE       isWorkspace: false,
+256 warn ERESOLVE       dependents: [Array]
+256 warn ERESOLVE     }
+256 warn ERESOLVE   }
+256 warn ERESOLVE }
+257 warn ERESOLVE overriding peer dependency {
+257 warn ERESOLVE   code: 'ERESOLVE',
+257 warn ERESOLVE   edge: {
+257 warn ERESOLVE     type: 'peer',
+257 warn ERESOLVE     name: 'typescript',
+257 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+257 warn ERESOLVE     error: 'INVALID',
+257 warn ERESOLVE     from: {
+257 warn ERESOLVE       name: '@typescript-eslint/typescript-estree',
+257 warn ERESOLVE       version: '8.72.0',
+257 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/typescript-estree',
+257 warn ERESOLVE       isWorkspace: false,
+257 warn ERESOLVE       dependents: [Array]
+257 warn ERESOLVE     }
+257 warn ERESOLVE   },
+257 warn ERESOLVE   dep: {
+257 warn ERESOLVE     name: 'typescript',
+257 warn ERESOLVE     version: '6.0.3',
+257 warn ERESOLVE     whileInstalling: {
+257 warn ERESOLVE       name: '@typescript-eslint/typescript-estree',
+257 warn ERESOLVE       version: '8.72.0',
+257 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\typescript-estree'
+257 warn ERESOLVE     },
+257 warn ERESOLVE     location: 'node_modules/typescript',
+257 warn ERESOLVE     isWorkspace: false,
+257 warn ERESOLVE     dependents: [ [Object] ]
+257 warn ERESOLVE   },
+257 warn ERESOLVE   force: false,
+257 warn ERESOLVE   isMine: false,
+257 warn ERESOLVE   strictPeerDeps: false,
+257 warn ERESOLVE   current: {
+257 warn ERESOLVE     name: 'typescript',
+257 warn ERESOLVE     version: '7.0.2',
+257 warn ERESOLVE     location: 'node_modules/typescript',
+257 warn ERESOLVE     isWorkspace: false,
+257 warn ERESOLVE     dependents: [
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object],
+257 warn ERESOLVE       [Object], [Object], [Object]
+257 warn ERESOLVE     ]
+257 warn ERESOLVE   },
+257 warn ERESOLVE   peerConflict: {
+257 warn ERESOLVE     current: {
+257 warn ERESOLVE       name: 'typescript',
+257 warn ERESOLVE       version: '7.0.2',
+257 warn ERESOLVE       location: 'node_modules/typescript',
+257 warn ERESOLVE       isWorkspace: false,
+257 warn ERESOLVE       dependents: [Array]
+257 warn ERESOLVE     },
+257 warn ERESOLVE     peer: {
+257 warn ERESOLVE       name: 'typescript',
+257 warn ERESOLVE       version: '6.0.3',
+257 warn ERESOLVE       whileInstalling: [Object],
+257 warn ERESOLVE       location: 'node_modules/typescript',
+257 warn ERESOLVE       isWorkspace: false,
+257 warn ERESOLVE       dependents: [Array]
+257 warn ERESOLVE     }
+257 warn ERESOLVE   }
+257 warn ERESOLVE }
+258 warn ERESOLVE overriding peer dependency {
+258 warn ERESOLVE   code: 'ERESOLVE',
+258 warn ERESOLVE   edge: {
+258 warn ERESOLVE     type: 'peer',
+258 warn ERESOLVE     name: 'typescript',
+258 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+258 warn ERESOLVE     error: 'INVALID',
+258 warn ERESOLVE     from: {
+258 warn ERESOLVE       name: '@typescript-eslint/utils',
+258 warn ERESOLVE       version: '8.72.0',
+258 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/utils',
+258 warn ERESOLVE       isWorkspace: false,
+258 warn ERESOLVE       dependents: [Array]
+258 warn ERESOLVE     }
+258 warn ERESOLVE   },
+258 warn ERESOLVE   dep: {
+258 warn ERESOLVE     name: 'typescript',
+258 warn ERESOLVE     version: '6.0.3',
+258 warn ERESOLVE     whileInstalling: {
+258 warn ERESOLVE       name: '@typescript-eslint/utils',
+258 warn ERESOLVE       version: '8.72.0',
+258 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\utils'
+258 warn ERESOLVE     },
+258 warn ERESOLVE     location: 'node_modules/typescript',
+258 warn ERESOLVE     isWorkspace: false,
+258 warn ERESOLVE     dependents: [ [Object] ]
+258 warn ERESOLVE   },
+258 warn ERESOLVE   force: false,
+258 warn ERESOLVE   isMine: false,
+258 warn ERESOLVE   strictPeerDeps: false,
+258 warn ERESOLVE   current: {
+258 warn ERESOLVE     name: 'typescript',
+258 warn ERESOLVE     version: '7.0.2',
+258 warn ERESOLVE     location: 'node_modules/typescript',
+258 warn ERESOLVE     isWorkspace: false,
+258 warn ERESOLVE     dependents: [
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object],
+258 warn ERESOLVE       [Object], [Object], [Object]
+258 warn ERESOLVE     ]
+258 warn ERESOLVE   },
+258 warn ERESOLVE   peerConflict: {
+258 warn ERESOLVE     current: {
+258 warn ERESOLVE       name: 'typescript',
+258 warn ERESOLVE       version: '7.0.2',
+258 warn ERESOLVE       location: 'node_modules/typescript',
+258 warn ERESOLVE       isWorkspace: false,
+258 warn ERESOLVE       dependents: [Array]
+258 warn ERESOLVE     },
+258 warn ERESOLVE     peer: {
+258 warn ERESOLVE       name: 'typescript',
+258 warn ERESOLVE       version: '6.0.3',
+258 warn ERESOLVE       whileInstalling: [Object],
+258 warn ERESOLVE       location: 'node_modules/typescript',
+258 warn ERESOLVE       isWorkspace: false,
+258 warn ERESOLVE       dependents: [Array]
+258 warn ERESOLVE     }
+258 warn ERESOLVE   }
+258 warn ERESOLVE }
+259 warn ERESOLVE overriding peer dependency {
+259 warn ERESOLVE   code: 'ERESOLVE',
+259 warn ERESOLVE   edge: {
+259 warn ERESOLVE     type: 'peer',
+259 warn ERESOLVE     name: 'typescript',
+259 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+259 warn ERESOLVE     error: 'INVALID',
+259 warn ERESOLVE     from: {
+259 warn ERESOLVE       name: '@typescript-eslint/type-utils',
+259 warn ERESOLVE       version: '8.72.0',
+259 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/eslint-plugin/node_modules/@typescript-eslint/type-utils',
+259 warn ERESOLVE       isWorkspace: false,
+259 warn ERESOLVE       dependents: [Array]
+259 warn ERESOLVE     }
+259 warn ERESOLVE   },
+259 warn ERESOLVE   dep: {
+259 warn ERESOLVE     name: 'typescript',
+259 warn ERESOLVE     version: '6.0.3',
+259 warn ERESOLVE     whileInstalling: {
+259 warn ERESOLVE       name: '@typescript-eslint/type-utils',
+259 warn ERESOLVE       version: '8.72.0',
+259 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\eslint-plugin\\node_modules\\@typescript-eslint\\type-utils'
+259 warn ERESOLVE     },
+259 warn ERESOLVE     location: 'node_modules/typescript',
+259 warn ERESOLVE     isWorkspace: false,
+259 warn ERESOLVE     dependents: [ [Object] ]
+259 warn ERESOLVE   },
+259 warn ERESOLVE   force: false,
+259 warn ERESOLVE   isMine: false,
+259 warn ERESOLVE   strictPeerDeps: false,
+259 warn ERESOLVE   current: {
+259 warn ERESOLVE     name: 'typescript',
+259 warn ERESOLVE     version: '7.0.2',
+259 warn ERESOLVE     location: 'node_modules/typescript',
+259 warn ERESOLVE     isWorkspace: false,
+259 warn ERESOLVE     dependents: [
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object],
+259 warn ERESOLVE       [Object], [Object], [Object]
+259 warn ERESOLVE     ]
+259 warn ERESOLVE   },
+259 warn ERESOLVE   peerConflict: {
+259 warn ERESOLVE     current: {
+259 warn ERESOLVE       name: 'typescript',
+259 warn ERESOLVE       version: '7.0.2',
+259 warn ERESOLVE       location: 'node_modules/typescript',
+259 warn ERESOLVE       isWorkspace: false,
+259 warn ERESOLVE       dependents: [Array]
+259 warn ERESOLVE     },
+259 warn ERESOLVE     peer: {
+259 warn ERESOLVE       name: 'typescript',
+259 warn ERESOLVE       version: '6.0.3',
+259 warn ERESOLVE       whileInstalling: [Object],
+259 warn ERESOLVE       location: 'node_modules/typescript',
+259 warn ERESOLVE       isWorkspace: false,
+259 warn ERESOLVE       dependents: [Array]
+259 warn ERESOLVE     }
+259 warn ERESOLVE   }
+259 warn ERESOLVE }
+260 warn ERESOLVE overriding peer dependency {
+260 warn ERESOLVE   code: 'ERESOLVE',
+260 warn ERESOLVE   edge: {
+260 warn ERESOLVE     type: 'peer',
+260 warn ERESOLVE     name: 'typescript',
+260 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+260 warn ERESOLVE     error: 'INVALID',
+260 warn ERESOLVE     from: {
+260 warn ERESOLVE       name: '@typescript-eslint/project-service',
+260 warn ERESOLVE       version: '8.72.0',
+260 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/typescript-estree/node_modules/@typescript-eslint/project-service',
+260 warn ERESOLVE       isWorkspace: false,
+260 warn ERESOLVE       dependents: [Array]
+260 warn ERESOLVE     }
+260 warn ERESOLVE   },
+260 warn ERESOLVE   dep: {
+260 warn ERESOLVE     name: 'typescript',
+260 warn ERESOLVE     version: '6.0.3',
+260 warn ERESOLVE     whileInstalling: {
+260 warn ERESOLVE       name: '@typescript-eslint/project-service',
+260 warn ERESOLVE       version: '8.72.0',
+260 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\typescript-estree\\node_modules\\@typescript-eslint\\project-service'
+260 warn ERESOLVE     },
+260 warn ERESOLVE     location: 'node_modules/typescript',
+260 warn ERESOLVE     isWorkspace: false,
+260 warn ERESOLVE     dependents: [ [Object] ]
+260 warn ERESOLVE   },
+260 warn ERESOLVE   force: false,
+260 warn ERESOLVE   isMine: false,
+260 warn ERESOLVE   strictPeerDeps: false,
+260 warn ERESOLVE   current: {
+260 warn ERESOLVE     name: 'typescript',
+260 warn ERESOLVE     version: '7.0.2',
+260 warn ERESOLVE     location: 'node_modules/typescript',
+260 warn ERESOLVE     isWorkspace: false,
+260 warn ERESOLVE     dependents: [
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object],
+260 warn ERESOLVE       [Object], [Object], [Object]
+260 warn ERESOLVE     ]
+260 warn ERESOLVE   },
+260 warn ERESOLVE   peerConflict: {
+260 warn ERESOLVE     current: {
+260 warn ERESOLVE       name: 'typescript',
+260 warn ERESOLVE       version: '7.0.2',
+260 warn ERESOLVE       location: 'node_modules/typescript',
+260 warn ERESOLVE       isWorkspace: false,
+260 warn ERESOLVE       dependents: [Array]
+260 warn ERESOLVE     },
+260 warn ERESOLVE     peer: {
+260 warn ERESOLVE       name: 'typescript',
+260 warn ERESOLVE       version: '6.0.3',
+260 warn ERESOLVE       whileInstalling: [Object],
+260 warn ERESOLVE       location: 'node_modules/typescript',
+260 warn ERESOLVE       isWorkspace: false,
+260 warn ERESOLVE       dependents: [Array]
+260 warn ERESOLVE     }
+260 warn ERESOLVE   }
+260 warn ERESOLVE }
+261 warn ERESOLVE overriding peer dependency {
+261 warn ERESOLVE   code: 'ERESOLVE',
+261 warn ERESOLVE   edge: {
+261 warn ERESOLVE     type: 'peer',
+261 warn ERESOLVE     name: 'typescript',
+261 warn ERESOLVE     spec: '>=4.8.4 <6.1.0',
+261 warn ERESOLVE     error: 'INVALID',
+261 warn ERESOLVE     from: {
+261 warn ERESOLVE       name: '@typescript-eslint/tsconfig-utils',
+261 warn ERESOLVE       version: '8.72.0',
+261 warn ERESOLVE       location: 'node_modules/eslint-config-next/node_modules/typescript-eslint/node_modules/@typescript-eslint/typescript-estree/node_modules/@typescript-eslint/tsconfig-utils',
+261 warn ERESOLVE       isWorkspace: false,
+261 warn ERESOLVE       dependents: [Array]
+261 warn ERESOLVE     }
+261 warn ERESOLVE   },
+261 warn ERESOLVE   dep: {
+261 warn ERESOLVE     name: 'typescript',
+261 warn ERESOLVE     version: '6.0.3',
+261 warn ERESOLVE     whileInstalling: {
+261 warn ERESOLVE       name: '@typescript-eslint/tsconfig-utils',
+261 warn ERESOLVE       version: '8.72.0',
+261 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app\\node_modules\\eslint-config-next\\node_modules\\typescript-eslint\\node_modules\\@typescript-eslint\\typescript-estree\\node_modules\\@typescript-eslint\\tsconfig-utils'
+261 warn ERESOLVE     },
+261 warn ERESOLVE     location: 'node_modules/typescript',
+261 warn ERESOLVE     isWorkspace: false,
+261 warn ERESOLVE     dependents: [ [Object] ]
+261 warn ERESOLVE   },
+261 warn ERESOLVE   force: false,
+261 warn ERESOLVE   isMine: false,
+261 warn ERESOLVE   strictPeerDeps: false,
+261 warn ERESOLVE   current: {
+261 warn ERESOLVE     name: 'typescript',
+261 warn ERESOLVE     version: '7.0.2',
+261 warn ERESOLVE     location: 'node_modules/typescript',
+261 warn ERESOLVE     isWorkspace: false,
+261 warn ERESOLVE     dependents: [
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object],
+261 warn ERESOLVE       [Object], [Object], [Object]
+261 warn ERESOLVE     ]
+261 warn ERESOLVE   },
+261 warn ERESOLVE   peerConflict: {
+261 warn ERESOLVE     current: {
+261 warn ERESOLVE       name: 'typescript',
+261 warn ERESOLVE       version: '7.0.2',
+261 warn ERESOLVE       location: 'node_modules/typescript',
+261 warn ERESOLVE       isWorkspace: false,
+261 warn ERESOLVE       dependents: [Array]
+261 warn ERESOLVE     },
+261 warn ERESOLVE     peer: {
+261 warn ERESOLVE       name: 'typescript',
+261 warn ERESOLVE       version: '6.0.3',
+261 warn ERESOLVE       whileInstalling: [Object],
+261 warn ERESOLVE       location: 'node_modules/typescript',
+261 warn ERESOLVE       isWorkspace: false,
+261 warn ERESOLVE       dependents: [Array]
+261 warn ERESOLVE     }
+261 warn ERESOLVE   }
+261 warn ERESOLVE }
+262 verbose cwd D:\New folder\devforum\my-app
+263 verbose os Windows_NT 10.0.26200
+264 verbose node v22.22.2
+265 verbose npm  v10.9.7
+266 verbose exit 0
+267 info ok

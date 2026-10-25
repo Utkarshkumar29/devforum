@@ -1,24 +1,20 @@
-'use client'
+"use client";
 
-import { useEffect } from "react"
+import { useEffect } from "react";
 
-const ConnectionTesting=()=>{
-
-    const getApi=async()=>{
-        try {
-            
-        } catch (error) {
-            console.log(error)
-        }
+const ConnectionTesting = () => {
+  const getApi = async () => {
+    try {
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    useEffect(()=>{
-        getApi()
-    })
+  useEffect(() => {
+    getApi();
+  });
 
-    return(
-        <></>
-    )
-}
+  return <></>;
+};
 
-export default ConnectionTesting
+export default ConnectionTesting;

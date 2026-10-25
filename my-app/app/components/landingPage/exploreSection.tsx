@@ -73,34 +73,42 @@ const ExploreSection = () => {
               </div>
             );
           })}
-
-          
       </div>
       <div className=" bg-[#151515] max-w-[1300px] w-full flex gap-40 h-[800px] pt-[100px] pb-[100px] px-[50px] rounded-3xl ">
-          <motion.div 
-            className=" h-full relative w-1/2 "
-            initial={{opacity:0,x:0}}
-            whileInView={{opacity:1,x:40}}
-          >
-            <Image src={collaboration} alt="Error" className=" absolute top-40  w-[300px] h-[500px] rounded-4xl object-fill "/>
-            <Image src={developer} alt="Error" className=" absolute top-5 -right-5 w-[350px] h-[400px] rounded-4xl object-cover"/>
-          </motion.div>
-          <motion.div
-                  className=" flex gap-2 flex-col justify-center w-1/2 "
-                  initial={{ opacity: 0, x: 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                >
-                  <span className=" text-[55px] font-bold text-[#FFFFFFFF] leading-[60px] ">
-                    Seamless Collaboration For Developers 
-                  </span>
-                  <span className=" pt-[24px] pb-[35px] text-[18px] leading-[26px] ">
-                    Our highlighted feature provides seamless collaboration, empowering developers to connect, share ideas, and build innovative solutions together effectively. 
-                  </span>
-                  <span className=" text-black bg-[#FFFFFF] w-[165px] h-[60px] rounded-[60px] flex justify-center items-center font-bold ">
-                    Explore Jobs
-                  </span>
-                </motion.div>
+        <motion.div
+          className=" h-full relative w-1/2 "
+          initial={{ opacity: 0, x: 0 }}
+          whileInView={{ opacity: 1, x: 40 }}
+        >
+          <Image
+            src={collaboration}
+            alt="Error"
+            className=" absolute top-40  w-[300px] h-[500px] rounded-4xl object-fill "
+          />
+          <Image
+            src={developer}
+            alt="Error"
+            className=" absolute top-5 -right-5 w-[350px] h-[400px] rounded-4xl object-cover"
+          />
+        </motion.div>
+        <motion.div
+          className=" flex gap-2 flex-col justify-center w-1/2 "
+          initial={{ opacity: 0, x: 10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <span className=" text-[55px] font-bold text-[#FFFFFFFF] leading-[60px] ">
+            Seamless Collaboration For Developers
+          </span>
+          <span className=" pt-[24px] pb-[35px] text-[18px] leading-[26px] ">
+            Our highlighted feature provides seamless collaboration, empowering
+            developers to connect, share ideas, and build innovative solutions
+            together effectively.
+          </span>
+          <span className=" text-black bg-[#FFFFFF] w-[165px] h-[60px] rounded-[60px] flex justify-center items-center font-bold ">
+            Explore Jobs
+          </span>
+        </motion.div>
       </div>
     </div>
   );

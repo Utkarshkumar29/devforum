@@ -8,18 +8,18 @@ const firebaseConfig = {
   storageBucket: "chatrooms-2f5bc.appspot.com",
   messagingSenderId: "998170279518",
   appId: "1:998170279518:web:f7a302a4da160f15e5becf",
-  measurementId: "G-26HY49WL31"
-}
+  measurementId: "G-26HY49WL31",
+};
 
-const app = initializeApp(firebaseConfig)
-const storage = getStorage(app)
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
 export const uploadFileToFirebase = async (file: File) => {
-  const fileRef = ref(storage, `posts/${Date.now()}-${file.name}`)
+  const fileRef = ref(storage, `posts/${Date.now()}-${file.name}`);
 
   await uploadBytes(fileRef, file);
 
-  const downloadURL = await getDownloadURL(fileRef)
+  const downloadURL = await getDownloadURL(fileRef);
 
   return downloadURL;
-}
+};

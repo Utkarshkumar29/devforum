@@ -1,0 +1,811 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.7
+2 info using node@v22.22.2
+3 silly config load:file:D:\nvm\v22.22.2\node_modules\npm\npmrc
+4 silly config load:file:D:\New folder\devforum\my-app\.npmrc
+5 silly config load:file:C:\Users\ukyp2\.npmrc
+6 silly config load:file:C:\nvm4w\nodejs\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--package-lock-only" "--ignore-scripts" "--no-audit" "--no-fund" "--offline" "--omit" "optional" "--cache" ".npm-cache" "--loglevel" "error"
+9 verbose logfile logs-max:10 dir:D:\New folder\devforum\my-app\.npm-cache\_logs\2026-10-25T07_25_27_151Z-
+10 verbose logfile D:\New folder\devforum\my-app\.npm-cache\_logs\2026-10-25T07_25_27_151Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+13 silly idealTree buildDeps
+14 silly fetch manifest @lexical/react@^0.52.0
+15 silly packumentCache full:https://registry.npmjs.org/@lexical%2freact cache-miss
+16 silly fetch manifest lexical@^0.52.0
+17 silly packumentCache full:https://registry.npmjs.org/lexical cache-miss
+18 silly fetch manifest next@^16.4.2
+19 silly packumentCache full:https://registry.npmjs.org/next cache-miss
+20 silly fetch manifest react@^19.3.1
+21 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+22 silly fetch manifest react-dom@^19.3.1
+23 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+24 silly fetch manifest uuid@^14.0.3
+25 silly packumentCache full:https://registry.npmjs.org/uuid cache-miss
+26 silly fetch manifest @types/node@^26.6.5
+27 silly packumentCache full:https://registry.npmjs.org/@types%2fnode cache-miss
+28 silly fetch manifest baseline-browser-mapping@^2.11.29
+29 silly packumentCache full:https://registry.npmjs.org/baseline-browser-mapping cache-miss
+30 silly fetch manifest eslint-config-next@^16.4.2
+31 silly packumentCache full:https://registry.npmjs.org/eslint-config-next cache-miss
+32 silly placeDep ROOT @lexical/react@ REPLACE for: my-app@0.1.0 want: ^0.52.0
+33 silly placeDep ROOT @types/node@ REPLACE for: my-app@0.1.0 want: ^26.6.5
+34 silly placeDep ROOT baseline-browser-mapping@ REPLACE for: my-app@0.1.0 want: ^2.11.29
+35 silly placeDep ROOT eslint-config-next@ REPLACE for: my-app@0.1.0 want: ^16.4.2
+36 silly placeDep ROOT lexical@ OK for: my-app@0.1.0 want: ^0.52.0
+37 silly placeDep ROOT next@ REPLACE for: my-app@0.1.0 want: ^16.4.2
+38 silly placeDep ROOT react@ REPLACE for: my-app@0.1.0 want: ^19.3.1
+39 warn ERESOLVE overriding peer dependency {
+39 warn ERESOLVE   code: 'ERESOLVE',
+39 warn ERESOLVE   edge: {
+39 warn ERESOLVE     type: 'peer',
+39 warn ERESOLVE     name: 'react',
+39 warn ERESOLVE     spec: '^18 || ^19 || ^19.0.0-rc',
+39 warn ERESOLVE     from: {
+39 warn ERESOLVE       name: '@headlessui/react',
+39 warn ERESOLVE       version: '2.2.10',
+39 warn ERESOLVE       location: 'node_modules/@headlessui/react',
+39 warn ERESOLVE       isWorkspace: false,
+39 warn ERESOLVE       dependents: [Array]
+39 warn ERESOLVE     }
+39 warn ERESOLVE   },
+39 warn ERESOLVE   dep: {
+39 warn ERESOLVE     name: 'react',
+39 warn ERESOLVE     version: undefined,
+39 warn ERESOLVE     errors: [ [NotCachedError] ],
+39 warn ERESOLVE     package: {},
+39 warn ERESOLVE     whileInstalling: {
+39 warn ERESOLVE       name: 'my-app',
+39 warn ERESOLVE       version: '0.1.0',
+39 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+39 warn ERESOLVE     },
+39 warn ERESOLVE     location: 'node_modules/react',
+39 warn ERESOLVE     isWorkspace: false,
+39 warn ERESOLVE     dependents: [ [Object] ]
+39 warn ERESOLVE   },
+39 warn ERESOLVE   force: false,
+39 warn ERESOLVE   isMine: true,
+39 warn ERESOLVE   strictPeerDeps: false,
+39 warn ERESOLVE   current: {
+39 warn ERESOLVE     name: 'react',
+39 warn ERESOLVE     version: '19.3.0',
+39 warn ERESOLVE     location: 'node_modules/react',
+39 warn ERESOLVE     isWorkspace: false,
+39 warn ERESOLVE     dependents: [
+39 warn ERESOLVE       [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object]
+39 warn ERESOLVE     ]
+39 warn ERESOLVE   }
+39 warn ERESOLVE }
+40 warn ERESOLVE overriding peer dependency {
+40 warn ERESOLVE   code: 'ERESOLVE',
+40 warn ERESOLVE   edge: {
+40 warn ERESOLVE     type: 'peerOptional',
+40 warn ERESOLVE     name: 'react',
+40 warn ERESOLVE     spec: '^16.9.0 || ^17.0.0 || ^18 || ^19',
+40 warn ERESOLVE     from: {
+40 warn ERESOLVE       name: '@reduxjs/toolkit',
+40 warn ERESOLVE       version: '2.13.0',
+40 warn ERESOLVE       location: 'node_modules/@reduxjs/toolkit',
+40 warn ERESOLVE       isWorkspace: false,
+40 warn ERESOLVE       dependents: [Array]
+40 warn ERESOLVE     }
+40 warn ERESOLVE   },
+40 warn ERESOLVE   dep: {
+40 warn ERESOLVE     name: 'react',
+40 warn ERESOLVE     version: undefined,
+40 warn ERESOLVE     errors: [ [NotCachedError] ],
+40 warn ERESOLVE     package: {},
+40 warn ERESOLVE     whileInstalling: {
+40 warn ERESOLVE       name: 'my-app',
+40 warn ERESOLVE       version: '0.1.0',
+40 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+40 warn ERESOLVE     },
+40 warn ERESOLVE     location: 'node_modules/react',
+40 warn ERESOLVE     isWorkspace: false,
+40 warn ERESOLVE     dependents: [ [Object] ]
+40 warn ERESOLVE   },
+40 warn ERESOLVE   force: false,
+40 warn ERESOLVE   isMine: true,
+40 warn ERESOLVE   strictPeerDeps: false,
+40 warn ERESOLVE   current: {
+40 warn ERESOLVE     name: 'react',
+40 warn ERESOLVE     version: '19.3.0',
+40 warn ERESOLVE     location: 'node_modules/react',
+40 warn ERESOLVE     isWorkspace: false,
+40 warn ERESOLVE     dependents: [
+40 warn ERESOLVE       [Object], [Object], [Object],
+40 warn ERESOLVE       [Object], [Object], [Object],
+40 warn ERESOLVE       [Object], [Object], [Object],
+40 warn ERESOLVE       [Object], [Object], [Object],
+40 warn ERESOLVE       [Object], [Object], [Object],
+40 warn ERESOLVE       [Object], [Object], [Object]
+40 warn ERESOLVE     ]
+40 warn ERESOLVE   }
+40 warn ERESOLVE }
+41 warn ERESOLVE overriding peer dependency {
+41 warn ERESOLVE   code: 'ERESOLVE',
+41 warn ERESOLVE   edge: {
+41 warn ERESOLVE     type: 'peerOptional',
+41 warn ERESOLVE     name: 'react',
+41 warn ERESOLVE     spec: '^18.0.0 || ^19.0.0',
+41 warn ERESOLVE     from: {
+41 warn ERESOLVE       name: 'framer-motion',
+41 warn ERESOLVE       version: '13.1.1',
+41 warn ERESOLVE       location: 'node_modules/framer-motion',
+41 warn ERESOLVE       isWorkspace: false,
+41 warn ERESOLVE       dependents: [Array]
+41 warn ERESOLVE     }
+41 warn ERESOLVE   },
+41 warn ERESOLVE   dep: {
+41 warn ERESOLVE     name: 'react',
+41 warn ERESOLVE     version: undefined,
+41 warn ERESOLVE     errors: [ [NotCachedError] ],
+41 warn ERESOLVE     package: {},
+41 warn ERESOLVE     whileInstalling: {
+41 warn ERESOLVE       name: 'my-app',
+41 warn ERESOLVE       version: '0.1.0',
+41 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+41 warn ERESOLVE     },
+41 warn ERESOLVE     location: 'node_modules/react',
+41 warn ERESOLVE     isWorkspace: false,
+41 warn ERESOLVE     dependents: [ [Object] ]
+41 warn ERESOLVE   },
+41 warn ERESOLVE   force: false,
+41 warn ERESOLVE   isMine: true,
+41 warn ERESOLVE   strictPeerDeps: false,
+41 warn ERESOLVE   current: {
+41 warn ERESOLVE     name: 'react',
+41 warn ERESOLVE     version: '19.3.0',
+41 warn ERESOLVE     location: 'node_modules/react',
+41 warn ERESOLVE     isWorkspace: false,
+41 warn ERESOLVE     dependents: [
+41 warn ERESOLVE       [Object], [Object], [Object],
+41 warn ERESOLVE       [Object], [Object], [Object],
+41 warn ERESOLVE       [Object], [Object], [Object],
+41 warn ERESOLVE       [Object], [Object], [Object],
+41 warn ERESOLVE       [Object], [Object], [Object],
+41 warn ERESOLVE       [Object], [Object], [Object]
+41 warn ERESOLVE     ]
+41 warn ERESOLVE   }
+41 warn ERESOLVE }
+42 warn ERESOLVE overriding peer dependency {
+42 warn ERESOLVE   code: 'ERESOLVE',
+42 warn ERESOLVE   edge: {
+42 warn ERESOLVE     type: 'peer',
+42 warn ERESOLVE     name: 'react',
+42 warn ERESOLVE     spec: '>=18.0.0',
+42 warn ERESOLVE     from: {
+42 warn ERESOLVE       name: 'react-content-loader',
+42 warn ERESOLVE       version: '7.1.2',
+42 warn ERESOLVE       location: 'node_modules/react-content-loader',
+42 warn ERESOLVE       isWorkspace: false,
+42 warn ERESOLVE       dependents: [Array]
+42 warn ERESOLVE     }
+42 warn ERESOLVE   },
+42 warn ERESOLVE   dep: {
+42 warn ERESOLVE     name: 'react',
+42 warn ERESOLVE     version: undefined,
+42 warn ERESOLVE     errors: [ [NotCachedError] ],
+42 warn ERESOLVE     package: {},
+42 warn ERESOLVE     whileInstalling: {
+42 warn ERESOLVE       name: 'my-app',
+42 warn ERESOLVE       version: '0.1.0',
+42 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+42 warn ERESOLVE     },
+42 warn ERESOLVE     location: 'node_modules/react',
+42 warn ERESOLVE     isWorkspace: false,
+42 warn ERESOLVE     dependents: [ [Object] ]
+42 warn ERESOLVE   },
+42 warn ERESOLVE   force: false,
+42 warn ERESOLVE   isMine: true,
+42 warn ERESOLVE   strictPeerDeps: false,
+42 warn ERESOLVE   current: {
+42 warn ERESOLVE     name: 'react',
+42 warn ERESOLVE     version: '19.3.0',
+42 warn ERESOLVE     location: 'node_modules/react',
+42 warn ERESOLVE     isWorkspace: false,
+42 warn ERESOLVE     dependents: [
+42 warn ERESOLVE       [Object], [Object], [Object],
+42 warn ERESOLVE       [Object], [Object], [Object],
+42 warn ERESOLVE       [Object], [Object], [Object],
+42 warn ERESOLVE       [Object], [Object], [Object],
+42 warn ERESOLVE       [Object], [Object], [Object],
+42 warn ERESOLVE       [Object], [Object], [Object]
+42 warn ERESOLVE     ]
+42 warn ERESOLVE   }
+42 warn ERESOLVE }
+43 warn ERESOLVE overriding peer dependency {
+43 warn ERESOLVE   code: 'ERESOLVE',
+43 warn ERESOLVE   edge: {
+43 warn ERESOLVE     type: 'peer',
+43 warn ERESOLVE     name: 'react',
+43 warn ERESOLVE     spec: '^19.3.0',
+43 warn ERESOLVE     from: {
+43 warn ERESOLVE       name: 'react-dom',
+43 warn ERESOLVE       version: '19.3.0',
+43 warn ERESOLVE       location: 'node_modules/react-dom',
+43 warn ERESOLVE       isWorkspace: false,
+43 warn ERESOLVE       dependents: [Array]
+43 warn ERESOLVE     }
+43 warn ERESOLVE   },
+43 warn ERESOLVE   dep: {
+43 warn ERESOLVE     name: 'react',
+43 warn ERESOLVE     version: undefined,
+43 warn ERESOLVE     errors: [ [NotCachedError] ],
+43 warn ERESOLVE     package: {},
+43 warn ERESOLVE     whileInstalling: {
+43 warn ERESOLVE       name: 'my-app',
+43 warn ERESOLVE       version: '0.1.0',
+43 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+43 warn ERESOLVE     },
+43 warn ERESOLVE     location: 'node_modules/react',
+43 warn ERESOLVE     isWorkspace: false,
+43 warn ERESOLVE     dependents: [ [Object] ]
+43 warn ERESOLVE   },
+43 warn ERESOLVE   force: false,
+43 warn ERESOLVE   isMine: true,
+43 warn ERESOLVE   strictPeerDeps: false,
+43 warn ERESOLVE   current: {
+43 warn ERESOLVE     name: 'react',
+43 warn ERESOLVE     version: '19.3.0',
+43 warn ERESOLVE     location: 'node_modules/react',
+43 warn ERESOLVE     isWorkspace: false,
+43 warn ERESOLVE     dependents: [
+43 warn ERESOLVE       [Object], [Object], [Object],
+43 warn ERESOLVE       [Object], [Object], [Object],
+43 warn ERESOLVE       [Object], [Object], [Object],
+43 warn ERESOLVE       [Object], [Object], [Object],
+43 warn ERESOLVE       [Object], [Object], [Object],
+43 warn ERESOLVE       [Object], [Object], [Object]
+43 warn ERESOLVE     ]
+43 warn ERESOLVE   }
+43 warn ERESOLVE }
+44 warn ERESOLVE overriding peer dependency {
+44 warn ERESOLVE   code: 'ERESOLVE',
+44 warn ERESOLVE   edge: {
+44 warn ERESOLVE     type: 'peer',
+44 warn ERESOLVE     name: 'react',
+44 warn ERESOLVE     spec: '^19.3.0',
+44 warn ERESOLVE     from: {
+44 warn ERESOLVE       name: 'react-dom',
+44 warn ERESOLVE       version: '19.3.0',
+44 warn ERESOLVE       location: 'node_modules/react-dom',
+44 warn ERESOLVE       isWorkspace: false,
+44 warn ERESOLVE       dependents: [Array]
+44 warn ERESOLVE     }
+44 warn ERESOLVE   },
+44 warn ERESOLVE   dep: {
+44 warn ERESOLVE     name: 'react',
+44 warn ERESOLVE     version: undefined,
+44 warn ERESOLVE     errors: [ [NotCachedError] ],
+44 warn ERESOLVE     package: {},
+44 warn ERESOLVE     whileInstalling: {
+44 warn ERESOLVE       name: 'my-app',
+44 warn ERESOLVE       version: '0.1.0',
+44 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+44 warn ERESOLVE     },
+44 warn ERESOLVE     location: 'node_modules/react',
+44 warn ERESOLVE     isWorkspace: false,
+44 warn ERESOLVE     dependents: [ [Object] ]
+44 warn ERESOLVE   },
+44 warn ERESOLVE   force: false,
+44 warn ERESOLVE   isMine: true,
+44 warn ERESOLVE   strictPeerDeps: false,
+44 warn ERESOLVE   current: {
+44 warn ERESOLVE     name: 'react',
+44 warn ERESOLVE     version: '19.3.0',
+44 warn ERESOLVE     location: 'node_modules/react',
+44 warn ERESOLVE     isWorkspace: false,
+44 warn ERESOLVE     dependents: [
+44 warn ERESOLVE       [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object]
+44 warn ERESOLVE     ]
+44 warn ERESOLVE   }
+44 warn ERESOLVE }
+45 warn ERESOLVE overriding peer dependency {
+45 warn ERESOLVE   code: 'ERESOLVE',
+45 warn ERESOLVE   edge: {
+45 warn ERESOLVE     type: 'peer',
+45 warn ERESOLVE     name: 'react',
+45 warn ERESOLVE     spec: '^19.3.0',
+45 warn ERESOLVE     from: {
+45 warn ERESOLVE       name: 'react-dom',
+45 warn ERESOLVE       version: '19.3.0',
+45 warn ERESOLVE       location: 'node_modules/react-dom',
+45 warn ERESOLVE       isWorkspace: false,
+45 warn ERESOLVE       dependents: [Array]
+45 warn ERESOLVE     }
+45 warn ERESOLVE   },
+45 warn ERESOLVE   dep: {
+45 warn ERESOLVE     name: 'react',
+45 warn ERESOLVE     version: undefined,
+45 warn ERESOLVE     errors: [ [NotCachedError] ],
+45 warn ERESOLVE     package: {},
+45 warn ERESOLVE     whileInstalling: {
+45 warn ERESOLVE       name: 'my-app',
+45 warn ERESOLVE       version: '0.1.0',
+45 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+45 warn ERESOLVE     },
+45 warn ERESOLVE     location: 'node_modules/react',
+45 warn ERESOLVE     isWorkspace: false,
+45 warn ERESOLVE     dependents: [ [Object] ]
+45 warn ERESOLVE   },
+45 warn ERESOLVE   force: false,
+45 warn ERESOLVE   isMine: true,
+45 warn ERESOLVE   strictPeerDeps: false,
+45 warn ERESOLVE   current: {
+45 warn ERESOLVE     name: 'react',
+45 warn ERESOLVE     version: '19.3.0',
+45 warn ERESOLVE     location: 'node_modules/react',
+45 warn ERESOLVE     isWorkspace: false,
+45 warn ERESOLVE     dependents: [
+45 warn ERESOLVE       [Object], [Object], [Object],
+45 warn ERESOLVE       [Object], [Object], [Object],
+45 warn ERESOLVE       [Object], [Object], [Object],
+45 warn ERESOLVE       [Object], [Object], [Object],
+45 warn ERESOLVE       [Object], [Object], [Object],
+45 warn ERESOLVE       [Object], [Object], [Object]
+45 warn ERESOLVE     ]
+45 warn ERESOLVE   }
+45 warn ERESOLVE }
+46 warn ERESOLVE overriding peer dependency {
+46 warn ERESOLVE   code: 'ERESOLVE',
+46 warn ERESOLVE   edge: {
+46 warn ERESOLVE     type: 'peer',
+46 warn ERESOLVE     name: 'react',
+46 warn ERESOLVE     spec: '^19.3.0',
+46 warn ERESOLVE     from: {
+46 warn ERESOLVE       name: 'react-dom',
+46 warn ERESOLVE       version: '19.3.0',
+46 warn ERESOLVE       location: 'node_modules/react-dom',
+46 warn ERESOLVE       isWorkspace: false,
+46 warn ERESOLVE       dependents: [Array]
+46 warn ERESOLVE     }
+46 warn ERESOLVE   },
+46 warn ERESOLVE   dep: {
+46 warn ERESOLVE     name: 'react',
+46 warn ERESOLVE     version: undefined,
+46 warn ERESOLVE     errors: [ [NotCachedError] ],
+46 warn ERESOLVE     package: {},
+46 warn ERESOLVE     whileInstalling: {
+46 warn ERESOLVE       name: 'my-app',
+46 warn ERESOLVE       version: '0.1.0',
+46 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+46 warn ERESOLVE     },
+46 warn ERESOLVE     location: 'node_modules/react',
+46 warn ERESOLVE     isWorkspace: false,
+46 warn ERESOLVE     dependents: [ [Object] ]
+46 warn ERESOLVE   },
+46 warn ERESOLVE   force: false,
+46 warn ERESOLVE   isMine: true,
+46 warn ERESOLVE   strictPeerDeps: false,
+46 warn ERESOLVE   current: {
+46 warn ERESOLVE     name: 'react',
+46 warn ERESOLVE     version: '19.3.0',
+46 warn ERESOLVE     location: 'node_modules/react',
+46 warn ERESOLVE     isWorkspace: false,
+46 warn ERESOLVE     dependents: [
+46 warn ERESOLVE       [Object], [Object], [Object],
+46 warn ERESOLVE       [Object], [Object], [Object],
+46 warn ERESOLVE       [Object], [Object], [Object],
+46 warn ERESOLVE       [Object], [Object], [Object],
+46 warn ERESOLVE       [Object], [Object], [Object],
+46 warn ERESOLVE       [Object], [Object], [Object]
+46 warn ERESOLVE     ]
+46 warn ERESOLVE   }
+46 warn ERESOLVE }
+47 warn ERESOLVE overriding peer dependency {
+47 warn ERESOLVE   code: 'ERESOLVE',
+47 warn ERESOLVE   edge: {
+47 warn ERESOLVE     type: 'peer',
+47 warn ERESOLVE     name: 'react',
+47 warn ERESOLVE     spec: '>=17',
+47 warn ERESOLVE     from: {
+47 warn ERESOLVE       name: 'react-infinite-scroll-component',
+47 warn ERESOLVE       version: '7.2.1',
+47 warn ERESOLVE       location: 'node_modules/react-infinite-scroll-component',
+47 warn ERESOLVE       isWorkspace: false,
+47 warn ERESOLVE       dependents: [Array]
+47 warn ERESOLVE     }
+47 warn ERESOLVE   },
+47 warn ERESOLVE   dep: {
+47 warn ERESOLVE     name: 'react',
+47 warn ERESOLVE     version: undefined,
+47 warn ERESOLVE     errors: [ [NotCachedError] ],
+47 warn ERESOLVE     package: {},
+47 warn ERESOLVE     whileInstalling: {
+47 warn ERESOLVE       name: 'my-app',
+47 warn ERESOLVE       version: '0.1.0',
+47 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+47 warn ERESOLVE     },
+47 warn ERESOLVE     location: 'node_modules/react',
+47 warn ERESOLVE     isWorkspace: false,
+47 warn ERESOLVE     dependents: [ [Object] ]
+47 warn ERESOLVE   },
+47 warn ERESOLVE   force: false,
+47 warn ERESOLVE   isMine: true,
+47 warn ERESOLVE   strictPeerDeps: false,
+47 warn ERESOLVE   current: {
+47 warn ERESOLVE     name: 'react',
+47 warn ERESOLVE     version: '19.3.0',
+47 warn ERESOLVE     location: 'node_modules/react',
+47 warn ERESOLVE     isWorkspace: false,
+47 warn ERESOLVE     dependents: [
+47 warn ERESOLVE       [Object], [Object], [Object],
+47 warn ERESOLVE       [Object], [Object], [Object],
+47 warn ERESOLVE       [Object], [Object], [Object],
+47 warn ERESOLVE       [Object], [Object], [Object],
+47 warn ERESOLVE       [Object], [Object], [Object],
+47 warn ERESOLVE       [Object], [Object], [Object]
+47 warn ERESOLVE     ]
+47 warn ERESOLVE   }
+47 warn ERESOLVE }
+48 warn ERESOLVE overriding peer dependency {
+48 warn ERESOLVE   code: 'ERESOLVE',
+48 warn ERESOLVE   edge: {
+48 warn ERESOLVE     type: 'peer',
+48 warn ERESOLVE     name: 'react',
+48 warn ERESOLVE     spec: '^18.0 || ^19',
+48 warn ERESOLVE     from: {
+48 warn ERESOLVE       name: 'react-redux',
+48 warn ERESOLVE       version: '9.3.0',
+48 warn ERESOLVE       location: 'node_modules/react-redux',
+48 warn ERESOLVE       isWorkspace: false,
+48 warn ERESOLVE       dependents: [Array]
+48 warn ERESOLVE     }
+48 warn ERESOLVE   },
+48 warn ERESOLVE   dep: {
+48 warn ERESOLVE     name: 'react',
+48 warn ERESOLVE     version: undefined,
+48 warn ERESOLVE     errors: [ [NotCachedError] ],
+48 warn ERESOLVE     package: {},
+48 warn ERESOLVE     whileInstalling: {
+48 warn ERESOLVE       name: 'my-app',
+48 warn ERESOLVE       version: '0.1.0',
+48 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+48 warn ERESOLVE     },
+48 warn ERESOLVE     location: 'node_modules/react',
+48 warn ERESOLVE     isWorkspace: false,
+48 warn ERESOLVE     dependents: [ [Object] ]
+48 warn ERESOLVE   },
+48 warn ERESOLVE   force: false,
+48 warn ERESOLVE   isMine: true,
+48 warn ERESOLVE   strictPeerDeps: false,
+48 warn ERESOLVE   current: {
+48 warn ERESOLVE     name: 'react',
+48 warn ERESOLVE     version: '19.3.0',
+48 warn ERESOLVE     location: 'node_modules/react',
+48 warn ERESOLVE     isWorkspace: false,
+48 warn ERESOLVE     dependents: [
+48 warn ERESOLVE       [Object], [Object], [Object],
+48 warn ERESOLVE       [Object], [Object], [Object],
+48 warn ERESOLVE       [Object], [Object], [Object],
+48 warn ERESOLVE       [Object], [Object], [Object],
+48 warn ERESOLVE       [Object], [Object], [Object],
+48 warn ERESOLVE       [Object], [Object], [Object]
+48 warn ERESOLVE     ]
+48 warn ERESOLVE   }
+48 warn ERESOLVE }
+49 warn ERESOLVE overriding peer dependency {
+49 warn ERESOLVE   code: 'ERESOLVE',
+49 warn ERESOLVE   edge: {
+49 warn ERESOLVE     type: 'peer',
+49 warn ERESOLVE     name: 'react',
+49 warn ERESOLVE     spec: '^18.0 || ^19',
+49 warn ERESOLVE     from: {
+49 warn ERESOLVE       name: 'react-redux',
+49 warn ERESOLVE       version: '9.3.0',
+49 warn ERESOLVE       location: 'node_modules/react-redux',
+49 warn ERESOLVE       isWorkspace: false,
+49 warn ERESOLVE       dependents: [Array]
+49 warn ERESOLVE     }
+49 warn ERESOLVE   },
+49 warn ERESOLVE   dep: {
+49 warn ERESOLVE     name: 'react',
+49 warn ERESOLVE     version: undefined,
+49 warn ERESOLVE     errors: [ [NotCachedError] ],
+49 warn ERESOLVE     package: {},
+49 warn ERESOLVE     whileInstalling: {
+49 warn ERESOLVE       name: 'my-app',
+49 warn ERESOLVE       version: '0.1.0',
+49 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+49 warn ERESOLVE     },
+49 warn ERESOLVE     location: 'node_modules/react',
+49 warn ERESOLVE     isWorkspace: false,
+49 warn ERESOLVE     dependents: [ [Object] ]
+49 warn ERESOLVE   },
+49 warn ERESOLVE   force: false,
+49 warn ERESOLVE   isMine: true,
+49 warn ERESOLVE   strictPeerDeps: false,
+49 warn ERESOLVE   current: {
+49 warn ERESOLVE     name: 'react',
+49 warn ERESOLVE     version: '19.3.0',
+49 warn ERESOLVE     location: 'node_modules/react',
+49 warn ERESOLVE     isWorkspace: false,
+49 warn ERESOLVE     dependents: [
+49 warn ERESOLVE       [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object]
+49 warn ERESOLVE     ]
+49 warn ERESOLVE   }
+49 warn ERESOLVE }
+50 warn ERESOLVE overriding peer dependency {
+50 warn ERESOLVE   code: 'ERESOLVE',
+50 warn ERESOLVE   edge: {
+50 warn ERESOLVE     type: 'peer',
+50 warn ERESOLVE     name: 'react',
+50 warn ERESOLVE     spec: '^18 || ^19',
+50 warn ERESOLVE     from: {
+50 warn ERESOLVE       name: 'react-toastify',
+50 warn ERESOLVE       version: '11.1.0',
+50 warn ERESOLVE       location: 'node_modules/react-toastify',
+50 warn ERESOLVE       isWorkspace: false,
+50 warn ERESOLVE       dependents: [Array]
+50 warn ERESOLVE     }
+50 warn ERESOLVE   },
+50 warn ERESOLVE   dep: {
+50 warn ERESOLVE     name: 'react',
+50 warn ERESOLVE     version: undefined,
+50 warn ERESOLVE     errors: [ [NotCachedError] ],
+50 warn ERESOLVE     package: {},
+50 warn ERESOLVE     whileInstalling: {
+50 warn ERESOLVE       name: 'my-app',
+50 warn ERESOLVE       version: '0.1.0',
+50 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+50 warn ERESOLVE     },
+50 warn ERESOLVE     location: 'node_modules/react',
+50 warn ERESOLVE     isWorkspace: false,
+50 warn ERESOLVE     dependents: [ [Object] ]
+50 warn ERESOLVE   },
+50 warn ERESOLVE   force: false,
+50 warn ERESOLVE   isMine: true,
+50 warn ERESOLVE   strictPeerDeps: false,
+50 warn ERESOLVE   current: {
+50 warn ERESOLVE     name: 'react',
+50 warn ERESOLVE     version: '19.3.0',
+50 warn ERESOLVE     location: 'node_modules/react',
+50 warn ERESOLVE     isWorkspace: false,
+50 warn ERESOLVE     dependents: [
+50 warn ERESOLVE       [Object], [Object], [Object],
+50 warn ERESOLVE       [Object], [Object], [Object],
+50 warn ERESOLVE       [Object], [Object], [Object],
+50 warn ERESOLVE       [Object], [Object], [Object],
+50 warn ERESOLVE       [Object], [Object], [Object],
+50 warn ERESOLVE       [Object], [Object], [Object]
+50 warn ERESOLVE     ]
+50 warn ERESOLVE   }
+50 warn ERESOLVE }
+51 silly placeDep ROOT react-dom@ REPLACE for: my-app@0.1.0 want: ^19.3.1
+52 warn ERESOLVE overriding peer dependency {
+52 warn ERESOLVE   code: 'ERESOLVE',
+52 warn ERESOLVE   edge: {
+52 warn ERESOLVE     type: 'peer',
+52 warn ERESOLVE     name: 'react-dom',
+52 warn ERESOLVE     spec: '^18 || ^19 || ^19.0.0-rc',
+52 warn ERESOLVE     from: {
+52 warn ERESOLVE       name: '@headlessui/react',
+52 warn ERESOLVE       version: '2.2.10',
+52 warn ERESOLVE       location: 'node_modules/@headlessui/react',
+52 warn ERESOLVE       isWorkspace: false,
+52 warn ERESOLVE       dependents: [Array]
+52 warn ERESOLVE     }
+52 warn ERESOLVE   },
+52 warn ERESOLVE   dep: {
+52 warn ERESOLVE     name: 'react-dom',
+52 warn ERESOLVE     version: undefined,
+52 warn ERESOLVE     errors: [ [NotCachedError] ],
+52 warn ERESOLVE     package: {},
+52 warn ERESOLVE     whileInstalling: {
+52 warn ERESOLVE       name: 'my-app',
+52 warn ERESOLVE       version: '0.1.0',
+52 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+52 warn ERESOLVE     },
+52 warn ERESOLVE     location: 'node_modules/react-dom',
+52 warn ERESOLVE     isWorkspace: false,
+52 warn ERESOLVE     dependents: [ [Object] ]
+52 warn ERESOLVE   },
+52 warn ERESOLVE   force: false,
+52 warn ERESOLVE   isMine: true,
+52 warn ERESOLVE   strictPeerDeps: false,
+52 warn ERESOLVE   current: {
+52 warn ERESOLVE     name: 'react-dom',
+52 warn ERESOLVE     version: '19.3.0',
+52 warn ERESOLVE     location: 'node_modules/react-dom',
+52 warn ERESOLVE     isWorkspace: false,
+52 warn ERESOLVE     dependents: [
+52 warn ERESOLVE       [Object], [Object],
+52 warn ERESOLVE       [Object], [Object],
+52 warn ERESOLVE       [Object], [Object],
+52 warn ERESOLVE       [Object], [Object],
+52 warn ERESOLVE       [Object], [Object],
+52 warn ERESOLVE       [Object]
+52 warn ERESOLVE     ]
+52 warn ERESOLVE   }
+52 warn ERESOLVE }
+53 warn ERESOLVE overriding peer dependency {
+53 warn ERESOLVE   code: 'ERESOLVE',
+53 warn ERESOLVE   edge: {
+53 warn ERESOLVE     type: 'peerOptional',
+53 warn ERESOLVE     name: 'react-dom',
+53 warn ERESOLVE     spec: '^18.0.0 || ^19.0.0',
+53 warn ERESOLVE     from: {
+53 warn ERESOLVE       name: 'framer-motion',
+53 warn ERESOLVE       version: '13.1.1',
+53 warn ERESOLVE       location: 'node_modules/framer-motion',
+53 warn ERESOLVE       isWorkspace: false,
+53 warn ERESOLVE       dependents: [Array]
+53 warn ERESOLVE     }
+53 warn ERESOLVE   },
+53 warn ERESOLVE   dep: {
+53 warn ERESOLVE     name: 'react-dom',
+53 warn ERESOLVE     version: undefined,
+53 warn ERESOLVE     errors: [ [NotCachedError] ],
+53 warn ERESOLVE     package: {},
+53 warn ERESOLVE     whileInstalling: {
+53 warn ERESOLVE       name: 'my-app',
+53 warn ERESOLVE       version: '0.1.0',
+53 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+53 warn ERESOLVE     },
+53 warn ERESOLVE     location: 'node_modules/react-dom',
+53 warn ERESOLVE     isWorkspace: false,
+53 warn ERESOLVE     dependents: [ [Object] ]
+53 warn ERESOLVE   },
+53 warn ERESOLVE   force: false,
+53 warn ERESOLVE   isMine: true,
+53 warn ERESOLVE   strictPeerDeps: false,
+53 warn ERESOLVE   current: {
+53 warn ERESOLVE     name: 'react-dom',
+53 warn ERESOLVE     version: '19.3.0',
+53 warn ERESOLVE     location: 'node_modules/react-dom',
+53 warn ERESOLVE     isWorkspace: false,
+53 warn ERESOLVE     dependents: [
+53 warn ERESOLVE       [Object], [Object],
+53 warn ERESOLVE       [Object], [Object],
+53 warn ERESOLVE       [Object], [Object],
+53 warn ERESOLVE       [Object], [Object],
+53 warn ERESOLVE       [Object], [Object],
+53 warn ERESOLVE       [Object]
+53 warn ERESOLVE     ]
+53 warn ERESOLVE   }
+53 warn ERESOLVE }
+54 warn ERESOLVE overriding peer dependency {
+54 warn ERESOLVE   code: 'ERESOLVE',
+54 warn ERESOLVE   edge: {
+54 warn ERESOLVE     type: 'peer',
+54 warn ERESOLVE     name: 'react-dom',
+54 warn ERESOLVE     spec: '>=17',
+54 warn ERESOLVE     from: {
+54 warn ERESOLVE       name: 'react-infinite-scroll-component',
+54 warn ERESOLVE       version: '7.2.1',
+54 warn ERESOLVE       location: 'node_modules/react-infinite-scroll-component',
+54 warn ERESOLVE       isWorkspace: false,
+54 warn ERESOLVE       dependents: [Array]
+54 warn ERESOLVE     }
+54 warn ERESOLVE   },
+54 warn ERESOLVE   dep: {
+54 warn ERESOLVE     name: 'react-dom',
+54 warn ERESOLVE     version: undefined,
+54 warn ERESOLVE     errors: [ [NotCachedError] ],
+54 warn ERESOLVE     package: {},
+54 warn ERESOLVE     whileInstalling: {
+54 warn ERESOLVE       name: 'my-app',
+54 warn ERESOLVE       version: '0.1.0',
+54 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+54 warn ERESOLVE     },
+54 warn ERESOLVE     location: 'node_modules/react-dom',
+54 warn ERESOLVE     isWorkspace: false,
+54 warn ERESOLVE     dependents: [ [Object] ]
+54 warn ERESOLVE   },
+54 warn ERESOLVE   force: false,
+54 warn ERESOLVE   isMine: true,
+54 warn ERESOLVE   strictPeerDeps: false,
+54 warn ERESOLVE   current: {
+54 warn ERESOLVE     name: 'react-dom',
+54 warn ERESOLVE     version: '19.3.0',
+54 warn ERESOLVE     location: 'node_modules/react-dom',
+54 warn ERESOLVE     isWorkspace: false,
+54 warn ERESOLVE     dependents: [
+54 warn ERESOLVE       [Object], [Object],
+54 warn ERESOLVE       [Object], [Object],
+54 warn ERESOLVE       [Object], [Object],
+54 warn ERESOLVE       [Object], [Object],
+54 warn ERESOLVE       [Object], [Object],
+54 warn ERESOLVE       [Object]
+54 warn ERESOLVE     ]
+54 warn ERESOLVE   }
+54 warn ERESOLVE }
+55 warn ERESOLVE overriding peer dependency {
+55 warn ERESOLVE   code: 'ERESOLVE',
+55 warn ERESOLVE   edge: {
+55 warn ERESOLVE     type: 'peer',
+55 warn ERESOLVE     name: 'react-dom',
+55 warn ERESOLVE     spec: '^18 || ^19',
+55 warn ERESOLVE     from: {
+55 warn ERESOLVE       name: 'react-toastify',
+55 warn ERESOLVE       version: '11.1.0',
+55 warn ERESOLVE       location: 'node_modules/react-toastify',
+55 warn ERESOLVE       isWorkspace: false,
+55 warn ERESOLVE       dependents: [Array]
+55 warn ERESOLVE     }
+55 warn ERESOLVE   },
+55 warn ERESOLVE   dep: {
+55 warn ERESOLVE     name: 'react-dom',
+55 warn ERESOLVE     version: undefined,
+55 warn ERESOLVE     errors: [ [NotCachedError] ],
+55 warn ERESOLVE     package: {},
+55 warn ERESOLVE     whileInstalling: {
+55 warn ERESOLVE       name: 'my-app',
+55 warn ERESOLVE       version: '0.1.0',
+55 warn ERESOLVE       path: 'D:\\New folder\\devforum\\my-app'
+55 warn ERESOLVE     },
+55 warn ERESOLVE     location: 'node_modules/react-dom',
+55 warn ERESOLVE     isWorkspace: false,
+55 warn ERESOLVE     dependents: [ [Object] ]
+55 warn ERESOLVE   },
+55 warn ERESOLVE   force: false,
+55 warn ERESOLVE   isMine: true,
+55 warn ERESOLVE   strictPeerDeps: false,
+55 warn ERESOLVE   current: {
+55 warn ERESOLVE     name: 'react-dom',
+55 warn ERESOLVE     version: '19.3.0',
+55 warn ERESOLVE     location: 'node_modules/react-dom',
+55 warn ERESOLVE     isWorkspace: false,
+55 warn ERESOLVE     dependents: [
+55 warn ERESOLVE       [Object], [Object],
+55 warn ERESOLVE       [Object], [Object],
+55 warn ERESOLVE       [Object], [Object],
+55 warn ERESOLVE       [Object], [Object],
+55 warn ERESOLVE       [Object], [Object],
+55 warn ERESOLVE       [Object]
+55 warn ERESOLVE     ]
+55 warn ERESOLVE   }
+55 warn ERESOLVE }
+56 silly placeDep ROOT uuid@ REPLACE for: my-app@0.1.0 want: ^14.0.3
+57 silly fetch manifest @floating-ui/react@^0.26.16
+58 silly packumentCache full:https://registry.npmjs.org/@floating-ui%2freact cache-miss
+59 silly fetch manifest @react-aria/focus@^3.20.2
+60 silly packumentCache full:https://registry.npmjs.org/@react-aria%2ffocus cache-miss
+61 silly fetch manifest @react-aria/interactions@^3.25.0
+62 silly packumentCache full:https://registry.npmjs.org/@react-aria%2finteractions cache-miss
+63 silly fetch manifest @tanstack/react-virtual@^3.13.9
+64 silly packumentCache full:https://registry.npmjs.org/@tanstack%2freact-virtual cache-miss
+65 http fetch GET https://registry.npmjs.org/npm attempt 1 failed with EACCES
+66 silly fetch manifest use-sync-external-store@^1.5.0
+67 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store cache-miss
+68 silly placeDep node_modules/@headlessui/react @floating-ui/react@ OK for: @headlessui/react@2.2.10 want: ^0.26.16
+69 silly placeDep node_modules/@headlessui/react @react-aria/focus@ OK for: @headlessui/react@2.2.10 want: ^3.20.2
+70 silly placeDep node_modules/@headlessui/react @react-aria/interactions@ OK for: @headlessui/react@2.2.10 want: ^3.25.0
+71 silly placeDep node_modules/@headlessui/react @tanstack/react-virtual@ OK for: @headlessui/react@2.2.10 want: ^3.13.9
+72 silly placeDep node_modules/@headlessui/react use-sync-external-store@ OK for: @headlessui/react@2.2.10 want: ^1.5.0
+73 http cache https://registry.npmjs.org/@tailwindcss/oxide-wasm32-wasi/-/oxide-wasm32-wasi-4.3.3.tgz 0ms (cache hit)
+74 silly tarball no local data for https://registry.npmjs.org/@tailwindcss/oxide-wasm32-wasi/-/oxide-wasm32-wasi-4.3.3.tgz. Extracting by manifest.
+75 verbose stack Error: request to https://registry.npmjs.org/@tailwindcss/oxide-wasm32-wasi/-/oxide-wasm32-wasi-4.3.3.tgz failed: cache mode is 'only-if-cached' but no cached response is available.
+75 verbose stack     at cacheFetch (D:\nvm\v22.22.2\node_modules\npm\node_modules\make-fetch-happen\lib\cache\index.js:12:13)
+75 verbose stack     at async fetch (D:\nvm\v22.22.2\node_modules\npm\node_modules\make-fetch-happen\lib\fetch.js:98:7)
+76 error code ENOTCACHED
+77 error request to https://registry.npmjs.org/@tailwindcss/oxide-wasm32-wasi/-/oxide-wasm32-wasi-4.3.3.tgz failed: cache mode is 'only-if-cached' but no cached response is available.
+78 silly unfinished npm timer reify 1792913127788
+79 silly unfinished npm timer reify:loadTrees 1792913127788
+80 silly unfinished npm timer idealTree:buildDeps 1792913127978
+81 silly unfinished npm timer idealTree:node_modules/@tailwindcss/oxide-wasm32-wasi 1792913128046
+82 verbose cwd D:\New folder\devforum\my-app
+83 verbose os Windows_NT 10.0.26200
+84 verbose node v22.22.2
+85 verbose npm  v10.9.7
+86 verbose exit 1
+87 verbose code 1
+88 error A complete log of this run can be found in: D:\New folder\devforum\my-app\.npm-cache\_logs\2026-10-25T07_25_27_151Z-debug-0.log
