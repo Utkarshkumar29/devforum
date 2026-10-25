@@ -28,6 +28,12 @@ jobs:
 
       - name: List
         run: npm run list --if-present
+        
+      - name: Lint check
+        run: npm run lint
+
+      - name: Formatting check
+        run: npx prettier --check .
       
       - name: Build Next.js app
         run: npm run build
