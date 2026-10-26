@@ -19,7 +19,7 @@
     "firebase": "^12.4.0",
     "framer-motion": "^13.1.1",
     "lexical": "^0.52.0",
-    "next": "^16.4.2",
+    "next": "^16.4.3",
     "prettier": "^3.9.10",
     "react": "^19.3.1",
     "react-content-loader": "^7.1.1",
@@ -35,9 +35,9 @@
     "@types/node": "^26.6.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "baseline-browser-mapping": "^2.11.29",
+    "baseline-browser-mapping": "^2.11.31",
     "eslint": "^9.38.0",
-    "eslint-config-next": "^16.4.2",
+    "eslint-config-next": "^16.4.3",
     "tailwindcss": "^4",
     "typescript": "^6.0.3"
   }
