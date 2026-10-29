@@ -49,12 +49,9 @@ export const fetchPostSlugs = createAsyncThunk<
   FetchSlugsArgs
 >("posts/fetchPosts", async ({ page, limit }) => {
   const token = localStorage.getItem("accessToken");
-  const response = await fetch(
-    `/api/cached-feed?page=${page}&limit=${limit}`,
-    {
-      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
-    },
-  );
+  const response = await fetch(`/api/cached-feed?page=${page}&limit=${limit}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  });
 
   if (!response.ok) {
     throw new Error(`Feed request failed (${response.status})`);

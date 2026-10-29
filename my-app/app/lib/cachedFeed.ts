@@ -35,7 +35,9 @@ export async function getCachedFeedPage(
   });
 
   if (!response.ok) {
-    const error = new Error(`Feed request failed (${response.status})`) as Error & {
+    const error = new Error(
+      `Feed request failed (${response.status})`,
+    ) as Error & {
       status?: number;
     };
     error.status = response.status;
