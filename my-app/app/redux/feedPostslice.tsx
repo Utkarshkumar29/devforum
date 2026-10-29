@@ -48,11 +48,19 @@ export const fetchPostSlugs = createAsyncThunk<
   FetchSlugsResponse,
   FetchSlugsArgs
 >("posts/fetchPosts", async ({ page, limit }) => {
-  const res = await axiosPrivate.get("/posts/getPosts", {
-    params: { page, limit },
-  });
+  const token = localStorage.getItem("accessToken");
+  const response = await fetch(
+    `/api/cached-feed?page=${page}&limit=${limit}`,
+    {
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    },
+  );
 
-  const data = res.data;
+  if (!response.ok) {
+    throw new Error(`Feed request failed (${response.status})`);
+  }
+
+  const data = await response.json();
 
   return {
     posts: data.results as PostSlug[],

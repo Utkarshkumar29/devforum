@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  cacheComponents: true,
+  prerendering: true,
   async rewrites() {
     return [
       {
