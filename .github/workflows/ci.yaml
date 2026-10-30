@@ -34,6 +34,9 @@ jobs:
 
       - name: Formatting check
         run: npx prettier --check .
+
+      - name: browserlist check
+        run:  npx browserslist --update-db
       
       - name: Build Next.js app
         run: npm run build
