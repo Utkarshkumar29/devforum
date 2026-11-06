@@ -15,7 +15,7 @@
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@headlessui/react": "^2.2.9",
     "@lexical/react": "^0.53.0",
-    "@reduxjs/toolkit": "^2.10.1",
+    "@reduxjs/toolkit": "^2.14.0",
     "axios": "^1.21.0",
     "firebase": "^13.1.0",
     "framer-motion": "^14.9.0",
@@ -38,7 +38,10 @@
     "@types/react-dom": "^19",
     "eslint": "^9.38.0",
     "eslint-config-next": "^16.4.4",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.3.4",
     "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=26.0.0"
   }
 }
