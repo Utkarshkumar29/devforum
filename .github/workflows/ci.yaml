@@ -35,8 +35,10 @@ jobs:
       - name: Formatting check
         run: npx prettier --check .
 
-      - name: browserlist check
-        run:  npx browserslist --update-db
+      - name: Browserslist check
+        run: |
+          npx browserslist
+          npm ls caniuse-lite
       
       - name: Build Next.js app
         run: npm run build
